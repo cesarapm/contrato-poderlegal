@@ -1,0 +1,156 @@
+@import '/resources/css/app.css';
+
+/**
+ * Filament Admin Panel - Tema Personalizado Poder Legal
+ * Paleta morado/dorado premium
+ */
+
+/* Variables adicionales para Filament */
+:root {
+    --filament-primary: #4A148C;
+    --filament-secondary: #FFD700;
+}
+
+/* Personalización del logo y marca */
+.fi-sidebar-brand {
+    font-family: var(--font-display);
+    font-weight: 700;
+    background: linear-gradient(135deg, #FFD700, #FFC107);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Header del panel */
+.fi-topbar {
+    background: linear-gradient(135deg, #1A0933 0%, #4A148C 55%, #663399 100%);
+    border-bottom: 2px solid #FFD700;
+}
+
+/* Sidebar personalizado */
+.fi-sidebar {
+    background: linear-gradient(180deg, #1A0933 0%, #4A148C 100%);
+}
+
+.fi-sidebar-nav-item:hover {
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.fi-sidebar-nav-item.active {
+    background: rgba(255, 215, 0, 0.15);
+    border-left: 3px solid #FFD700;
+}
+
+/* Botones personalizados */
+.fi-btn-primary {
+    background: linear-gradient(135deg, #FFD700 0%, #FFC107 50%, #FFAA00 100%);
+    color: #212121;
+    font-weight: 600;
+}
+
+.fi-btn-primary:hover {
+    background: linear-gradient(135deg, #FFAA00 0%, #FF8F00 100%);
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+}
+
+/* Cards y contenedores */
+.fi-card {
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(74, 20, 140, 0.08);
+    transition: all 0.3s ease;
+}
+
+.fi-card:hover {
+    box-shadow: 0 8px 24px rgba(74, 20, 140, 0.12);
+}
+
+/* Tablas */
+.fi-table-row:hover {
+    background: rgba(74, 20, 140, 0.02);
+}
+
+/* Badges personalizados */
+.fi-badge {
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+/* Forms */
+.fi-input,
+.fi-select,
+.fi-textarea {
+    border-color: #e4d4ff;
+    border-radius: 8px;
+}
+
+.fi-input:focus,
+.fi-select:focus,
+.fi-textarea:focus {
+    border-color: #4A148C;
+    box-shadow: 0 0 0 3px rgba(74, 20, 140, 0.1);
+}
+
+/* Wizard steps en Filament */
+.fi-wizard-step-active {
+    background: linear-gradient(135deg, #4A148C 0%, #663399 100%);
+    color: white;
+}
+
+.fi-wizard-step-completed {
+    background: #4CAF50;
+    color: white;
+}
+
+/* Notificaciones */
+.fi-notification {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(74, 20, 140, 0.12);
+}
+
+.fi-notification-success {
+    border-left: 4px solid #4CAF50;
+}
+
+.fi-notification-error {
+    border-left: 4px solid #F44336;
+}
+
+.fi-notification-warning {
+    border-left: 4px solid #FF9800;
+}
+
+/* Modales */
+.fi-modal {
+    border-radius: 16px;
+}
+
+.fi-modal-header {
+    background: linear-gradient(135deg, #4A148C 0%, #663399 100%);
+    color: white;
+    border-radius: 16px 16px 0 0;
+}
+
+/* Stats widgets */
+.fi-stat-card {
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(74, 20, 140, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.fi-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(74, 20, 140, 0.12);
+}
+
+/* Loading states */
+.fi-spinner {
+    border-color: rgba(74, 20, 140, 0.1);
+    border-top-color: #4A148C;
+}
+
+/* Mejoras de accesibilidad */
+.fi-fo-field-wrp:focus-within {
+    outline: 2px solid #FFD700;
+    outline-offset: 2px;
+}
