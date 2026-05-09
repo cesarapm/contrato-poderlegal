@@ -20,7 +20,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://contrato.poderlegal.com{{ request()->getPathInfo() }}">
+    <link rel="canonical" href="https://contrato.poderlegal.mx{{ request()->getPathInfo() }}">
 
     <!-- Fuentes Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -158,8 +158,8 @@
         <div class="mt-8 text-center">
             <p class="text-white/60 text-sm">
                 ¿Necesitas ayuda? Contáctanos en 
-                <a href="mailto:contacto@poderlegal.com" class="text-gold-accent hover:text-gold-warm transition-colors">
-                    contacto@poderlegal.com
+                <a href="mailto:contacto@poderlegal.mx" class="text-gold-accent hover:text-gold-warm transition-colors">
+                    contacto@poderlegal.mx
                 </a>
             </p>
         </div>
