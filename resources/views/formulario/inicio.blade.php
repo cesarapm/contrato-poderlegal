@@ -1,101 +1,39 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="Genera tu contrato de arrendamiento en línea de forma rápida y segura. Sistema profesional con validación legal incluida. Poder Legal - Protección jurídica inmobiliaria en México.">
-    <meta name="keywords" content="contrato de arrendamiento, generar contrato, contrato arrendamiento México, póliza jurídica arrendamiento, protección inmobiliaria, derecho inmobiliario México">
-    <meta name="author" content="Poder Legal">
     <meta name="robots" content="index, follow">
-    <meta name="language" content="es">
-    <meta name="geo.region" content="MX">
-    
+    <meta name="theme-color" content="#4A148C">
+
     <title>Genera tu Contrato de Arrendamiento - Poder Legal</title>
-    
+
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://contrato.poderlegal.mx">
-    
-    <!-- Open Graph / Facebook -->
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Genera tu Contrato de Arrendamiento - Poder Legal">
     <meta property="og:description" content="Sistema profesional para generar contratos de arrendamiento en línea. 9 pasos simples, validación legal incluida.">
-    <meta property="og:image" content="https://contrato.poderlegal.mx/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Poder Legal - Generador de Contratos de Arrendamiento">
     <meta property="og:url" content="https://contrato.poderlegal.mx">
-    <meta property="og:site_name" content="Poder Legal">
     <meta property="og:locale" content="es_MX">
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Genera tu Contrato de Arrendamiento - Poder Legal">
-    <meta name="twitter:description" content="Sistema profesional para generar contratos de arrendamiento en línea. 9 pasos simples, validación legal incluida.">
-    <meta name="twitter:image" content="https://contrato.poderlegal.mx/og-image.png">
-    <meta name="twitter:image:alt" content="Poder Legal - Generador de Contratos">
-    
-    <!-- Business Info -->
-    <meta name="business:contact_data:street_address" content="Francisco Petrarca 223 oficina 1005">
-    <meta name="business:contact_data:locality" content="Polanco">
-    <meta name="business:contact_data:region" content="Alcaldía Miguel Hidalgo">
-    <meta name="business:contact_data:postal_code" content="11560">
-    <meta name="business:contact_data:country_name" content="México">
-    <meta name="business:contact_data:phone_number" content="+525589209955">
-    <meta name="business:contact_data:email" content="contacto@poderlegal.mx">
-    
-    <!-- Mobile -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Poder Legal">
-    <meta name="theme-color" content="#4A148C">
-    <meta name="msapplication-TileColor" content="#4A148C">
-    
+
+    <!-- Fuentes Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
-    
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Generador de Contratos de Arrendamiento - Poder Legal",
-      "description": "Sistema profesional en línea para generar contratos de arrendamiento con validación legal. Proceso guiado en 9 pasos simples.",
-      "url": "https://contrato.poderlegal.mx",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "Web",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "MXN"
-      },
-      "provider": {
-        "@type": "LegalService",
-        "name": "Poder Legal",
-        "url": "https://poderlegal.mx",
-        "logo": "https://poderlegal.mx/imagen/logo.webp",
-        "telephone": "+525589209955",
-        "email": "contacto@poderlegal.mx",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Francisco Petrarca 223 oficina 1005",
-          "addressLocality": "Polanco",
-          "addressRegion": "Ciudad de México",
-          "postalCode": "11560",
-          "addressCountry": "MX"
-        }
-      }
-    }
-    </script>
 </head>
 <body class="min-h-screen" style="background: linear-gradient(135deg, #1A0933 0%, #4A148C 50%, #663399 100%);">
-    
+
     <!-- Header -->
     <header class="bg-white/10 backdrop-blur-md border-b border-white/20 sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4">
