@@ -1,28 +1,33 @@
 <?php
 
-namespace App\Filament\Resources\Arrendatarios\Schemas;
+namespace App\Filament\Resources\Contratos\RelationManagers;
 
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\CreateAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 
-class ArrendatarioForm
+class ArrendatariosRelationManager extends RelationManager
 {
-    public static function schema(Schema $schema): Schema
+    protected static string $relationship = 'arrendatarios';
+
+    protected static ?string $title = 'Arrendatarios';
+
+    public function form(Schema $schema): Schema
     {
         return $schema
             ->schema([
                 Section::make('Información del Arrendatario')
                     ->schema([
-                        Select::make('contrato_id')
-                            ->label('Contrato')
-                            ->relationship('contrato', 'folio')
-                            ->searchable()
-                            ->preload()
-                            ->required(),
-
                         Grid::make(2)
                             ->schema([
                                 Select::make('tipo_persona')
@@ -80,6 +85,46 @@ class ArrendatarioForm
                                     ->maxLength(100),
                             ]),
                     ]),
+            ]);
+    }
+
+    public function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                TextColumn::make('orden')
+                    ->label('#')
+                    ->sortable(),
+                TextColumn::make('nombre')
+                    ->label('Nombre')
+                    ->searchable()
+                    ->formatStateUsing(fn ($record) => trim("{$record->nombre} {$record->apellido_paterno} {$record->apellido_materno}")),
+                TextColumn::make('tipo_persona')
+                    ->label('Tipo')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'fisica' => 'success',
+                        'moral' => 'info',
+                        default => 'gray',
+                    }),
+                TextColumn::make('telefono_1')
+                    ->label('Teléfono')
+                    ->searchable(),
+                TextColumn::make('email')
+                    ->label('Email')
+                    ->searchable(),
+            ])
+            ->headerActions([
+                CreateAction::make(),
+            ])
+            ->actions([
+                EditAction::make(),
+                DeleteAction::make(),
+            ])
+            ->bulkActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
             ]);
     }
 }

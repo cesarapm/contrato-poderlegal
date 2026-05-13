@@ -1,28 +1,33 @@
 <?php
 
-namespace App\Filament\Resources\Fiadores\Schemas;
+namespace App\Filament\Resources\Contratos\RelationManagers;
 
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\CreateAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 
-class FiadorForm
+class FiadorRelationManager extends RelationManager
 {
-    public static function schema(Schema $schema): Schema
+    protected static string $relationship = 'fiador';
+
+    protected static ?string $title = 'Fiador / Obligado Solidario';
+
+    public function form(Schema $schema): Schema
     {
         return $schema
             ->schema([
                 Section::make('Información del Fiador')
                     ->schema([
-                        Select::make('contrato_id')
-                            ->label('Contrato')
-                            ->relationship('contrato', 'folio')
-                            ->searchable()
-                            ->preload()
-                            ->required(),
-
                         Grid::make(2)
                             ->schema([
                                 Select::make('tipo')
@@ -86,6 +91,51 @@ class FiadorForm
                                     ->visible(fn ($get) => $get('tipo') !== 'ninguno'),
                             ]),
                     ]),
+            ]);
+    }
+
+    public function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                TextColumn::make('tipo')
+                    ->label('Tipo')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'fiador' => 'warning',
+                        'obligado_solidario' => 'danger',
+                        'ninguno' => 'gray',
+                        default => 'gray',
+                    }),
+                TextColumn::make('nombre')
+                    ->label('Nombre')
+                    ->searchable()
+                    ->formatStateUsing(fn ($record) => trim("{$record->nombre} {$record->apellido_paterno} {$record->apellido_materno}")),
+                TextColumn::make('tipo_persona')
+                    ->label('Persona')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'fisica' => 'success',
+                        'moral' => 'info',
+                        default => 'gray',
+                    }),
+                TextColumn::make('telefono_1')
+                    ->label('Teléfono'),
+                TextColumn::make('email')
+                    ->label('Email')
+                    ->searchable(),
+            ])
+            ->headerActions([
+                CreateAction::make(),
+            ])
+            ->actions([
+                EditAction::make(),
+                DeleteAction::make(),
+            ])
+            ->bulkActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
             ]);
     }
 }

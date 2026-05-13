@@ -8,12 +8,16 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
+use Filament\Actions\Action;
+use Filament\Notifications\Notification;
 use Filament\Support\Colors\Color;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use App\Services\GeneradorContratoPdf;
+use Illuminate\Support\Facades\Storage;
 
 class ContratosTable
 {
@@ -163,6 +167,32 @@ class ContratosTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
+                Action::make('generar_pdf')
+                    ->label('PDF')
+                    ->icon('heroicon-o-document-arrow-down')
+                    ->color('success')
+                    ->tooltip('Generar y descargar PDF')
+                    ->action(function ($record) {
+                        try {
+                            $generador = app(GeneradorContratoPdf::class);
+                            $path = $generador->generar($record);
+
+                            Notification::make()
+                                ->title('PDF generado correctamente')
+                                ->success()
+                                ->send();
+
+                            return response()->streamDownload(function () use ($path) {
+                                echo Storage::disk('local')->get($path);
+                            }, $record->folio . '.pdf', ['Content-Type' => 'application/pdf']);
+                        } catch (\Exception $e) {
+                            Notification::make()
+                                ->title('Error al generar PDF')
+                                ->body($e->getMessage())
+                                ->danger()
+                                ->send();
+                        }
+                    }),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

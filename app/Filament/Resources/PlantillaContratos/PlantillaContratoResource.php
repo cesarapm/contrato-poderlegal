@@ -55,6 +55,10 @@ class PlantillaContratoResource extends Resource
         ];
     }
     
+    public static function shouldRegisterNavigation(): bool
+{
+    return false;
+}
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::where('activa', true)->count() ?: null;

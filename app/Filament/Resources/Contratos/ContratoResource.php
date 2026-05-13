@@ -5,6 +5,10 @@ namespace App\Filament\Resources\Contratos;
 use App\Filament\Resources\Contratos\Pages\CreateContrato;
 use App\Filament\Resources\Contratos\Pages\EditContrato;
 use App\Filament\Resources\Contratos\Pages\ListContratos;
+use App\Filament\Resources\Contratos\RelationManagers\ArrendadoresRelationManager;
+use App\Filament\Resources\Contratos\RelationManagers\ArrendatariosRelationManager;
+use App\Filament\Resources\Contratos\RelationManagers\FiadorRelationManager;
+use App\Filament\Resources\Contratos\RelationManagers\InmuebleRelationManager;
 use App\Filament\Resources\Contratos\Schemas\ContratoForm;
 use App\Filament\Resources\Contratos\Tables\ContratosTable;
 use App\Models\Contrato;
@@ -44,7 +48,10 @@ class ContratoResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            InmuebleRelationManager::class,
+            ArrendadoresRelationManager::class,
+            ArrendatariosRelationManager::class,
+            FiadorRelationManager::class,
         ];
     }
 

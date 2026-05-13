@@ -1,4 +1,4 @@
-<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="w-full max-w-6xl mx-auto px-1 sm:px-6 lg:px-8">
     <!-- Progress Steps -->
     <div class="mb-8 sm:mb-12">
         <div class="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 gap-2 mb-4">
@@ -55,7 +55,7 @@
         <form wire:submit.prevent="submit" class="relative z-10">
             <!-- Paso 1: Datos del Tramitante -->
             @if ($currentStep === 1)
-                <div class="space-y-6 animate-fadeIn">
+                <div class="space-y-6 animate-fadeIn ">
                     <div class="mb-8">
                         <h3 class="text-2xl sm:text-3xl lg:text-4xl font-display font-bold mb-3" style="background: linear-gradient(135deg, #FFD700 0%, #FFAA00 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
                             Datos del Tramitante
@@ -221,11 +221,11 @@
                         <div>
                             <label class="block text-white font-semibold mb-2">Monto de Renta Mensual *</label>
                             <div class="relative">
-                                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/60 font-bold">$</span>
+                              
                                 <input 
                                     type="number" 
                                     wire:model="monto_renta_mensual"
-                                    class="w-full pl-8 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                    class="w-full pl-7 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                     placeholder="15,000.00"
                                     step="0.01">
                             </div>
