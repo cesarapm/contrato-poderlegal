@@ -35,11 +35,11 @@ class Fiador extends Model
         if ($this->tipo === 'ninguno' || empty($this->nombre)) {
             return null;
         }
-        
-        if ($this->tipo_persona === 'moral') {
-            return $this->nombre;
-        }
-        
-        return trim("{$this->nombre} {$this->apellido_paterno} {$this->apellido_materno}");
+
+        return trim(implode(' ', array_filter([
+            $this->nombre,
+            $this->apellido_paterno,
+            $this->apellido_materno,
+        ])));
     }
 }

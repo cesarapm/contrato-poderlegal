@@ -54,6 +54,18 @@ class GeneradorContratoPdf
         $inmueble     = $contrato->inmueble;
         $fiador       = $contrato->fiador;
 
+        // \Log::debug('PDF variables debug', [
+        //     'arrendador_nombre'    => $arrendador?->nombre,
+        //     'arrendador_ap'       => $arrendador?->apellido_paterno,
+        //     'arrendador_am'       => $arrendador?->apellido_materno,
+        //     'arrendador_completo' => $arrendador?->nombre_completo,
+        //     'arrendatario_nombre'    => $arrendatario?->nombre,
+        //     'arrendatario_ap'       => $arrendatario?->apellido_paterno,
+        //     'arrendatario_am'       => $arrendatario?->apellido_materno,
+        //     'arrendatario_tipo'      => $arrendatario?->tipo_persona,
+        //     'arrendatario_completo' => $arrendatario?->nombre_completo,
+        // ]);
+
         $fechaInicio  = $contrato->fecha_inicio  ? Carbon::parse($contrato->fecha_inicio)  : null;
         $fechaTermino = $contrato->fecha_termino ? Carbon::parse($contrato->fecha_termino) : null;
 

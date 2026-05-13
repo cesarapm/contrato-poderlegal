@@ -21,9 +21,10 @@ class PlantillaArrendamientoSeeder extends Seeder
   h3 { font-size: 12pt; font-weight: bold; margin: 16px 0 4px; }
   p { margin: 8px 0; text-align: justify; }
   .firma-section { margin-top: 60px; }
-  .firma-row { display: flex; justify-content: space-around; margin-top: 20px; }
-  .firma-box { text-align: center; width: 40%; }
-  .firma-line { border-top: 1px solid #000; margin-top: 60px; margin-bottom: 4px; }
+  .firma-row { display: table; width: 100%; margin-top: 20px; }
+  .firma-box { display: table-cell; text-align: center; width: 50%; padding: 0 20px; }
+  .firma-line { border-top: 1px solid #000; margin-top: 60px; margin-bottom: 8px; }
+  .firma-nombre { text-align: center; margin-top: 4px; }
   .clausula-num { font-weight: bold; }
   .uppercase { text-transform: uppercase; }
 </style>
@@ -224,14 +225,16 @@ En caso de que el "ARRENDATARIO" tenga voluntad de dar por terminado el presente
 <div class="firma-section">
   <div class="firma-row">
     <div class="firma-box">
-      <p><strong>EL "ARRENDADOR"</strong></p>
+      <p style="text-align:center;"><strong>EL &#8220;ARRENDADOR&#8221;</strong></p>
       <div class="firma-line"></div>
-      <p>{{arrendador_nombre_completo}}<br>Por su propio derecho</p>
+      <p class="firma-nombre">{{arrendador_nombre_completo}}</p>
+      <p class="firma-nombre">Por su propio derecho</p>
     </div>
     <div class="firma-box">
-      <p><strong>EL "ARRENDATARIO"</strong></p>
+      <p style="text-align:center;"><strong>EL &#8220;ARRENDATARIO&#8221;</strong></p>
       <div class="firma-line"></div>
-      <p>{{arrendatario_nombre_completo}}<br>Por su propio derecho</p>
+      <p class="firma-nombre">{{arrendatario_nombre_completo}}</p>
+      <p class="firma-nombre">Por su propio derecho</p>
     </div>
   </div>
 

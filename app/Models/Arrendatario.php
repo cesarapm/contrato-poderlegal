@@ -32,10 +32,10 @@ class Arrendatario extends Model
 
     public function getNombreCompletoAttribute(): string
     {
-        if ($this->tipo_persona === 'moral') {
-            return $this->nombre;
-        }
-        
-        return trim("{$this->nombre} {$this->apellido_paterno} {$this->apellido_materno}");
+        return trim(implode(' ', array_filter([
+            $this->nombre,
+            $this->apellido_paterno,
+            $this->apellido_materno,
+        ])));
     }
 }

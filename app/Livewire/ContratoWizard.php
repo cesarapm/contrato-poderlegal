@@ -205,11 +205,13 @@ class ContratoWizard extends Component
             ],
             5 => [
                 'arrendatarios.*.nombre' => 'required|string|max:255',
+                'arrendatarios.*.apellido_paterno' => 'required|string|max:255',
                 'arrendatarios.*.telefono_1' => 'required|string|max:20',
                 'arrendatarios.*.email' => 'required|email|max:255',
             ],
             6 => [
                 'arrendadores.*.nombre' => 'required|string|max:255',
+                'arrendadores.*.apellido_paterno' => 'required|string|max:255',
                 'arrendadores.*.telefono_1' => 'required|string|max:20',
                 'arrendadores.*.email' => 'required|email|max:255',
             ],
@@ -233,10 +235,10 @@ class ContratoWizard extends Component
         $this->validateCurrentStep();
 
         try {
-            \Log::info('Iniciando creación de contrato', [
-                'tramitante' => $this->tramitante_nombre,
-                'producto' => $this->tipo_producto,
-            ]);
+            // \Log::info('Iniciando creación de contrato', [
+            //     'tramitante' => $this->tramitante_nombre,
+            //     'producto' => $this->tipo_producto,
+            // ]);
 
             // Crear o actualizar Tramitante (si el email ya existe, lo actualiza)
             $tramitante = Tramitante::updateOrCreate(
@@ -253,7 +255,7 @@ class ContratoWizard extends Component
                 ]
             );
 
-            \Log::info('Tramitante creado/actualizado', ['id' => $tramitante->id, 'email' => $tramitante->email]);
+            // \Log::info('Tramitante creado/actualizado', ['id' => $tramitante->id, 'email' => $tramitante->email]);
 
             // Calcular monto total (ejemplo: 12 meses)
             $monto_total = floatval($this->monto_renta_mensual) * 12;
@@ -285,7 +287,7 @@ class ContratoWizard extends Component
                 'observaciones' => $this->observaciones,
             ]);
 
-            \Log::info('Contrato creado', ['id' => $contrato->id, 'folio' => $contrato->folio]);
+            // \Log::info('Contrato creado', ['id' => $contrato->id, 'folio' => $contrato->folio]);
 
             // Crear Inmueble
             Inmueble::create([
@@ -301,7 +303,7 @@ class ContratoWizard extends Component
                 'uso_inmueble' => $this->inmueble_uso,
             ]);
 
-            \Log::info('Inmueble creado');
+            // \Log::info('Inmueble creado');
 
             // Crear Arrendatarios
             foreach ($this->arrendatarios as $index => $arr) {
@@ -327,7 +329,7 @@ class ContratoWizard extends Component
                 ]);
             }
 
-            \Log::info('Arrendatarios creados', ['count' => count($this->arrendatarios)]);
+            // \Log::info('Arrendatarios creados', ['count' => count($this->arrendatarios)]);
 
             // Crear Arrendadores
             foreach ($this->arrendadores as $index => $arr) {
@@ -355,7 +357,7 @@ class ContratoWizard extends Component
                 ]);
             }
 
-            \Log::info('Arrendadores creados', ['count' => count($this->arrendadores)]);
+            // \Log::info('Arrendadores creados', ['count' => count($this->arrendadores)]);
 
             // Crear Fiador si aplica
             if ($this->fiador_tipo !== 'ninguno') {
@@ -375,10 +377,10 @@ class ContratoWizard extends Component
                     'email' => $this->fiador_email,
                     'domicilio' => [],
                 ]);
-                \Log::info('Fiador creado');
+                // \Log::info('Fiador creado');
             }
 
-            \Log::info('Contrato completado exitosamente', ['folio' => $contrato->folio]);
+            // \Log::info('Contrato completado exitosamente', ['folio' => $contrato->folio]);
 
             session()->flash('success', '¡Contrato creado exitosamente! Folio: ' . $contrato->folio);
             
