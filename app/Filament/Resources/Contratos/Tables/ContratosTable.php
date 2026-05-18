@@ -17,6 +17,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use App\Services\GeneradorContratoPdf;
+use App\Services\GeneradorPolizaPdf;
 use Illuminate\Support\Facades\Storage;
 
 class ContratosTable
@@ -168,10 +169,10 @@ class ContratosTable
                 ViewAction::make(),
                 EditAction::make(),
                 Action::make('generar_pdf')
-                    ->label('PDF')
+                    ->label('Contrato')
                     ->icon('heroicon-o-document-arrow-down')
                     ->color('success')
-                    ->tooltip('Generar y descargar PDF')
+                    ->tooltip('Generar y descargar PDF del contrato')
                     ->action(function ($record) {
                         try {
                             $generador = app(GeneradorContratoPdf::class);
@@ -188,6 +189,33 @@ class ContratosTable
                         } catch (\Exception $e) {
                             Notification::make()
                                 ->title('Error al generar PDF')
+                                ->body($e->getMessage())
+                                ->danger()
+                                ->send();
+                        }
+                    }),
+
+                Action::make('generar_poliza')
+                    ->label('Póliza')
+                    ->icon('heroicon-o-shield-check')
+                    ->color('warning')
+                    ->tooltip('Generar y descargar Póliza Poder Legal')
+                    ->action(function ($record) {
+                        try {
+                            $generador = app(GeneradorPolizaPdf::class);
+                            $path = $generador->generar($record);
+
+                            Notification::make()
+                                ->title('Póliza generada correctamente')
+                                ->success()
+                                ->send();
+
+                            return response()->streamDownload(function () use ($path) {
+                                echo Storage::disk('local')->get($path);
+                            }, $record->folio . '-poliza.pdf', ['Content-Type' => 'application/pdf']);
+                        } catch (\Exception $e) {
+                            Notification::make()
+                                ->title('Error al generar Póliza')
                                 ->body($e->getMessage())
                                 ->danger()
                                 ->send();

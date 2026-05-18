@@ -422,7 +422,7 @@
                             <div>
                                 <label class="block text-white font-semibold mb-2">Tipo de Persona</label>
                                 <select 
-                                    wire:model="arrendatarios.{{ $index }}.tipo_persona"
+                                    wire:model.live="arrendatarios.{{ $index }}.tipo_persona"
                                     class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm">
                                     <option value="fisica" class="bg-purple-900 text-white">Persona Física</option>
                                     <option value="moral" class="bg-purple-900 text-white">Persona Moral</option>
@@ -490,6 +490,102 @@
                                     placeholder="arrendatario@ejemplo.com">
                                 @error("arrendatarios.{$index}.email") <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                             </div>
+
+                            @if($arrendatario['tipo_persona'] === 'moral')
+                                @include('formulario.persona-moral-fields', [
+                                    'prefix' => "arrendatarios.{$index}",
+                                    'actaModel' => "actas_arrendatarios.{$index}",
+                                    'poderesModel' => "poderes_arrendatarios.{$index}",
+                                    'constanciaModel' => "constancias_arrendatarios.{$index}",
+                                    'data' => $arrendatario,
+                                ])
+                            @endif
+
+                            {{-- Comprobantes de ingresos (todos los tipos) --}}
+                            @php
+                                $comprArr = $comprobantes_arrendatarios[$index] ?? null;
+                                $comprFiles = $comprArr ? (is_array($comprArr) ? $comprArr : [$comprArr]) : [];
+                            @endphp
+                            <div class="mt-4 pt-4 border-t border-white/20" x-data="{ files: [], uploaded: {{ count($comprFiles) }} }">
+                                <label class="block text-white font-semibold mb-2 text-sm">
+                                    Comprobantes de ingresos
+                                    <span class="text-white/40 font-normal">(mínimo 3, opcional)</span>
+                                </label>
+                                <label class="flex items-center gap-2 w-full px-3 py-2 rounded-xl border cursor-pointer transition-all backdrop-blur-sm text-sm"
+                                       :class="(files.length || uploaded) ? 'bg-green-500/10 border-green-400/50 text-green-300' : 'bg-white/10 border-white/20 text-white/70 hover:border-gold-accent'">
+                                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                                    </svg>
+                                    <span class="truncate flex-1" x-text="files.length ? files.length + (files.length === 1 ? ' archivo seleccionado' : ' archivos seleccionados') : (uploaded ? uploaded + (uploaded === 1 ? ' archivo subido' : ' archivos subidos') : 'Seleccionar archivos (puede elegir varios)')">Seleccionar archivos (puede elegir varios)</span>
+                                    <input type="file" wire:model="comprobantes_arrendatarios.{{ $index }}" class="hidden" accept=".pdf,.jpg,.jpeg,.png" multiple
+                                           @change="files = Array.from($event.target.files); uploaded = 0">
+                                </label>
+                                <template x-if="files.length">
+                                    <ul class="mt-2 space-y-1">
+                                        <template x-for="file in files" :key="file.name">
+                                            <li class="text-green-400 text-xs">
+                                                <span x-text="file.name + ' · ' + (file.size / 1024 / 1024).toFixed(2) + ' MB'"></span>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </template>
+                                @if(count($comprFiles) > 0)
+                                    <ul x-show="!files.length" class="mt-2 space-y-1">
+                                        @foreach($comprFiles as $uf)
+                                            @if($uf && method_exists($uf, 'getClientOriginalName'))
+                                                <li class="text-green-400 text-xs">{{ $uf->getClientOriginalName() }} · {{ round($uf->getSize() / 1024 / 1024, 2) }} MB</li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                @endif
+                                <p class="text-white/40 text-xs mt-1">Últimos 3 meses — PDF, JPG o PNG — máx. 5 MB c/u</p>
+                                @error("comprobantes_arrendatarios.{$index}.0")
+                                    <p class="text-red-400 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            {{-- INE (todos los tipos) --}}
+                            @php
+                                $inesArr = $ines_arrendatarios[$index] ?? null;
+                                $inesFiles = $inesArr ? (is_array($inesArr) ? $inesArr : [$inesArr]) : [];
+                            @endphp
+                            <div class="mt-4 pt-4 border-t border-white/20" x-data="{ files: [], uploaded: {{ count($inesFiles) }} }">
+                                <label class="block text-white font-semibold mb-2 text-sm">
+                                    INE / Identificación oficial
+                                    <span class="text-white/40 font-normal">(opcional, puede subir varios)</span>
+                                </label>
+                                <label class="flex items-center gap-2 w-full px-3 py-2 rounded-xl border cursor-pointer transition-all backdrop-blur-sm text-sm"
+                                       :class="(files.length || uploaded) ? 'bg-green-500/10 border-green-400/50 text-green-300' : 'bg-white/10 border-white/20 text-white/70 hover:border-gold-accent'">
+                                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                                    </svg>
+                                    <span class="truncate flex-1" x-text="files.length ? files.length + (files.length === 1 ? ' archivo seleccionado' : ' archivos seleccionados') : (uploaded ? uploaded + (uploaded === 1 ? ' archivo subido' : ' archivos subidos') : 'Seleccionar archivos (anverso y reverso)')">Seleccionar archivos (anverso y reverso)</span>
+                                    <input type="file" wire:model="ines_arrendatarios.{{ $index }}" class="hidden" accept=".pdf,.jpg,.jpeg,.png" multiple
+                                           @change="files = Array.from($event.target.files); uploaded = 0">
+                                </label>
+                                <template x-if="files.length">
+                                    <ul class="mt-2 space-y-1">
+                                        <template x-for="file in files" :key="file.name">
+                                            <li class="text-green-400 text-xs">
+                                                <span x-text="file.name + ' · ' + (file.size / 1024 / 1024).toFixed(2) + ' MB'"></span>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </template>
+                                @if(count($inesFiles) > 0)
+                                    <ul x-show="!files.length" class="mt-2 space-y-1">
+                                        @foreach($inesFiles as $uf)
+                                            @if($uf && method_exists($uf, 'getClientOriginalName'))
+                                                <li class="text-green-400 text-xs">{{ $uf->getClientOriginalName() }} · {{ round($uf->getSize() / 1024 / 1024, 2) }} MB</li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                @endif
+                                <p class="text-white/40 text-xs mt-1">PDF, JPG o PNG — máx. 5 MB c/u</p>
+                                @error("ines_arrendatarios.{$index}.0")
+                                    <p class="text-red-400 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
                     @endforeach
                 </div>
@@ -530,7 +626,7 @@
                             <div>
                                 <label class="block text-white font-semibold mb-2">Tipo de Persona</label>
                                 <select 
-                                    wire:model="arrendadores.{{ $index }}.tipo_persona"
+                                    wire:model.live="arrendadores.{{ $index }}.tipo_persona"
                                     class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm">
                                     <option value="fisica" class="bg-purple-900 text-white">Persona Física</option>
                                     <option value="moral" class="bg-purple-900 text-white">Persona Moral</option>
@@ -616,6 +712,60 @@
                                     <span class="text-white group-hover:text-gold-accent transition-colors">En proceso sucesorio</span>
                                 </label>
                             </div>
+
+                            @if($arrendador['tipo_persona'] === 'moral')
+                                @include('formulario.persona-moral-fields', [
+                                    'prefix' => "arrendadores.{$index}",
+                                    'actaModel' => "actas_arrendadores.{$index}",
+                                    'poderesModel' => "poderes_arrendadores.{$index}",
+                                    'constanciaModel' => "constancias_arrendadores.{$index}",
+                                    'data' => $arrendador,
+                                ])
+                            @endif
+
+                            {{-- INE (todos los tipos) --}}
+                            @php
+                                $inesArrArr = $ines_arrendadores[$index] ?? null;
+                                $inesArrFiles = $inesArrArr ? (is_array($inesArrArr) ? $inesArrArr : [$inesArrArr]) : [];
+                            @endphp
+                            <div class="mt-4 pt-4 border-t border-white/20" x-data="{ files: [], uploaded: {{ count($inesArrFiles) }} }">
+                                <label class="block text-white font-semibold mb-2 text-sm">
+                                    INE / Identificación oficial
+                                    <span class="text-white/40 font-normal">(opcional, puede subir varios)</span>
+                                </label>
+                                <label class="flex items-center gap-2 w-full px-3 py-2 rounded-xl border cursor-pointer transition-all backdrop-blur-sm text-sm"
+                                       :class="(files.length || uploaded) ? 'bg-green-500/10 border-green-400/50 text-green-300' : 'bg-white/10 border-white/20 text-white/70 hover:border-gold-accent'">
+                                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                                    </svg>
+                                    <span class="truncate flex-1" x-text="files.length ? files.length + (files.length === 1 ? ' archivo seleccionado' : ' archivos seleccionados') : (uploaded ? uploaded + (uploaded === 1 ? ' archivo subido' : ' archivos subidos') : 'Seleccionar archivos (anverso y reverso)')">Seleccionar archivos (anverso y reverso)</span>
+                                    <input type="file" wire:model="ines_arrendadores.{{ $index }}" class="hidden" accept=".pdf,.jpg,.jpeg,.png" multiple
+                                           @change="files = Array.from($event.target.files); uploaded = 0">
+                                </label>
+                                <template x-if="files.length">
+                                    <ul class="mt-2 space-y-1">
+                                        <template x-for="file in files" :key="file.name">
+                                            <li class="text-green-400 text-xs">
+                                                <span x-text="file.name + ' · ' + (file.size / 1024 / 1024).toFixed(2) + ' MB'"></span>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </template>
+                                @if(count($inesArrFiles) > 0)
+                                    <ul x-show="!files.length" class="mt-2 space-y-1">
+                                        @foreach($inesArrFiles as $uf)
+                                            @if($uf && method_exists($uf, 'getClientOriginalName'))
+                                                <li class="text-green-400 text-xs">{{ $uf->getClientOriginalName() }} · {{ round($uf->getSize() / 1024 / 1024, 2) }} MB</li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                @endif
+                                <p class="text-white/40 text-xs mt-1">PDF, JPG o PNG — máx. 5 MB c/u</p>
+                                @error("ines_arrendadores.{$index}.0")
+                                    <p class="text-red-400 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+
                         </div>
                     @endforeach
                 </div>
@@ -635,7 +785,7 @@
                         <label class="block text-white font-semibold mb-3">¿Requiere Fiador?</label>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <label class="cursor-pointer group">
-                                <input type="radio" wire:model="fiador_tipo" value="ninguno" class="hidden peer">
+                                <input type="radio" wire:model.live="fiador_tipo" value="ninguno" class="hidden peer">
                                 <div class="p-4 rounded-xl bg-white/5 border-2 border-white/20 peer-checked:border-gold-accent peer-checked:bg-gold-accent/10 transition-all text-center">
                                     <div class="text-3xl mb-2">🚫</div>
                                     <p class="text-white font-semibold">Sin Fiador</p>
@@ -643,7 +793,7 @@
                             </label>
 
                             <label class="cursor-pointer group">
-                                <input type="radio" wire:model="fiador_tipo" value="persona" class="hidden peer">
+                                <input type="radio" wire:model.live="fiador_tipo" value="persona" class="hidden peer">
                                 <div class="p-4 rounded-xl bg-white/5 border-2 border-white/20 peer-checked:border-gold-accent peer-checked:bg-gold-accent/10 transition-all text-center">
                                     <div class="text-3xl mb-2">👤</div>
                                     <p class="text-white font-semibold">Persona Física</p>
@@ -651,7 +801,7 @@
                             </label>
 
                             <label class="cursor-pointer group">
-                                <input type="radio" wire:model="fiador_tipo" value="empresa" class="hidden peer">
+                                <input type="radio" wire:model.live="fiador_tipo" value="empresa" class="hidden peer">
                                 <div class="p-4 rounded-xl bg-white/5 border-2 border-white/20 peer-checked:border-gold-accent peer-checked:bg-gold-accent/10 transition-all text-center">
                                     <div class="text-3xl mb-2">🏢</div>
                                     <p class="text-white font-semibold">Persona Moral</p>
@@ -675,26 +825,24 @@
                                     @error('fiador_nombre') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                                 </div>
 
-                                @if($fiador_tipo === 'persona')
-                                    <div>
-                                        <label class="block text-white font-semibold mb-2">Apellido Paterno *</label>
-                                        <input 
-                                            type="text" 
-                                            wire:model="fiador_apellido_paterno"
-                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                            placeholder="Sánchez">
-                                        @error('fiador_apellido_paterno') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-                                    </div>
+                                <div>
+                                    <label class="block text-white font-semibold mb-2">Apellido Paterno *</label>
+                                    <input 
+                                        type="text" 
+                                        wire:model="fiador_apellido_paterno"
+                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                        placeholder="Sánchez">
+                                    @error('fiador_apellido_paterno') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                </div>
 
-                                    <div>
-                                        <label class="block text-white font-semibold mb-2">Apellido Materno</label>
-                                        <input 
-                                            type="text" 
-                                            wire:model="fiador_apellido_materno"
-                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                            placeholder="Cruz">
-                                    </div>
-                                @endif
+                                <div>
+                                    <label class="block text-white font-semibold mb-2">Apellido Materno</label>
+                                    <input 
+                                        type="text" 
+                                        wire:model="fiador_apellido_materno"
+                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                        placeholder="Cruz">
+                                </div>
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -726,6 +874,114 @@
                                     class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                     placeholder="fiador@ejemplo.com">
                                 @error('fiador_email') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            @if($fiador_tipo === 'empresa')
+                                @include('formulario.persona-moral-fields', [
+                                    'prefix' => 'fiador',
+                                    'sep'    => '_',
+                                    'actaModel' => 'fiador_acta_constitutiva',
+                                    'poderesModel' => 'fiador_poderes_representante',
+                                    'constanciaModel' => 'fiador_constancia_situacion_fiscal',
+                                    'data' => [
+                                        'no_acta_constitutiva' => $fiador_no_acta_constitutiva,
+                                        'fecha_acta_constitutiva' => $fiador_fecha_acta_constitutiva,
+                                        'fecha_registro_acta' => $fiador_fecha_registro_acta,
+                                        'estado_inscrita' => $fiador_estado_inscrita,
+                                        'nombre_notario' => $fiador_nombre_notario,
+                                        'no_notario' => $fiador_no_notario,
+                                        'estado_notario' => $fiador_estado_notario,
+                                        'ciudad_notario' => $fiador_ciudad_notario,
+                                        'folio_mercantil' => $fiador_folio_mercantil,
+                                        'poder_en_acta' => $fiador_poder_en_acta,
+                                    ],
+                                ])
+                            @endif
+
+                            {{-- Comprobantes de ingresos (todos los tipos) --}}
+                            @php
+                                $comprFidArr = $comprobantes_fiador ?? [];
+                                $comprFidFiles = is_array($comprFidArr) ? $comprFidArr : ($comprFidArr ? [$comprFidArr] : []);
+                            @endphp
+                            <div class="mt-4 pt-4 border-t border-white/20" x-data="{ files: [], uploaded: {{ count($comprFidFiles) }} }">
+                                <label class="block text-white font-semibold mb-2 text-sm">
+                                    Comprobantes de ingresos
+                                    <span class="text-white/40 font-normal">(mínimo 3, opcional)</span>
+                                </label>
+                                <label class="flex items-center gap-2 w-full px-3 py-2 rounded-xl border cursor-pointer transition-all backdrop-blur-sm text-sm"
+                                       :class="(files.length || uploaded) ? 'bg-green-500/10 border-green-400/50 text-green-300' : 'bg-white/10 border-white/20 text-white/70 hover:border-gold-accent'">
+                                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                                    </svg>
+                                    <span class="truncate flex-1" x-text="files.length ? files.length + (files.length === 1 ? ' archivo seleccionado' : ' archivos seleccionados') : (uploaded ? uploaded + (uploaded === 1 ? ' archivo subido' : ' archivos subidos') : 'Seleccionar archivos (puede elegir varios)')">Seleccionar archivos (puede elegir varios)</span>
+                                    <input type="file" wire:model="comprobantes_fiador" class="hidden" accept=".pdf,.jpg,.jpeg,.png" multiple
+                                           @change="files = Array.from($event.target.files); uploaded = 0">
+                                </label>
+                                <template x-if="files.length">
+                                    <ul class="mt-2 space-y-1">
+                                        <template x-for="file in files" :key="file.name">
+                                            <li class="text-green-400 text-xs">
+                                                <span x-text="file.name + ' · ' + (file.size / 1024 / 1024).toFixed(2) + ' MB'"></span>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </template>
+                                @if(count($comprFidFiles) > 0)
+                                    <ul x-show="!files.length" class="mt-2 space-y-1">
+                                        @foreach($comprFidFiles as $uf)
+                                            @if($uf && method_exists($uf, 'getClientOriginalName'))
+                                                <li class="text-green-400 text-xs">{{ $uf->getClientOriginalName() }} · {{ round($uf->getSize() / 1024 / 1024, 2) }} MB</li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                @endif
+                                <p class="text-white/40 text-xs mt-1">Últimos 3 meses — PDF, JPG o PNG — máx. 5 MB c/u</p>
+                                @error('comprobantes_fiador.*')
+                                    <p class="text-red-400 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            {{-- INE (todos los tipos) --}}
+                            @php
+                                $ineFidArr = $ine_fiador ?? [];
+                                $ineFidFiles = is_array($ineFidArr) ? $ineFidArr : ($ineFidArr ? [$ineFidArr] : []);
+                            @endphp
+                            <div class="mt-4 pt-4 border-t border-white/20" x-data="{ files: [], uploaded: {{ count($ineFidFiles) }} }">
+                                <label class="block text-white font-semibold mb-2 text-sm">
+                                    INE / Identificación oficial
+                                    <span class="text-white/40 font-normal">(opcional, puede subir varios)</span>
+                                </label>
+                                <label class="flex items-center gap-2 w-full px-3 py-2 rounded-xl border cursor-pointer transition-all backdrop-blur-sm text-sm"
+                                       :class="(files.length || uploaded) ? 'bg-green-500/10 border-green-400/50 text-green-300' : 'bg-white/10 border-white/20 text-white/70 hover:border-gold-accent'">
+                                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                                    </svg>
+                                    <span class="truncate flex-1" x-text="files.length ? files.length + (files.length === 1 ? ' archivo seleccionado' : ' archivos seleccionados') : (uploaded ? uploaded + (uploaded === 1 ? ' archivo subido' : ' archivos subidos') : 'Seleccionar archivos (anverso y reverso)')">Seleccionar archivos (anverso y reverso)</span>
+                                    <input type="file" wire:model="ine_fiador" class="hidden" accept=".pdf,.jpg,.jpeg,.png" multiple
+                                           @change="files = Array.from($event.target.files); uploaded = 0">
+                                </label>
+                                <template x-if="files.length">
+                                    <ul class="mt-2 space-y-1">
+                                        <template x-for="file in files" :key="file.name">
+                                            <li class="text-green-400 text-xs">
+                                                <span x-text="file.name + ' · ' + (file.size / 1024 / 1024).toFixed(2) + ' MB'"></span>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </template>
+                                @if(count($ineFidFiles) > 0)
+                                    <ul x-show="!files.length" class="mt-2 space-y-1">
+                                        @foreach($ineFidFiles as $uf)
+                                            @if($uf && method_exists($uf, 'getClientOriginalName'))
+                                                <li class="text-green-400 text-xs">{{ $uf->getClientOriginalName() }} · {{ round($uf->getSize() / 1024 / 1024, 2) }} MB</li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                @endif
+                                <p class="text-white/40 text-xs mt-1">PDF, JPG o PNG — máx. 5 MB c/u</p>
+                                @error('ine_fiador.*')
+                                    <p class="text-red-400 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                     @endif

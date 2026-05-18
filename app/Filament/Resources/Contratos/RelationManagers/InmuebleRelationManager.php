@@ -28,7 +28,7 @@ class InmuebleRelationManager extends RelationManager
             ->schema([
                 Section::make('Información del Inmueble')
                     ->schema([
-                        Grid::make(3)
+                        Grid::make(2)
                             ->schema([
                                 TextInput::make('codigo_postal')
                                     ->label('Código Postal')
@@ -94,7 +94,7 @@ class InmuebleRelationManager extends RelationManager
                                     ->maxLength(150),
                             ]),
 
-                        Grid::make(3)
+                        Grid::make(2)
                             ->schema([
                                 TextInput::make('numero_exterior')
                                     ->label('Número Exterior')
@@ -105,9 +105,9 @@ class InmuebleRelationManager extends RelationManager
                                     ->label('Número Interior')
                                     ->maxLength(20),
 
-                                TextInput::make('edificio')
-                                    ->label('Edificio')
-                                    ->maxLength(50),
+                                // TextInput::make('edificio')
+                                //     ->label('Edificio')
+                                //     ->maxLength(50),
                             ]),
 
                         Select::make('uso_inmueble')
@@ -119,7 +119,7 @@ class InmuebleRelationManager extends RelationManager
                                 'industrial' => 'Industrial',
                                 'mixto' => 'Mixto',
                             ]),
-                    ]),
+                    ])->columnSpanFull(),
             ]);
     }
 

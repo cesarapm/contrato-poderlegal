@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Contrato extends Model
@@ -29,6 +30,7 @@ class Contrato extends Model
         'servicios_inmueble',
         'observaciones',
         'pdf_path',
+        'poliza_pdf_path',
     ];
 
     protected $casts = [
@@ -45,10 +47,31 @@ class Contrato extends Model
     protected static function boot()
     {
         parent::boot();
-        
+
         static::creating(function ($contrato) {
             if (empty($contrato->folio)) {
                 $contrato->folio = 'CON-' . strtoupper(Str::random(8));
+            }
+        });
+
+        // Eliminar PDFs antiguos cuando se reemplazan
+        static::updating(function ($contrato) {
+            foreach (['pdf_path', 'poliza_pdf_path'] as $campo) {
+                if ($contrato->isDirty($campo)) {
+                    $anterior = $contrato->getOriginal($campo);
+                    if ($anterior && Storage::disk('local')->exists($anterior)) {
+                        Storage::disk('local')->delete($anterior);
+                    }
+                }
+            }
+        });
+
+        // Eliminar PDFs al borrar definitivamente (force delete)
+        static::forceDeleted(function ($contrato) {
+            foreach (['pdf_path', 'poliza_pdf_path'] as $campo) {
+                if ($contrato->$campo && Storage::disk('local')->exists($contrato->$campo)) {
+                    Storage::disk('local')->delete($contrato->$campo);
+                }
             }
         });
     }

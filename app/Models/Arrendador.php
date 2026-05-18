@@ -2,11 +2,27 @@
 
 namespace App\Models;
 
+use App\Traits\EliminaArchivosAlBorrar;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Arrendador extends Model
 {
+    use EliminaArchivosAlBorrar;
+
+    protected array $camposArchivoSimple = [
+        'identificacion_path',
+        'titulo_propiedad_path',
+        'acta_constitutiva_path',
+        'poderes_representante_path',
+        'constancia_situacion_fiscal_path',
+    ];
+
+    protected array $camposArchivoMultiple = [
+        'comprobantes_ingresos',
+        'ine_paths',
+    ];
+
     protected $fillable = [
         'contrato_id',
         'tipo_persona',
@@ -22,12 +38,34 @@ class Arrendador extends Model
         'en_proceso_sucesorio',
         'direccion',
         'orden',
+        // Campos persona moral
+        'no_acta_constitutiva',
+        'fecha_acta_constitutiva',
+        'fecha_registro_acta',
+        'estado_inscrita',
+        'acta_constitutiva_path',
+        'nombre_notario',
+        'no_notario',
+        'estado_notario',
+        'ciudad_notario',
+        'folio_mercantil',
+        'poder_en_acta',
+        'poderes_representante_path',
+        'constancia_situacion_fiscal_path',
+        // Todos los tipos
+        'comprobantes_ingresos',
+        'ine_paths',
     ];
 
     protected $casts = [
         'tiene_representante_legal' => 'boolean',
         'en_proceso_sucesorio' => 'boolean',
         'direccion' => 'array',
+        'fecha_acta_constitutiva' => 'date',
+        'fecha_registro_acta' => 'date',
+        'poder_en_acta' => 'boolean',
+        'comprobantes_ingresos' => 'array',
+        'ine_paths' => 'array',
     ];
 
     public function contrato(): BelongsTo

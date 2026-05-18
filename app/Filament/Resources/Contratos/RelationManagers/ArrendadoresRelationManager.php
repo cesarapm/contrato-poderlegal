@@ -3,6 +3,9 @@
 namespace App\Filament\Resources\Contratos\RelationManagers;
 
 use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Radio;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\Select;
@@ -30,7 +33,7 @@ class ArrendadoresRelationManager extends RelationManager
             ->schema([
                 Section::make('Información del Arrendador')
                     ->schema([
-                        Grid::make(3)
+                        Grid::make(2)
                             ->schema([
                                 Select::make('tipo_persona')
                                     ->label('Tipo de Persona')
@@ -40,7 +43,7 @@ class ArrendadoresRelationManager extends RelationManager
                                         'moral' => 'Persona Moral',
                                     ])
                                     ->default('fisica')
-                                    ->reactive(),
+                                    ->live(),
 
                                 TextInput::make('orden')
                                     ->label('Orden')
@@ -52,14 +55,14 @@ class ArrendadoresRelationManager extends RelationManager
                                 Grid::make(1)
                                     ->schema([
                                         Checkbox::make('tiene_representante_legal')
-                                            ->label('Tiene Representante Legal'),
+                                        ->label('Tiene Representante Legal'),
 
                                         Checkbox::make('en_proceso_sucesorio')
                                             ->label('En Proceso Sucesorio'),
                                     ]),
                             ]),
 
-                        Grid::make(3)
+                        Grid::make(2)
                             ->schema([
                                 TextInput::make('nombre')
                                     ->label('Nombre')
@@ -76,7 +79,7 @@ class ArrendadoresRelationManager extends RelationManager
                                     ->maxLength(50),
                             ]),
 
-                        Grid::make(3)
+                        Grid::make(2)
                             ->schema([
                                 TextInput::make('telefono_1')
                                     ->label('Teléfono Principal')
@@ -95,6 +98,100 @@ class ArrendadoresRelationManager extends RelationManager
                                     ->email()
                                     ->maxLength(100),
                             ]),
+                    ]),
+
+                Section::make('Acta Constitutiva')
+                    ->visible(fn ($get) => $get('tipo_persona') === 'moral')
+                    ->schema([
+                        Grid::make(2)
+                            ->schema([
+                                TextInput::make('no_acta_constitutiva')
+                                    ->label('No. de acta constitutiva')
+                                    ->maxLength(50),
+
+                                DatePicker::make('fecha_acta_constitutiva')
+                                    ->label('Fecha del acta constitutiva')
+                                    ->native(false),
+
+                                DatePicker::make('fecha_registro_acta')
+                                    ->label('Fecha de registro')
+                                    ->native(false),
+
+                                TextInput::make('estado_inscrita')
+                                    ->label('Estado donde está inscrita')
+                                    ->maxLength(100),
+                            ]),
+
+                        Grid::make(4)
+                            ->schema([
+                                TextInput::make('nombre_notario')
+                                    ->label('Nombre del notario público')
+                                    ->columnSpan(2)
+                                    ->maxLength(150),
+
+                                TextInput::make('no_notario')
+                                    ->label('No. de notario')
+                                    ->maxLength(20),
+
+                                TextInput::make('estado_notario')
+                                    ->label('Estado del notario')
+                                    ->maxLength(100),
+                            ]),
+
+                        Grid::make(2)
+                            ->schema([
+                                TextInput::make('ciudad_notario')
+                                    ->label('Ciudad del notario')
+                                    ->maxLength(100),
+
+                                TextInput::make('folio_mercantil')
+                                    ->label('Folio mercantil')
+                                    ->maxLength(100),
+                            ]),
+
+                        Radio::make('poder_en_acta')
+                            ->label('¿El poder del representante está en el acta constitutiva?')
+                            ->options([1 => 'Sí', 0 => 'No'])
+                            ->inline(),
+
+                        FileUpload::make('acta_constitutiva_path')
+                            ->label('Copia del acta constitutiva')
+                            ->disk('public')
+                            ->directory('actas')
+                            ->acceptedFileTypes(['application/pdf', 'image/jpeg', 'image/png'])
+                            ->maxSize(5120)->downloadable()->openable()->nullable(),
+                    ]),
+
+                Section::make('Documentos adicionales (persona moral)')
+                    ->visible(fn ($get) => $get('tipo_persona') === 'moral')
+                    ->schema([
+                        Grid::make(2)
+                            ->schema([
+                                FileUpload::make('poderes_representante_path')
+                                    ->label('Poderes del representante legal')
+                                    ->disk('public')
+                                    ->directory('poderes')
+                                    ->acceptedFileTypes(['application/pdf', 'image/jpeg', 'image/png'])
+                                    ->maxSize(5120)->downloadable()->openable()->nullable(),
+
+                                FileUpload::make('constancia_situacion_fiscal_path')
+                                    ->label('Constancia de situación fiscal')
+                                    ->disk('public')
+                                    ->directory('constancias')
+                                    ->acceptedFileTypes(['application/pdf', 'image/jpeg', 'image/png'])
+                                    ->maxSize(5120)->downloadable()->openable()->nullable(),
+                            ]),
+                    ]),
+
+                Section::make('Documentos generales')
+                    ->schema([
+                        FileUpload::make('ine_paths')
+                            ->label('INE / Identificación oficial')
+                            ->disk('public')
+                            ->directory('ines')
+                            ->acceptedFileTypes(['application/pdf', 'image/jpeg', 'image/png'])
+                            ->multiple()
+                            ->maxSize(5120)->downloadable()->openable()->nullable(),
                     ]),
             ]);
     }
@@ -129,10 +226,12 @@ class ArrendadoresRelationManager extends RelationManager
                     ->boolean(),
             ])
             ->headerActions([
-                CreateAction::make(),
+                CreateAction::make()
+                    ->modalWidth('7xl'),
             ])
             ->actions([
-                EditAction::make(),
+                EditAction::make()
+                    ->modalWidth('7xl'),
                 DeleteAction::make(),
             ])
             ->bulkActions([
@@ -142,3 +241,4 @@ class ArrendadoresRelationManager extends RelationManager
             ]);
     }
 }
+
