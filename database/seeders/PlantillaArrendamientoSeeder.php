@@ -20,6 +20,7 @@ class PlantillaArrendamientoSeeder extends Seeder
   h2 { text-align: center; font-size: 12pt; font-weight: bold; letter-spacing: 4px; text-transform: uppercase; margin: 20px 0 10px; }
   h3 { font-size: 12pt; font-weight: bold; margin: 16px 0 4px; }
   p { margin: 8px 0; text-align: justify; }
+  strong { font-weight: 900; }
   .firma-section { margin-top: 60px; }
   .firma-row { display: table; width: 100%; margin-top: 20px; }
   .firma-box { display: table-cell; text-align: center; width: 50%; padding: 0 20px; }
@@ -45,11 +46,11 @@ CLÁUSULAS:</p>
 
 <p><span class="clausula-num">1.</span> &nbsp; Declara el <strong>"ARRENDADOR"</strong>, por conducto de representante legal:</p>
 
-<p><span class="clausula-num">1.1</span> &nbsp; Ser una persona {{arrendador_tipo_persona}} de nacionalidad mexicana, con plena capacidad para la celebración del presente Contrato.</p>
+<p><span class="clausula-num">1.1</span> &nbsp; Ser una persona <strong>{{arrendador_tipo_persona}}</strong> de nacionalidad mexicana, con plena capacidad para la celebración del presente Contrato.</p>
 
-<p><span class="clausula-num">1.2</span> &nbsp; Tener su domicilio el ubicado en {{arrendador_domicilio}}.</p>
+<p><span class="clausula-num">1.2</span> &nbsp; Tener su domicilio el ubicado en <strong>{{arrendador_domicilio}}</strong>.</p>
 
-<p><span class="clausula-num">1.3</span> &nbsp; Que es el legítimo propietario del inmueble ubicado en {{inmueble_direccion_completa}} (El <strong>"Inmueble"</strong>).</p>
+<p><span class="clausula-num">1.3</span> &nbsp; Que es el legítimo propietario del inmueble ubicado en <strong>{{inmueble_direccion_completa}}</strong> (El <strong>"Inmueble"</strong>).</p>
 
 <p><span class="clausula-num">1.4</span> &nbsp; Que, a la fecha de firma del presente Contrato, el Inmueble se encuentra al corriente en el pago de impuestos, derechos y aprovechamientos en los términos de las leyes aplicables, y que no ha sido objeto de ninguna reclamación, demanda o juicio reivindicatorio o embargo de cualquier tercero que esté pendiente de resolución y que atente contra sus derechos de dar en arrendamiento el Inmueble.</p>
 
@@ -61,7 +62,7 @@ CLÁUSULAS:</p>
 
 <p><span class="clausula-num">2.</span> &nbsp; Declara el <strong>"ARRENDATARIO"</strong>, por su propio derecho:</p>
 
-<p><span class="clausula-num">2.1</span> &nbsp; Ser persona {{arrendatario_tipo_persona}} de nacionalidad mexicana con plena capacidad para la celebración del presente Contrato.</p>
+<p><span class="clausula-num">2.1</span> &nbsp; Ser persona <strong>{{arrendatario_tipo_persona}}</strong> de nacionalidad mexicana con plena capacidad para la celebración del presente Contrato.</p>
 
 <p><span class="clausula-num">2.2</span> &nbsp; Que cuenta con las facultades necesarias y suficientes para la celebración del presente Contrato.</p>
 
@@ -88,19 +89,19 @@ CLÁUSULAS:</p>
 <h2>C L A U S U L A S</h2>
 
 <h3>Primera.- Objeto.</h3>
-<p>En este acto el "ARRENDADOR" se obliga a conceder el uso y goce temporal del Inmueble ubicado en {{inmueble_direccion_completa}}, el cual incluye {{inmueble_estacionamiento}} espacio(s) para estacionamiento (El <strong>"Inmueble"</strong>) a favor del "ARRENDATARIO", quien a su vez toma posesión del Inmueble y se obliga a pagar a cambio el precio cierto previsto en la Cláusula Segunda siguiente.</p>
+<p>En este acto el "ARRENDADOR" se obliga a conceder el uso y goce temporal del Inmueble ubicado en <strong>{{inmueble_direccion_completa}}</strong>, el cual incluye <strong>{{inmueble_estacionamiento}}</strong> espacio(s) para estacionamiento (El <strong>"Inmueble"</strong>) a favor del "ARRENDATARIO", quien a su vez toma posesión del Inmueble y se obliga a pagar a cambio el precio cierto previsto en la Cláusula Segunda siguiente.</p>
 
 <h3>Segunda.- La Renta.</h3>
 <p>El "ARRENDATARIO" pagará al "ARRENDADOR" una renta mensual, durante el Plazo de Vigencia del presente Contrato por el equivalente a la cantidad de <strong>${{monto_renta_mensual}} M.N. (Moneda Nacional)</strong> (<strong>"Renta Mensual"</strong>), en el entendido que dicha cantidad cubre la Cuota de Mantenimiento.</p>
 
-<p>El "ARRENDATARIO" debe pagar al "ARRENDADOR" la primer Renta Mensual correspondiente al mes de {{mes_primer_pago}} en la fecha de firma del presente Contrato.</p>
+<p>El "ARRENDATARIO" debe pagar al "ARRENDADOR" la primer Renta Mensual correspondiente al mes de <strong>{{mes_primer_pago}}</strong> en la fecha de firma del presente Contrato.</p>
 
 <p>Asimismo, el "ARRENDATARIO" pagará la Renta Mensual independientemente que el Inmueble sea o no ocupado por el "ARRENDATARIO" por el total del Plazo de Vigencia del presente Contrato.</p>
 
 <p><strong>Forma de Pago</strong><br>
 El "ARRENDATARIO" pagará al "ARRENDADOR" la Renta Mensual de manera adelantada, dentro de los primeros 5 (cinco) días naturales calendario contados a partir del día 15 de cada mes (la "Fecha de Pago") en efectivo o a la cuenta bancaria que indique por escrito el "ARRENDADOR".</p>
 
-<p>Al momento de la entrega de la posesión del Inmueble, el "ARRENDADOR" recibirá el pago la Renta Mensual correspondiente al periodo comprendido del mes de {{mes_inicio_periodo}} del año {{anio_inicio}} al {{mes_fin_periodo}} del {{anio_fin}}, en los términos establecidos en la presente cláusula, siendo el presente documento el recibo más eficaz que en derecho proceda. El "ARRENDATARIO" en ningún caso y bajo ningún concepto o título podrá retener el importe de la Renta Mensual.</p>
+<p>Al momento de la entrega de la posesión del Inmueble, el "ARRENDADOR" recibirá el pago la Renta Mensual correspondiente al periodo comprendido del mes de <strong>{{mes_inicio_periodo}}</strong> del año <strong>{{anio_inicio}}</strong> al <strong>{{mes_fin_periodo}}</strong> del <strong>{{anio_fin}}</strong>, en los términos establecidos en la presente cláusula, siendo el presente documento el recibo más eficaz que en derecho proceda. El "ARRENDATARIO" en ningún caso y bajo ningún concepto o título podrá retener el importe de la Renta Mensual.</p>
 
 <p><strong>Recibos de Pago.</strong><br>
 En caso de que el pago de la Renta Mensual se haga vía transferencia bancaria, el "ARRENDATARIO" entregará al "ARRENDADOR" de manera física o virtual (al correo electrónico descrito en la cláusula Décima Octava del presente Contrato) dentro de los primeros 5 (cinco) días naturales calendario contados a partir del día primero de cada mes, la ficha de depósito bancaria o documento en que conste la transferencia interbancaria que hubiere realizado para el pago de la Renta Mensual correspondiente. El "ARRENDADOR", a su vez, mediante correo electrónico acusará de recibo a más tardar dentro de los 5 (cinco) días hábiles siguientes a la fecha en que se le haya notificado dicho pago, siendo ésta forma el medio idóneo para comprobar los pagos por concepto de Renta Mensual, por lo que el "ARRENDATARIO" se compromete a guardar todos y cada uno de los comprobantes de pago, mismos que le serán requeridos en caso de que se le solicite acreditar el pago de la Renta Mensual convenida, por tanto convienen las partes considerarlos como "RECIBOS DE PAGO" en su más amplio sentido y por cumplida la obligación del "ARRENDADOR" prevista en el artículo 2448-E del Código Civil aplicable para la Ciudad de México.</p>
@@ -112,7 +113,7 @@ El "ARRENDATARIO" no podrá consignar la Renta Mensual en Institución o Depende
 En caso de que se decidiera incrementar la Cuota de Mantenimiento, la Renta Mensual convenida se incrementará de igual manera, en la cantidad numéricamente igual a dicho incremento.</p>
 
 <h3>Tercera.- Plazo de vigencia del Contrato de Arrendamiento.</h3>
-<p>El plazo de vigencia de este Contrato será de 12 meses (el "Plazo de Vigencia"), contado a partir del {{fecha_inicio_texto}}. El Plazo de Vigencia queda acordado en forma forzosa para ambas partes, salvo porque existiera una causal de terminación anticipada en los términos dispuestos en este Contrato. El presente Contrato concluye el día {{fecha_termino_texto}}, una vez terminado el Plazo de Vigencia, el "ARRENDATARIO" entregará el Inmueble sin oposición y en las mismas condiciones en que le fue entregado.</p>
+<p>El plazo de vigencia de este Contrato será de 12 meses (el "Plazo de Vigencia"), contado a partir del <strong>{{fecha_inicio_texto}}</strong>. El Plazo de Vigencia queda acordado en forma forzosa para ambas partes, salvo porque existiera una causal de terminación anticipada en los términos dispuestos en este Contrato. El presente Contrato concluye el día <strong>{{fecha_termino_texto}}</strong>, una vez terminado el Plazo de Vigencia, el "ARRENDATARIO" entregará el Inmueble sin oposición y en las mismas condiciones en que le fue entregado.</p>
 
 <p><strong>Renovación</strong><br>
 El presente contrato podrá renovarse a entera discrecionalidad del "ARRENDADOR", lo anterior en términos del artículo 2448-C del Código Civil aplicable para la Ciudad de México, no obstante, el "ARRENDADOR" tomará en consideración el cumplimiento del "ARRENDATARIO" respecto de sus obligaciones contraídas en el presente Contrato.</p>
@@ -151,7 +152,7 @@ En caso de que el "ARRENDATARIO" tenga voluntad de dar por terminado el presente
 <p>El "ARRENDADOR" devolverá el Depósito en Garantía al "ARRENDATARIO", dentro de los 45 (cuarenta y cinco) días calendario siguientes al término del Plazo de Vigencia o a la terminación anticipada del mismo, siempre y cuando, el "ARRENDATARIO" haya cumplido puntualmente con todas y cada una de sus obligaciones pactadas, en caso contrario el "ARRENDADOR" tendrá derecho a descontar del Depósito en Garantía, aquellos gastos que hubiere tenido que realizar por incumplimiento o negligencia del "ARRENDATARIO", sin perjuicio de su derecho de ejercitar todas las acciones que procedan en contra del "ARRENDATARIO" respecto de los montos faltantes.</p>
 
 <h3>Sexta.- Uso y Condición del Inmueble.</h3>
-<p>El Inmueble será destinado únicamente para uso {{inmueble_uso}}, quedándole prohibido al "ARRENDATARIO" y éste lo acepta expresamente, cambiar el uso referido, salvo autorización escrita del "ARRENDADOR".</p>
+<p>El Inmueble será destinado únicamente para uso <strong>{{inmueble_uso}}</strong>, quedándole prohibido al "ARRENDATARIO" y éste lo acepta expresamente, cambiar el uso referido, salvo autorización escrita del "ARRENDADOR".</p>
 
 <p>El "ARRENDATARIO" reconoce expresamente que recibe el Inmueble arrendado a su entera satisfacción, en buen estado de conservación, uso y aseo, con sus instalaciones hidráulicas y de energía eléctrica completas y en condiciones normales de servicio, comprometiéndose a mantenerlo en igual estado hasta su devolución.</p>
 
@@ -203,8 +204,8 @@ En caso de que el "ARRENDATARIO" tenga voluntad de dar por terminado el presente
 
 <h3>Décima Octava.- Avisos y Notificaciones.</h3>
 <p>Cualquier aviso o notificación, solicitud, requerimiento, exigencia, aprobación, consentimiento u otras comunicaciones que el "ARRENDADOR" y el "ARRENDATARIO" pretendan o deban otorgarse entre sí, conforme al presente Contrato de Arrendamiento, serán por escrito y remitidas a la otra parte a su domicilio señalado en las declaraciones del presente contrato y a los siguientes correos electrónicos:</p>
-<p><strong>"ARRENDADOR":</strong> {{arrendador_email}}</p>
-<p><strong>"ARRENDATARIO":</strong> {{arrendatario_email}}</p>
+<p><strong>"ARRENDADOR":</strong> <strong>{{arrendador_email}}</strong></p>
+<p><strong>"ARRENDATARIO":</strong> <strong>{{arrendatario_email}}</strong></p>
 
 <h3>Décima Novena.- Jurisdicción y Ley aplicable.</h3>
 <p>Las partes se sujetan al Código Civil de la Ciudad de México para todo lo no previsto en el presente Contrato de Arrendamiento, así como para la interpretación, ejecución y cumplimiento del mismo. Consecuentemente, las partes se someten expresamente a la jurisdicción de los tribunales competentes de la Ciudad de México, respecto a cualquier acción o procedimiento, interpretación y cumplimiento de todo lo pactado en el presente Contrato, renunciando expresamente a cualquier jurisdicción que les pudiera corresponder en virtud de sus domicilios presentes o futuros.</p>
@@ -220,20 +221,20 @@ En caso de que el "ARRENDATARIO" tenga voluntad de dar por terminado el presente
 <h3>Vigésima Segunda.- Anexo Uno.</h3>
 <p>El Anexo Uno firmado por las partes formará parte integrante de este Contrato, en el entendido que en caso de haber discrepancias o contradicciones entre el Anexo Uno y el Contrato, prevalecerá lo establecido en el Anexo Uno.</p>
 
-<p>Enteradas las partes del alcance y contenido del presente Contrato de Arrendamiento, y con pleno reconocimiento de la personalidad de las mismas, lo firman de conformidad y por triplicado en la Ciudad de México, con fecha {{fecha_firma}}.</p>
+<p>Enteradas las partes del alcance y contenido del presente Contrato de Arrendamiento, y con pleno reconocimiento de la personalidad de las mismas, lo firman de conformidad y por triplicado en la Ciudad de México, con fecha <strong>{{fecha_firma}}</strong>.</p>
 
 <div class="firma-section">
   <div class="firma-row">
     <div class="firma-box">
       <p style="text-align:center;"><strong>EL &#8220;ARRENDADOR&#8221;</strong></p>
       <div class="firma-line"></div>
-      <p class="firma-nombre">{{arrendador_nombre_completo}}</p>
+      <p class="firma-nombre"><strong>{{arrendador_nombre_completo}}</strong></p>
       <p class="firma-nombre">Por su propio derecho</p>
     </div>
     <div class="firma-box">
       <p style="text-align:center;"><strong>EL &#8220;ARRENDATARIO&#8221;</strong></p>
       <div class="firma-line"></div>
-      <p class="firma-nombre">{{arrendatario_nombre_completo}}</p>
+      <p class="firma-nombre"><strong>{{arrendatario_nombre_completo}}</strong></p>
       <p class="firma-nombre">Por su propio derecho</p>
     </div>
   </div>

@@ -120,11 +120,11 @@ class ContratosTable
                     ->sortable()
                     ->toggleable(),
 
-                TextColumn::make('plantilla.nombre')
-                    ->label('Plantilla')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->limit(25),
+                // TextColumn::make('plantilla.nombre')
+                //     ->label('Plantilla')
+                //     ->searchable()
+                //     ->toggleable(isToggledHiddenByDefault: true)
+                //     ->limit(25),
 
                 TextColumn::make('created_at')
                     ->label('Creado')

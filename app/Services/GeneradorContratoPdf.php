@@ -73,26 +73,26 @@ class GeneradorContratoPdf
 
         return [
             // Arrendador
-            'arrendador_nombre_completo' => $arrendador?->nombre_completo ?? '',
-            'arrendador_tipo_persona'    => $arrendador?->tipo_persona === 'moral' ? 'moral' : 'física',
-            'arrendador_domicilio'       => $this->formatearDireccion($arrendador?->direccion),
-            'arrendador_email'           => $arrendador?->email ?? '',
+            'arrendador_nombre_completo' => mb_strtoupper($arrendador?->nombre_completo ?? '', 'UTF-8'),
+            'arrendador_tipo_persona'    => mb_strtoupper($arrendador?->tipo_persona === 'moral' ? 'moral' : 'física', 'UTF-8'),
+            'arrendador_domicilio'       => mb_strtoupper($this->formatearDireccion($arrendador?->direccion), 'UTF-8'),
+            'arrendador_email'           => mb_strtoupper($arrendador?->email ?? '', 'UTF-8'),
             'arrendador_telefono'        => $arrendador?->telefono_1 ?? '',
 
             // Arrendatario
-            'arrendatario_nombre_completo' => $arrendatario?->nombre_completo ?? '',
-            'arrendatario_tipo_persona'    => $arrendatario?->tipo_persona === 'moral' ? 'moral' : 'física',
-            'arrendatario_email'           => $arrendatario?->email ?? '',
+            'arrendatario_nombre_completo' => mb_strtoupper($arrendatario?->nombre_completo ?? '', 'UTF-8'),
+            'arrendatario_tipo_persona'    => mb_strtoupper($arrendatario?->tipo_persona === 'moral' ? 'moral' : 'física', 'UTF-8'),
+            'arrendatario_email'           => mb_strtoupper($arrendatario?->email ?? '', 'UTF-8'),
             'arrendatario_telefono'        => $arrendatario?->telefono_1 ?? '',
 
             // Inmueble
-            'inmueble_direccion_completa' => $inmueble?->direccion_completa ?? '',
-            'inmueble_calle'              => $inmueble?->calle ?? '',
-            'inmueble_colonia'            => $inmueble?->colonia ?? '',
-            'inmueble_alcaldia'           => $inmueble?->alcaldia_municipio ?? '',
-            'inmueble_estado'             => $inmueble?->estado ?? '',
+            'inmueble_direccion_completa' => mb_strtoupper($inmueble?->direccion_completa ?? '', 'UTF-8'),
+            'inmueble_calle'              => mb_strtoupper($inmueble?->calle ?? '', 'UTF-8'),
+            'inmueble_colonia'            => mb_strtoupper($inmueble?->colonia ?? '', 'UTF-8'),
+            'inmueble_alcaldia'           => mb_strtoupper($inmueble?->alcaldia_municipio ?? '', 'UTF-8'),
+            'inmueble_estado'             => mb_strtoupper($inmueble?->estado ?? '', 'UTF-8'),
             'inmueble_cp'                 => $inmueble?->codigo_postal ?? '',
-            'inmueble_uso'                => $inmueble?->uso_inmueble ?? 'habitacional',
+            'inmueble_uso'                => mb_strtoupper($inmueble?->uso_inmueble ?? 'habitacional', 'UTF-8'),
             'inmueble_estacionamiento'    => '1',
 
             // Montos
@@ -102,18 +102,18 @@ class GeneradorContratoPdf
             'monto_total'            => number_format((float) $contrato->monto_total, 2),
 
             // Fechas
-            'fecha_inicio_texto'  => $fechaInicio  ? $this->fechaTexto($fechaInicio)  : '',
-            'fecha_termino_texto' => $fechaTermino ? $this->fechaTexto($fechaTermino) : '',
-            'fecha_firma'         => $fechaInicio  ? $this->fechaTexto($fechaInicio)  : '',
-            'mes_primer_pago'     => $fechaInicio  ? $this->mesAnio($fechaInicio)     : '',
-            'mes_inicio_periodo'  => $fechaInicio  ? $this->mesNombre($fechaInicio)   : '',
-            'mes_fin_periodo'     => $fechaTermino ? $this->mesNombre($fechaTermino)  : '',
+            'fecha_inicio_texto'  => $fechaInicio  ? mb_strtoupper($this->fechaTexto($fechaInicio), 'UTF-8')  : '',
+            'fecha_termino_texto' => $fechaTermino ? mb_strtoupper($this->fechaTexto($fechaTermino), 'UTF-8') : '',
+            'fecha_firma'         => $fechaInicio  ? mb_strtoupper($this->fechaTexto($fechaInicio), 'UTF-8')  : '',
+            'mes_primer_pago'     => $fechaInicio  ? mb_strtoupper($this->mesAnio($fechaInicio), 'UTF-8')     : '',
+            'mes_inicio_periodo'  => $fechaInicio  ? mb_strtoupper($this->mesNombre($fechaInicio), 'UTF-8')   : '',
+            'mes_fin_periodo'     => $fechaTermino ? mb_strtoupper($this->mesNombre($fechaTermino), 'UTF-8')  : '',
             'anio_inicio'         => $fechaInicio  ? $fechaInicio->year               : '',
             'anio_fin'            => $fechaTermino ? $fechaTermino->year              : '',
 
             // Fiador
-            'fiador_nombre_completo' => $fiador?->nombre_completo ?? 'N/A',
-            'fiador_tipo'            => $fiador?->tipo ?? '',
+            'fiador_nombre_completo' => mb_strtoupper($fiador?->nombre_completo ?? 'N/A', 'UTF-8'),
+            'fiador_tipo'            => mb_strtoupper($fiador?->tipo ?? '', 'UTF-8'),
 
             // Folio
             'folio' => $contrato->folio ?? '',
@@ -162,7 +162,7 @@ class GeneradorContratoPdf
     {
         $entero = (int) $numero;
         $fmt = new NumberFormatter('es_MX', NumberFormatter::SPELLOUT);
-        $letras = strtoupper($fmt->format($entero));
+        $letras = mb_strtoupper($fmt->format($entero), 'UTF-8');
         return $letras . ' PESOS 00/100 M.N.';
     }
 }
