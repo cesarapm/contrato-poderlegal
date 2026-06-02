@@ -876,6 +876,113 @@
                                 @error('fiador_email') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                             </div>
 
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-white font-semibold mb-2">Estado civil *</label>
+                                    <select 
+                                        wire:model="fiador_estado_civil"
+                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm">
+                                        <option value="">SELECCIONA</option>
+                                        <option value="SOLTERO">SOLTERO</option>
+                                        <option value="CASADO">CASADO</option>
+                                        <option value="DIVORCIADO">DIVORCIADO</option>
+                                        <option value="VIUDO">VIUDO</option>
+                                        <option value="UNION_LIBRE">UNIÓN LIBRE</option>
+                                    </select>
+                                    @error('fiador_estado_civil') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                </div>
+
+                                <div>
+                                    <label class="block text-white font-semibold mb-2">Nacionalidad *</label>
+                                    <input 
+                                        type="text" 
+                                        wire:model="fiador_nacionalidad"
+                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                        placeholder="México">
+                                    @error('fiador_nacionalidad') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-white font-semibold mb-2">
+                                        Número INM
+                                        <button type="button" class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-white/10 hover:bg-white/20 transition-colors ml-1" 
+                                                title="Solo para extranjeros con residencia permanente en México">
+                                            <span class="text-xs">?</span>
+                                        </button>
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        wire:model="fiador_numero_inm"
+                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                        placeholder="11883224">
+                                </div>
+
+                                <div>
+                                    <label class="block text-white font-semibold mb-2">Número de INE</label>
+                                    <input 
+                                        type="text" 
+                                        wire:model="fiador_numero_ine"
+                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                        placeholder="1234567890123">
+                                </div>
+                            </div>
+
+                            <h5 class="text-lg font-bold text-gold-accent mt-6 mb-3">Dirección</h5>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-white font-semibold mb-2">Código postal*</label>
+                                    <input 
+                                        type="text" 
+                                        wire:model="fiador_codigo_postal"
+                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                        placeholder="01234">
+                                    @error('fiador_codigo_postal') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                </div>
+
+                                <div>
+                                    <label class="block text-white font-semibold mb-2">Estado*</label>
+                                    <input 
+                                        type="text" 
+                                        wire:model="fiador_estado"
+                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                        placeholder="Ciudad de México">
+                                    @error('fiador_estado') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                </div>
+
+                                <div>
+                                    <label class="block text-white font-semibold mb-2">Alcaldía / Municipio*</label>
+                                    <input 
+                                        type="text" 
+                                        wire:model="fiador_ciudad"
+                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                        placeholder="Cuauhtémoc">
+                                    @error('fiador_ciudad') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-white font-semibold mb-2">País *</label>
+                                <input 
+                                    type="text" 
+                                    wire:model="fiador_pais"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                    placeholder="México">
+                                @error('fiador_pais') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            <div>
+                                <label class="block text-white font-semibold mb-2">Calle *</label>
+                                <input 
+                                    type="text" 
+                                    wire:model="fiador_domicilio"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                    placeholder="Avenida Insurgentes Sur 123, Colonia Roma">
+                                @error('fiador_domicilio') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
                             @if($fiador_tipo === 'empresa')
                                 @include('formulario.persona-moral-fields', [
                                     'prefix' => 'fiador',
@@ -1036,8 +1143,8 @@
                             wire:model="observaciones"
                             rows="5"
                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm resize-none"
-                            placeholder="Ingresa cualquier comentario, solicitud especial o cláusula adicional que desees incluir en el contrato..."></textarea>
-                        <p class="text-white/50 text-sm mt-2">Este campo es opcional y nos ayudará a personalizar mejor tu contrato.</p>
+                            placeholder="Ingresa cualquier comentario, solicitud especial o cláusula adicional que desees incluir en la solicitud..."></textarea>
+                        <p class="text-white/50 text-sm mt-2">Este campo es opcional y nos ayudará a personalizar mejor tu solicitud.</p>
                     </div>
                 </div>
             @endif
@@ -1049,16 +1156,16 @@
                         <h3 class="text-2xl sm:text-3xl lg:text-4xl font-display font-bold mb-3" style="background: linear-gradient(135deg, #FFD700 0%, #FFAA00 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
                             Confirmación Final
                         </h3>
-                        <p class="text-white/70">Revisa y acepta los términos para generar tu contrato</p>
+                        <p class="text-white/70">Revisa y acepta los términos para generar tu solicitud</p>
                     </div>
 
-                    <!-- Resumen del contrato -->
+                    <!-- Resumen de la solicitud -->
                     <div class="p-6 rounded-2xl bg-gradient-to-br from-gold-accent/10 to-purple-deep/20 border border-gold-accent/30">
                         <h4 class="text-2xl font-bold text-gold-accent mb-4 flex items-center gap-2">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                             </svg>
-                            Resumen de tu Contrato
+                            Resumen de tu Solicitud
                         </h4>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-white">
@@ -1094,13 +1201,13 @@
                         <div class="p-6 rounded-2xl bg-white/5 border border-white/20">
                             <h5 class="text-xl font-bold text-white mb-4">Términos y Condiciones</h5>
                             <div class="max-h-60 overflow-y-auto space-y-3 text-white/80 text-sm pr-2">
-                                <p>Al generar este contrato de arrendamiento, usted acepta que:</p>
+                                <p>Al generar esta solicitud de arrendamiento, usted acepta que:</p>
                                 <ul class="list-disc list-inside space-y-2 ml-4">
                                     <li>Toda la información proporcionada es verídica y exacta.</li>
-                                    <li>El contrato generado tendrá validez legal conforme a la legislación vigente.</li>
+                                    <li>La solicitud generada tendrá validez legal conforme a la legislación vigente.</li>
                                     <li>Es responsable de verificar que todos los datos sean correctos antes de la firma.</li>
                                     <li>Poder Legal actúa únicamente como facilitador de la generación del documento.</li>
-                                    <li>Se recomienda la revisión del contrato por un profesional legal antes de su firma.</li>
+                                    <li>Se recomienda la revisión de la solicitud por un profesional legal antes de su firma.</li>
                                     <li>Los pagos y transacciones se realizan conforme a los términos acordados.</li>
                                 </ul>
                             </div>
@@ -1113,7 +1220,7 @@
                                 class="w-5 h-5 mt-1 rounded border-white/30 bg-white/10 text-gold-accent focus:ring-gold-accent/50">
                             <span class="text-white flex-1">
                                 <span class="font-semibold">Acepto los términos y condiciones *</span>
-                                <span class="block text-sm text-white/60 mt-1">He leído y acepto las condiciones para la generación del contrato de arrendamiento</span>
+                                <span class="block text-sm text-white/60 mt-1">He leído y acepto las condiciones para la generación de la solicitud de arrendamiento</span>
                             </span>
                         </label>
                         @error('acepto_terminos') <span class="text-red-400 text-sm ml-8">{{ $message }}</span> @enderror
@@ -1134,8 +1241,8 @@
                     <!-- Mensaje de confirmación -->
                     <div class="text-center p-6 rounded-2xl bg-gradient-to-r from-green-500/10 to-green-600/10 border border-green-500/30">
                         <div class="text-5xl mb-3">✨</div>
-                        <p class="text-white text-lg font-semibold mb-2">¡Estás listo para generar tu contrato!</p>
-                        <p class="text-white/70 text-sm">Al hacer clic en "Generar Contrato", crearemos tu documento personalizado.</p>
+                        <p class="text-white text-lg font-semibold mb-2">¡Estás listo para generar tu solicitud!</p>
+                        <p class="text-white/70 text-sm">Al hacer clic en "Generar Solicitud", crearemos tu documento personalizado.</p>
                     </div>
                 </div>
             @endif
@@ -1181,7 +1288,7 @@
                             <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
-                            <span class="hidden xs:inline">Generar Contrato</span>
+                            <span class="hidden xs:inline">Generar Solicitud</span>
                             <span class="xs:hidden">Generar</span>
                         </span>
                     </button>

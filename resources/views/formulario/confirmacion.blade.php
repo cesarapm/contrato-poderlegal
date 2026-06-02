@@ -86,7 +86,7 @@
                         </div>
                         <div>
                             <p class="text-sm text-white/60">Estado</p>
-                            <p class="text-lg font-semibold text-gold-accent">{{ ucfirst($contrato->estado) }}</p>
+                            <p class="text-lg font-semibold text-gold-accent">En Trámite</p>
                         </div>
                     </div>
                 </div>

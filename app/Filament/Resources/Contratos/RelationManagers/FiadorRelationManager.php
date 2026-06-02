@@ -92,7 +92,65 @@ class FiadorRelationManager extends RelationManager
                                     ->email()
                                     ->maxLength(100)
                                     ->visible(fn ($get) => $get('tipo') !== 'ninguno'),
+
+                                Select::make('estado_civil')
+                                    ->label('Estado Civil')
+                                    ->options([
+                                        'SOLTERO' => 'Soltero',
+                                        'CASADO' => 'Casado',
+                                        'DIVORCIADO' => 'Divorciado',
+                                        'VIUDO' => 'Viudo',
+                                        'UNION_LIBRE' => 'Unión Libre',
+                                    ])
+                                    ->visible(fn ($get) => $get('tipo') !== 'ninguno'),
+
+                                TextInput::make('nacionalidad')
+                                    ->label('Nacionalidad')
+                                    ->default('México')
+                                    ->maxLength(100)
+                                    ->visible(fn ($get) => $get('tipo') !== 'ninguno'),
+
+                                TextInput::make('numero_inm')
+                                    ->label('Número INM')
+                                    ->helperText('Solo para extranjeros con residencia permanente')
+                                    ->maxLength(50)
+                                    ->visible(fn ($get) => $get('tipo') !== 'ninguno'),
+
+                                TextInput::make('numero_ine')
+                                    ->label('Número de INE')
+                                    ->helperText('Opcional - Credencial de elector')
+                                    ->maxLength(50)
+                                    ->visible(fn ($get) => $get('tipo') !== 'ninguno'),
                             ]),
+                    ]),
+
+                Section::make('Dirección del Fiador')
+                    ->visible(fn ($get) => $get('tipo') !== 'ninguno')
+                    ->schema([
+                        TextInput::make('domicilio')
+                            ->label('Calle y Número')
+                            ->maxLength(255)
+                            ->placeholder('Avenida Insurgentes Sur 123, Colonia Roma'),
+
+                        Grid::make(3)
+                            ->schema([
+                                TextInput::make('codigo_postal')
+                                    ->label('Código Postal')
+                                    ->maxLength(10),
+
+                                TextInput::make('ciudad')
+                                    ->label('Alcaldía / Municipio')
+                                    ->maxLength(100),
+
+                                TextInput::make('estado')
+                                    ->label('Estado')
+                                    ->maxLength(100),
+                            ]),
+
+                        TextInput::make('pais')
+                            ->label('País')
+                            ->default('México')
+                            ->maxLength(100),
                     ]),
 
                 Section::make('Acta Constitutiva')
@@ -230,6 +288,22 @@ class FiadorRelationManager extends RelationManager
                 TextColumn::make('email')
                     ->label('Email')
                     ->searchable(),
+                TextColumn::make('nacionalidad')
+                    ->label('Nacionalidad')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('numero_ine')
+                    ->label('INE')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('ciudad')
+                    ->label('Ciudad')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('estado')
+                    ->label('Estado')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->headerActions([
                 CreateAction::make()

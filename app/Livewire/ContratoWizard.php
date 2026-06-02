@@ -8,6 +8,7 @@ use App\Models\Inmueble;
 use App\Models\Arrendatario;
 use App\Models\Arrendador;
 use App\Models\Fiador;
+use App\Services\CalculadoraPrecioPoliza;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -114,6 +115,15 @@ class ContratoWizard extends Component
     public $fiador_telefono_1 = '';
     public $fiador_telefono_2 = '';
     public $fiador_email = '';
+    public $fiador_estado_civil = '';
+    public $fiador_numero_inm = '';
+    public $fiador_numero_ine = '';
+    public $fiador_nacionalidad = 'México';
+    public $fiador_domicilio = '';
+    public $fiador_codigo_postal = '';
+    public $fiador_ciudad = '';
+    public $fiador_estado = '';
+    public $fiador_pais = 'México';
     // Fiador persona moral
     public $fiador_no_acta_constitutiva = '';
     public $fiador_fecha_acta_constitutiva = '';
@@ -372,8 +382,10 @@ class ContratoWizard extends Component
 
             // \Log::info('Tramitante creado/actualizado', ['id' => $tramitante->id, 'email' => $tramitante->email]);
 
-            // Calcular monto total (ejemplo: 12 meses)
-            $monto_total = floatval($this->monto_renta_mensual) * 12;
+            // Calcular precio de la póliza según tabla de precios
+            $calculadora = new CalculadoraPrecioPoliza();
+            $montoRentaMensual = floatval($this->monto_renta_mensual);
+            $monto_total = $calculadora->calcularPrecioPolizaConIva($montoRentaMensual);
 
             // Preparar datos de renta
             $datos_renta = [
@@ -551,7 +563,6 @@ class ContratoWizard extends Component
                     'poder_en_acta' => $arr['tipo_persona'] === 'moral' ? ($arr['poder_en_acta'] ?? null) : null,
                     'poderes_representante_path' => $poderesPath,
                     'constancia_situacion_fiscal_path' => $constanciaPath,
-                    'comprobantes_ingresos' => null,
                     'ine_paths' => !empty($ineArrArrendador) ? $ineArrArrendador : null,
                 ]);
             }
@@ -603,7 +614,15 @@ class ContratoWizard extends Component
                     'telefono_1' => $this->fiador_telefono_1,
                     'telefono_2' => $this->fiador_telefono_2,
                     'email' => $this->fiador_email,
-                    'domicilio' => [],
+                    'estado_civil' => $this->fiador_estado_civil,
+                    'numero_inm' => $this->fiador_numero_inm,
+                    'numero_ine' => $this->fiador_numero_ine,
+                    'nacionalidad' => $this->fiador_nacionalidad,
+                    'domicilio' => $this->fiador_domicilio,
+                    'codigo_postal' => $this->fiador_codigo_postal,
+                    'ciudad' => $this->fiador_ciudad,
+                    'estado' => $this->fiador_estado,
+                    'pais' => $this->fiador_pais,
                     'comprobantes_ingresos' => !empty($comprobantesArrFiador) ? $comprobantesArrFiador : null,
                     'ine_paths' => !empty($ineArrFiador) ? $ineArrFiador : null,
                     // Persona moral

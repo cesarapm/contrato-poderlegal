@@ -15,214 +15,319 @@ class PlantillaPolizaSeeder extends Seeder
 <head>
 <meta charset="UTF-8">
 <style>
-  /* ===== RESET & BASE ===== */
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: "Arial", "Helvetica Neue", Helvetica, sans-serif;
-    font-size: 10pt;
-    line-height: 1.5;
-    color: #1a1a2e;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    color: #1a1a1a;
     background: #fff;
   }
 
-  /* ===== PORTADA ===== */
+  /* PORTADA */
   .portada {
-    page-break-after: always;
-    min-height: 100vh;
-    display: block;
+    padding: 0;
+    position: relative;
   }
 
-  /* Cabecera azul oscuro */
-  .portada-header {
-    background: #0d1b4b;
+  /* Header con franja amarilla diagonal */
+  .header-portada {
+    position: relative;
+    padding: 20px 30px 15px;
+    background: #fff;
+    border-top: 10px solid #1a1a5e;
+    overflow: hidden;
+  }
+  .diagonal-stripe {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 150px;
+    background: #f0c040;
+    transform: skewX(-20deg);
+    transform-origin: top right;
+  }
+  .header-content {
+    display: table;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+  .header-left {
+    display: table-cell;
+    vertical-align: top;
+    width: 65%;
+  }
+  .header-right {
+    display: table-cell;
+    vertical-align: top;
+    text-align: right;
+    width: 35%;
+  }
+  .logo-poder {
+    font-size: 24pt;
+    font-weight: 900;
+    color: #1a1a5e;
+    letter-spacing: 0.5px;
+    line-height: 1;
+  }
+  .logo-poder .sup {
+    font-size: 10pt;
+    vertical-align: super;
+  }
+  .sub-logo {
+    font-size: 9pt;
+    color: #f0c040;
+    font-weight: 700;
+    margin-top: 2px;
+    letter-spacing: 1.5px;
+  }
+  .tagline-seguridad {
+    font-size: 7pt;
+    color: #666;
+    margin-top: 3px;
+    font-weight: 600;
+  }
+  .escudo-logo {
+    width: 85px;
+    height: auto;
+    margin-top: 5px;
+  }
+
+  /* Cuerpo de la portada */
+  .body-portada {
+    padding: 15px 30px 15px;
+  }
+
+  /* Layout de 2 columnas para la primera fila */
+  .fila-superior {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    margin-bottom: 12px;
+  }
+  .col-sup-izq {
+    display: table-cell;
+    width: 54%;
+    padding-right: 6px;
+    vertical-align: top;
+  }
+  .col-sup-der {
+    display: table-cell;
+    width: 46%;
+    padding-left: 6px;
+    vertical-align: top;
+  }
+
+  /* Secciones ancho completo */
+  .seccion-completa {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  /* Secciones con icono amarillo */
+  .seccion-box {
+    border: 3px solid #1a1a5e;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .seccion-header {
+    background: #1a1a5e;
     color: #fff;
-    padding: 22px 36px 18px;
+    padding: 9px 14px;
+    font-size: 7.5pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     display: table;
     width: 100%;
   }
-  .portada-header-left {
+  .seccion-icon {
     display: table-cell;
+    width: 28px;
     vertical-align: middle;
-    width: 75%;
   }
-  .portada-header-right {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: right;
-    width: 25%;
-  }
-  .portada-header-right img {
-    width: 90px;
-    height: auto;
-  }
-  .portada-header .brand {
-    font-size: 22pt;
+  .seccion-icon-img {
+    width: 24px;
+    height: 24px;
+    background: #f9c74f;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-weight: 900;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #ffffff;
-  }
-  .portada-header .brand span {
-    color: #f0c040;
-  }
-  .portada-header .tagline {
-    font-size: 9pt;
-    color: #a8b8d8;
-    margin-top: 3px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-  .portada-header .badge-proteccion {
-    display: inline-block;
-    background: #f0c040;
-    color: #0d1b4b;
-    font-weight: 800;
-    font-size: 8.5pt;
-    padding: 4px 14px;
-    border-radius: 3px;
-    letter-spacing: 1px;
-    margin-top: 10px;
-    text-transform: uppercase;
-  }
-
-  /* Franja dorada */
-  .portada-stripe {
-    background: #f0c040;
-    height: 5px;
-  }
-
-  /* Sección de datos */
-  .portada-body {
-    padding: 28px 36px;
-  }
-  .portada-title {
-    font-size: 14pt;
-    font-weight: 700;
-    color: #0d1b4b;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border-bottom: 2.5px solid #f0c040;
-    padding-bottom: 8px;
-    margin-bottom: 22px;
-  }
-
-  /* Tabla de datos de la portada */
-  .data-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 22px;
-  }
-  .data-table tr { border-bottom: 1px solid #e8eaf2; }
-  .data-table tr:last-child { border-bottom: none; }
-  .data-table td {
-    padding: 8px 10px;
-    vertical-align: top;
-  }
-  .data-table td.label {
-    width: 42%;
-    font-size: 8.5pt;
-    font-weight: 700;
-    color: #6b7280;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .data-table td.value {
-    font-size: 10pt;
-    font-weight: 600;
-    color: #1a1a2e;
-  }
-  .data-table td.value.highlight {
-    color: #0d1b4b;
+    color: #1a1a5e;
     font-size: 11pt;
-  }
-
-  /* Cuadro de paquete */
-  .paquete-box {
-    background: #0d1b4b;
-    color: #fff;
-    border-radius: 6px;
-    padding: 16px 22px;
-    margin-bottom: 22px;
-  }
-  .paquete-box .paquete-nombre {
-    font-size: 13pt;
-    font-weight: 800;
-    color: #f0c040;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-  }
-  .paquete-box .paquete-desc {
-    font-size: 8.5pt;
-    color: #a8b8d8;
-    margin-top: 4px;
-  }
-
-  /* Cuadro financiero */
-  .financiero-box {
-    border: 2px solid #0d1b4b;
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 22px;
-  }
-  .financiero-box .financiero-header {
-    background: #0d1b4b;
-    color: #f0c040;
-    font-weight: 800;
-    font-size: 9pt;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 7px 14px;
-  }
-  .financiero-box table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  .financiero-box table td {
-    padding: 9px 14px;
-    border-bottom: 1px solid #e8eaf2;
-    font-size: 10pt;
-  }
-  .financiero-box table tr:last-child td { border-bottom: none; }
-  .financiero-box table td.flab {
-    color: #6b7280;
-    font-size: 8.5pt;
-    font-weight: 700;
-    text-transform: uppercase;
-    width: 55%;
-  }
-  .financiero-box table td.fval {
-    font-weight: 700;
-    color: #0d1b4b;
-    text-align: right;
-  }
-  .financiero-box table td.fval.total {
-    font-size: 13pt;
-    color: #0d1b4b;
-  }
-
-  /* Disclaimer portada */
-  .portada-disclaimer {
-    background: #f3f4f8;
-    border-left: 4px solid #0d1b4b;
-    padding: 12px 16px;
-    font-size: 8pt;
-    color: #4b5563;
-    line-height: 1.5;
-    margin-bottom: 20px;
-  }
-
-  /* Pie de portada */
-  .portada-footer {
-    background: #0d1b4b;
-    color: #a8b8d8;
-    font-size: 7.5pt;
-    padding: 12px 36px;
+    line-height: 24px;
     text-align: center;
   }
+  .seccion-titulo {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 5px;
+  }
+  .seccion-content {
+    padding: 8px 12px;
+    background: #fff;
+  }
 
-  /* ===== CONTRATO ===== */
+  /* Tabla de datos dentro de secciones */
+  .datos-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .datos-table tr {
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .datos-table tr:last-child {
+    border-bottom: none;
+  }
+  .datos-table td {
+    padding: 6px 0;
+    font-size: 8pt;
+    vertical-align: top;
+  }
+  .datos-table td:first-child {
+    font-weight: 800;
+    color: #1a1a5e;
+    text-transform: uppercase;
+    width: 48%;
+    font-size: 7pt;
+    letter-spacing: 0.4px;
+  }
+  .datos-table td:last-child {
+    color: #1a1a1a;
+    font-weight: 600;
+    padding-left: 10px;
+  }
+
+  /* Tabla de cobertura con montos */
+  .cobertura-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0;
+  }
+  .cobertura-table thead th {
+    padding: 7px 12px;
+    font-size: 7pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    border: none;
+  }
+  .cobertura-table thead th:first-child {
+    background: #1a1a5e;
+    color: #fff;
+    text-align: center;
+    border-radius: 0;
+  }
+  .cobertura-table thead th:last-child {
+    background: #f9c74f;
+    color: #1a1a5e;
+    text-align: center;
+    border-radius: 0;
+    font-weight: 900;
+  }
+  .cobertura-table tbody td {
+    padding: 10px 12px;
+    font-size: 7.5pt;
+    border: 1px solid #e5e7eb;
+    border-top: none;
+    background: #fff;
+  }
+  .cobertura-table tbody td:first-child {
+    font-weight: 700;
+    color: #1a1a5e;
+    text-transform: uppercase;
+    text-align: left;
+    letter-spacing: 0.3px;
+  }
+  .cobertura-table tbody td:last-child {
+    text-align: right;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+  .total-row td {
+    background: #1a1a5e !important;
+    color: #f9c74f !important;
+    font-weight: 900 !important;
+    font-size: 9pt !important;
+    padding: 12px !important;
+    border: none !important;
+  }
+  .total-row td:first-child {
+    color: #f9c74f !important;
+    text-align: left !important;
+  }
+  .total-row td:last-child {
+    text-align: right !important;
+    color: #f9c74f !important;
+  }
+
+  /* Footer */
+  .footer-portada {
+    margin-top: 350px;
+    background: #1a1a5e;
+    color: #fff;
+    padding: 18px 30px;
+    font-size: 7pt;
+    border-top: 5px solid #f9c74f;
+  }
+  .footer-grid {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+  .footer-col {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0 12px;
+  }
+  .footer-icono-escudo {
+    width: 50px;
+    height: 50px;
+    background: #f9c74f;
+    border: 3px solid #1a1a5e;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22pt;
+    color: #1a1a5e;
+    vertical-align: middle;
+    margin-right: 12px;
+  }
+  .footer-titulo {
+    font-weight: 800;
+    font-size: 8pt;
+    line-height: 1.3;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .footer-detalle {
+    font-size: 7pt;
+    line-height: 1.4;
+    font-weight: 400;
+    color: #fff;
+  }
+  .footer-detalle strong {
+    font-weight: 700;
+  }
+  .footer-separador {
+    width: 2px;
+    height: 50px;
+    background: rgba(255,255,255,0.3);
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  /* ===== ESTILOS CONTRATO ===== */
   .contrato {
     padding: 2cm 2.5cm;
+    page-break-before: always;
   }
   .contrato-header {
     text-align: center;
@@ -231,14 +336,14 @@ class PlantillaPolizaSeeder extends Seeder
   .contrato-header .brand-contrato {
     font-size: 16pt;
     font-weight: 900;
-    color: #0d1b4b;
+    color: #1a1a5e;
     letter-spacing: 3px;
     text-transform: uppercase;
   }
   .contrato-header .brand-contrato span { color: #f0c040; }
   .contrato-stripe {
     height: 3px;
-    background: linear-gradient(to right, #0d1b4b, #f0c040, #0d1b4b);
+    background: linear-gradient(to right, #1a1a5e, #f0c040, #1a1a5e);
     margin: 10px auto 18px;
     width: 60%;
   }
@@ -248,13 +353,13 @@ class PlantillaPolizaSeeder extends Seeder
     font-weight: 800;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #0d1b4b;
+    color: #1a1a5e;
     margin-bottom: 18px;
     border-bottom: 1.5px solid #e8eaf2;
     padding-bottom: 10px;
   }
 
-  .intro { text-align: justify; margin-bottom: 16px; font-size: 9.5pt; }
+  .intro { text-align: justify; margin-bottom: 16px; font-size: 9.5pt; line-height: 1.5; }
 
   h2.seccion {
     font-size: 10pt;
@@ -262,28 +367,30 @@ class PlantillaPolizaSeeder extends Seeder
     text-align: center;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: #0d1b4b;
+    color: #1a1a5e;
     margin: 20px 0 10px;
   }
   .declaracion {
     margin-bottom: 8px;
     text-align: justify;
     font-size: 9.5pt;
+    line-height: 1.5;
   }
   .declaracion .num {
     font-weight: 700;
-    color: #0d1b4b;
+    color: #1a1a5e;
   }
 
   .clausula {
     margin-bottom: 12px;
     text-align: justify;
     font-size: 9.5pt;
+    line-height: 1.5;
   }
   .clausula .clausula-titulo {
     font-weight: 800;
     text-transform: uppercase;
-    color: #0d1b4b;
+    color: #1a1a5e;
   }
 
   .firmas {
@@ -303,17 +410,18 @@ class PlantillaPolizaSeeder extends Seeder
   }
   .firma-espacio { height: 55px; }
   .firma-linea {
-    border-top: 1.5px solid #0d1b4b;
+    border-top: 1.5px solid #1a1a5e;
     margin-bottom: 6px;
   }
   .firma-nombre {
     font-weight: 700;
     font-size: 9.5pt;
-    color: #0d1b4b;
+    color: #1a1a5e;
   }
   .firma-cargo {
     font-size: 8pt;
     color: #6b7280;
+    line-height: 1.3;
   }
   .firma-separador { display: table-cell; width: 4%; }
 
@@ -325,124 +433,231 @@ class PlantillaPolizaSeeder extends Seeder
     padding-top: 10px;
     border-top: 1px solid #e8eaf2;
   }
-
-  .vigencia-badge {
-    display: inline-block;
-    background: #dcfce7;
-    color: #166534;
-    border: 1px solid #86efac;
-    border-radius: 12px;
-    font-size: 8.5pt;
-    font-weight: 700;
-    padding: 3px 12px;
-  }
 </style>
 </head>
 <body>
 
-<!-- ===================================================== -->
-<!-- PORTADA                                               -->
-<!-- ===================================================== -->
+<!-- PORTADA -->
 <div class="portada">
-
-  <div class="portada-header">
-    <div class="portada-header-left">
-      <div class="brand">PODER <span>LEGAL</span></div>
-      <div class="tagline">Protección integral para arrendadores</div>
-      <div class="badge-proteccion">&#128737; Protección Segura</div>
-    </div>
-    <div class="portada-header-right">
-      <img src="{{logo_base64}}" alt="Pólizas Jurídicas" />
+  <!-- Header -->
+  <div class="header-portada">
+    <div class="diagonal-stripe"></div>
+    <div class="header-content">
+      <div class="header-left">
+        <div class="logo-poder">PODER <span class="sup">®</span> LEGAL</div>
+        <div class="sub-logo">— PÓLIZAS JURÍDICAS —</div>
+        <div class="tagline-seguridad">SEGURIDAD EN TUS ARRENDAMIENTOS</div>
+      </div>
+      <div class="header-right">
+        <img src="{{logo_base64}}" alt="Escudo" class="escudo-logo" />
+      </div>
     </div>
   </div>
-  <div class="portada-stripe"></div>
 
-  <div class="portada-body">
+  <!-- Cuerpo -->
+  <div class="body-portada">
+    
+    <!-- Primera Fila: DATOS GENERALES y DATOS DE COBERTURA lado a lado -->
+    <div class="fila-superior">
+      <!-- DATOS GENERALES -->
+      <div class="col-sup-izq">
+        <div class="seccion-box">
+          <div class="seccion-header">
+            <div class="seccion-icon"><span class="seccion-icon-img">i</span></div>
+            <div class="seccion-titulo">DATOS GENERALES</div>
+          </div>
+          <div class="seccion-content">
+            <table class="datos-table">
+              <tr>
+                <td>Póliza</td>
+                <td>{{numero_poliza}}</td>
+              </tr>
+              <tr>
+                <td>Cobertura</td>
+                <td>{{tipo_producto}}</td>
+              </tr>
+              <tr>
+                <td>Contrato</td>
+                <td>{{folio}}</td>
+              </tr>
+              <tr>
+                <td>Inicio de Vigencia</td>
+                <td>{{fecha_inicio_texto}}</td>
+              </tr>
+              <tr>
+                <td>Fin de Vigencia</td>
+                <td>{{fecha_termino_texto}}</td>
+              </tr>
+              <tr>
+                <td>Fecha de Emisión</td>
+                <td>{{fecha_emision}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
 
-    <div class="portada-title">Resumen de Póliza</div>
-
-    <table class="data-table">
-      <tr>
-        <td class="label">N° Contrato</td>
-        <td class="value highlight">{{folio}}</td>
-      </tr>
-      <tr>
-        <td class="label">Nombre del Cliente (Arrendador)</td>
-        <td class="value">{{arrendador_nombre_completo}}</td>
-      </tr>
-      <tr>
-        <td class="label">Dirección del Inmueble</td>
-        <td class="value">{{inmueble_direccion_completa}}</td>
-      </tr>
-      <tr>
-        <td class="label">Asesor Inmobiliario</td>
-        <td class="value">{{tramitante_nombre_completo}}</td>
-      </tr>
-      <tr>
-        <td class="label">Uso del Inmueble</td>
-        <td class="value">{{inmueble_uso}}</td>
-      </tr>
-      <tr>
-        <td class="label">Arrendatario (Inquilino)</td>
-        <td class="value">{{arrendatario_nombre_completo}}</td>
-      </tr>
-      <tr>
-        <td class="label">Vigencia del Contrato de Renta</td>
-        <td class="value">Del {{fecha_inicio_texto}} al {{fecha_termino_texto}}</td>
-      </tr>
-    </table>
-
-    <div class="paquete-box">
-      <div class="paquete-nombre">Paquete Poder Legal</div>
-      <div class="paquete-desc">Investigación · Contrato · Cobranza · Asesoría · Representación Jurídica</div>
+      <!-- DATOS DE COBERTURA -->
+      <div class="col-sup-der">
+        <div class="seccion-box">
+          <div class="seccion-header">
+            <div class="seccion-icon"><span class="seccion-icon-img">$</span></div>
+            <div class="seccion-titulo">DATOS DE COBERTURA</div>
+          </div>
+          <div class="seccion-content">
+            <table class="cobertura-table">
+              <thead>
+                <tr>
+                  <th>CONCEPTO</th>
+                  <th>MONTO</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>COMPLETA</td>
+                  <td>$ {{precio_servicio_sin_iva}}</td>
+                </tr>
+                <tr>
+                  <td>SUBTOTAL</td>
+                  <td>$ {{iva_servicio}}</td>
+                </tr>
+                <tr class="total-row">
+                  <td>TOTAL</td>
+                  <td>$ {{precio_servicio_con_iva}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="financiero-box">
-      <div class="financiero-header">Datos Económicos</div>
-      <table>
-        <tr>
-          <td class="flab">Monto Renta Mensual</td>
-          <td class="fval">${{monto_renta_mensual}} MXN</td>
-        </tr>
-        <tr>
-          <td class="flab">Precio del Servicio (sin IVA)</td>
-          <td class="fval">${{precio_servicio_sin_iva}} MXN</td>
-        </tr>
-        <tr>
-          <td class="flab">IVA (16%)</td>
-          <td class="fval">${{iva_servicio}} MXN</td>
-        </tr>
-        <tr style="background:#f0f4ff;">
-          <td class="flab" style="color:#0d1b4b;font-size:10pt;">Total del Servicio (IVA incluido)</td>
-          <td class="fval total">${{precio_servicio_con_iva}} MXN</td>
-        </tr>
-        <tr>
-          <td class="flab">Límite de Renta Puntual</td>
-          <td class="fval">${{monto_renta_mensual}} MXN / mes</td>
-        </tr>
-        <tr>
-          <td class="flab">Vigencia del Servicio</td>
-          <td class="fval"><span class="vigencia-badge">12 meses</span></td>
-        </tr>
-      </table>
+    <!-- Secciones de Ancho Completo -->
+    
+    <!-- DATOS DE LA INMOBILIARIA -->
+    <div class="seccion-completa">
+      <div class="seccion-box">
+        <div class="seccion-header">
+          <div class="seccion-icon"><span class="seccion-icon-img">i</span></div>
+          <div class="seccion-titulo">DATOS DE LA INMOBILIARIA</div>
+        </div>
+        <div class="seccion-content">
+          <table class="datos-table">
+            <tr>
+              <td>Solicitante Inmobiliaria (Asesor)</td>
+              <td>{{tramitante_nombre_completo}}</td>
+            </tr>
+            <tr>
+              <td>Inmobiliaria</td>
+              <td>{{tramitante_inmobiliaria}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>
 
-    <div class="portada-disclaimer">
-      <strong>PODER LEGAL</strong> brinda un servicio legal integral que protege el patrimonio del arrendador a través de
-      investigación, contratos, cobranza, asesoría y representación jurídica ante cualquier incumplimiento del arrendamiento.
-      Este modelo de acompañamiento <strong>no constituye una fianza ni seguro</strong>, sino una solución especializada para
-      prevenir riesgos, asegurar el cumplimiento del contrato y, en caso necesario, recuperar el inmueble y las rentas vencidas
-      mediante negociación, mediación o litigio; siempre priorizando la pronta recuperación del inmueble.
+    <!-- DATOS DEL ARRENDADOR -->
+    <div class="seccion-completa">
+      <div class="seccion-box">
+        <div class="seccion-header">
+          <div class="seccion-icon"><span class="seccion-icon-img">A</span></div>
+          <div class="seccion-titulo">DATOS DEL ARRENDADOR (PROPIETARIO)</div>
+        </div>
+        <div class="seccion-content">
+          <table class="datos-table">
+            <tr>
+              <td>Nombre</td>
+              <td>{{arrendador_nombre_completo}}</td>
+            </tr>
+            <tr>
+              <td>Domicilio</td>
+              <td>{{arrendador_domicilio}}</td>
+            </tr>
+            <tr>
+              <td>Teléfono</td>
+              <td>{{arrendador_telefono}}</td>
+            </tr>
+            <tr>
+              <td>Correo</td>
+              <td>{{arrendador_email}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>
 
-  </div><!-- /portada-body -->
+    <!-- DATOS DEL ARRENDATARIO -->
+    <div class="seccion-completa">
+      <div class="seccion-box">
+        <div class="seccion-header">
+          <div class="seccion-icon"><span class="seccion-icon-img">I</span></div>
+          <div class="seccion-titulo">DATOS DEL ARRENDATARIO (INQUILINO)</div>
+        </div>
+        <div class="seccion-content">
+          <table class="datos-table">
+            <tr>
+              <td>Nombre</td>
+              <td>{{arrendatario_nombre_completo}}</td>
+            </tr>
+            <tr>
+              <td>Teléfono</td>
+              <td>{{arrendatario_telefono}}</td>
+            </tr>
+            <tr>
+              <td>Correo</td>
+              <td>{{arrendatario_email}}</td>
+            </tr>
+            <tr>
+              <td>Domicilio</td>
+              <td>{{inmueble_direccion_completa}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
 
-  <div class="portada-footer">
-    GW NETWORK S.A. DE C.V. &nbsp;·&nbsp; Poder Legal &nbsp;·&nbsp; Folio: {{folio}}
+    <!-- DATOS DEL CONTRATO -->
+    <div class="seccion-completa">
+      <div class="seccion-box">
+        <div class="seccion-header">
+          <div class="seccion-icon"><span class="seccion-icon-img">C</span></div>
+          <div class="seccion-titulo">DATOS DEL CONTRATO</div>
+        </div>
+        <div class="seccion-content">
+          <table class="datos-table">
+            <tr>
+              <td>Monto de Renta Mensual</td>
+              <td>${{monto_renta_mensual}} MXN</td>
+            </tr>
+            <tr>
+              <td>Monto de IVA Mensual</td>
+              <td>${{monto_iva_renta}} MXN</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-</div><!-- /portada -->
-
+  <!-- Footer -->
+  <div class="footer-portada">
+    <div class="footer-grid">
+      <div class="footer-col" style="width:35%;text-align:left;">
+        <div class="footer-titulo">PÓLIZAS JURÍDICAS</div>
+        <div class="footer-detalle">Protección integral para arrendadores e inmobiliarias.</div>
+      </div>
+      <div class="footer-col" style="width:35%;text-align:center;">
+        <div class="footer-titulo">ESTE DOCUMENTO NO ES VÁLIDO<br>COMO RECIBO DE PAGO.</div>
+      </div>
+      <div class="footer-col" style="width:30%;text-align:right;">
+        <div class="footer-detalle"><strong>www.poderlegal.mx</strong></div>
+        <div class="footer-detalle"><strong>(55) 8920 9955</strong></div>
+        <div class="footer-detalle"><strong>contacto@poderlegal.mx</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ===================================================== -->
 <!-- CONTRATO                                              -->
@@ -661,10 +876,10 @@ class PlantillaPolizaSeeder extends Seeder
   </div>
 
   <div class="contrato-footer-num">
-    Póliza No. {{folio}} &nbsp;·&nbsp; GW NETWORK S.A. DE C.V. (PODER LEGAL) &nbsp;·&nbsp; Página 1 de 1
+    Póliza No. {{numero_poliza}} &nbsp;·&nbsp; GW NETWORK S.A. DE C.V. (PODER LEGAL) &nbsp;·&nbsp; Página 1 de 1
   </div>
 
-</div><!-- /contrato -->
+</div>
 
 </body>
 </html>

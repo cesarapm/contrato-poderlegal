@@ -19,11 +19,19 @@ class ContratoForm
             ->schema([
                 Section::make('Información General')
                     ->schema([
+                        TextInput::make('numero_poliza')
+                            ->label('Número de Póliza')
+                            ->required()
+                            ->placeholder('Ej: POL-2026-001')
+                            ->helperText('Este número aparecerá en el campo PÓLIZA del PDF')
+                            ->columnSpan(1),
+                        
                         TextInput::make('folio')
-                            ->label('Folio')
+                            ->label('Número de Contrato')
                             ->disabled()
                             ->dehydrated()
                             ->placeholder('Se genera automáticamente')
+                            ->helperText('Se genera automáticamente como CON-XXXXXXXX')
                             ->columnSpan(1),
                         
                         Select::make('estado')
@@ -37,7 +45,7 @@ class ContratoForm
                             ])
                             ->default('borrador')
                             ->required()
-                            ->columnSpan(1),
+                            ->columnSpan(2),
                     ])
                     ->columns(2),
 
@@ -55,25 +63,31 @@ class ContratoForm
                                 TextInput::make('apellido_materno'),
                                 TextInput::make('telefono_1')->required(),
                                 TextInput::make('email')->email()->required(),
+                                TextInput::make('inmobiliaria')
+                                    ->label('Inmobiliaria')
+                                    ->placeholder('Nombre de la inmobiliaria (si aplica)')
+                                    ->helperText('Opcional: Si el asesor pertenece a una inmobiliaria'),
                             ])
                             ->columnSpan(1),
 
                         Select::make('tipo_producto')
-                            ->label('Tipo de Producto')
+                            ->label('Tipo de Cobertura')
                             ->options([
-                                'basica' => '📄 Básica',
-                                'superior' => '⭐ Superior',
-                                'empresarial' => '💼 Empresarial',
+                                'basica' => 'Básica',
+                                'superior' => 'Superior',
+                                'premium' => 'Premium',
+                                'empresarial' => 'Empresarial',
                             ])
                             ->required()
+                            ->helperText('Este valor aparecerá como COBERTURA en el PDF')
                             ->columnSpan(1),
 
-                        Select::make('plantilla_id')
-                            ->label('Plantilla de Contrato')
-                            ->relationship('plantilla', 'nombre', fn($query) => $query->where('activa', true))
-                            ->searchable()
-                            ->preload()
-                            ->columnSpan(2),
+                        // Select::make('plantilla_id')
+                        //     ->label('Plantilla de Contrato')
+                        //     ->relationship('plantilla', 'nombre', fn($query) => $query->where('activa', true))
+                        //     ->searchable()
+                        //     ->preload()
+                        //     ->columnSpan(2),
                     ])
                     ->columns(2),
 
@@ -112,14 +126,55 @@ class ContratoForm
                     ])
                     ->columns(2),
 
+                Section::make('Datos de Cobertura de Póliza')
+                    ->description('Estos montos aparecen en la tabla de DATOS DE COBERTURA del PDF')
+                    ->schema([
+                        TextInput::make('poliza_precio_completa')
+                            ->label('Precio Completo (sin IVA)')
+                            ->required()
+                            ->numeric()
+                            ->prefix('$')
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(function ($state, callable $set, callable $get) {
+                                $precio = floatval($state ?? 0);
+                                $iva = $precio * 0.16;
+                                $total = $precio + $iva;
+                                
+                                $set('poliza_subtotal', number_format($iva, 2, '.', ''));
+                                $set('poliza_total', number_format($total, 2, '.', ''));
+                            })
+                            ->helperText('Ingrese el precio sin IVA. El subtotal y total se calcularán automáticamente.')
+                            ->columnSpan(1),
+
+                        TextInput::make('poliza_subtotal')
+                            ->label('IVA (16%)')
+                            ->numeric()
+                            ->prefix('$')
+                            ->disabled()
+                            ->dehydrated()
+                            ->helperText('Se calcula automáticamente')
+                            ->columnSpan(1),
+
+                        TextInput::make('poliza_total')
+                            ->label('Total (con IVA)')
+                            ->numeric()
+                            ->prefix('$')
+                            ->disabled()
+                            ->dehydrated()
+                            ->helperText('Precio completo + IVA')
+                            ->columnSpan(1),
+                    ])
+                    ->columns(3)
+                    ->collapsible(),
+
                 Section::make('Complementos y Servicios')
                     ->schema([
-                        KeyValue::make('complementos')
-                            ->label('Complementos del Contrato')
-                            ->keyLabel('Concepto')
-                            ->valueLabel('Valor')
-                            ->reorderable()
-                            ->columnSpanFull(),
+                        // KeyValue::make('complementos')
+                        //     ->label('Complementos del Contrato')
+                        //     ->keyLabel('Concepto')
+                        //     ->valueLabel('Valor')
+                        //     ->reorderable()
+                        //     ->columnSpanFull(),
 
                         KeyValue::make('datos_renta')
                             ->label('Datos de Renta')

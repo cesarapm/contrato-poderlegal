@@ -71,6 +71,74 @@ class GeneradorContratoPdf
 
         $monto = (float) $contrato->monto_renta_mensual;
 
+        // Preparar secciones condicionales del fiador
+        $seccionFiador = '';
+        $firmaFiador = '';
+        
+        if ($fiador && $fiador->tipo !== 'ninguno') {
+            $nombreFiador = mb_strtoupper($fiador->nombre_completo ?? '', 'UTF-8');
+            
+            // Construir texto de tipo de persona
+            $tipoPersona = '';
+            if ($fiador->tipo_persona) {
+                $tipoPersona = ' en su carácter de persona ' . mb_strtoupper($fiador->tipo_persona === 'moral' ? 'moral' : 'física', 'UTF-8');
+            }
+            
+            // Construir texto de nacionalidad y número de INE
+            $textoNacionalidad = '';
+            if ($fiador->nacionalidad) {
+                $textoNacionalidad = ' de nacionalidad ' . mb_strtoupper($fiador->nacionalidad, 'UTF-8');
+            }
+            
+            $textoIne = '';
+            if ($fiador->numero_ine) {
+                $textoIne = ' con número de INE ' . $fiador->numero_ine;
+            }
+            
+            // Construir texto de residencia
+            $textoResidencia = '';
+            if ($fiador->numero_inm) {
+                $textoResidencia = ' con residencia permanente en territorio mexicano expedido por el instituto nacional de migración número ' . $fiador->numero_inm;
+            }
+            
+            // Construir dirección completa
+            $direccionFiador = [];
+            if ($fiador->domicilio) {
+                $direccionFiador[] = $fiador->domicilio;
+            }
+            if ($fiador->ciudad) {
+                $direccionFiador[] = $fiador->ciudad;
+            }
+            if ($fiador->estado) {
+                $direccionFiador[] = $fiador->estado;
+            }
+            if ($fiador->pais && $fiador->pais !== 'México') {
+                $direccionFiador[] = $fiador->pais;
+            }
+            if ($fiador->codigo_postal) {
+                $direccionFiador[] = 'C.P. ' . $fiador->codigo_postal;
+            }
+            
+            $direccionCompleta = !empty($direccionFiador) ? ' con domicilio en ' . mb_strtoupper(implode(', ', $direccionFiador), 'UTF-8') : '';
+            
+            $seccionFiador = '
+<p><span class="clausula-num">3.3.</span> &nbsp; <strong>\'DECLARA EL OBLIGADO SOLIDARIO\'</strong></p>
+
+<p><span class="clausula-num">3.4.</span> &nbsp; ' . $nombreFiador . $tipoPersona . $textoNacionalidad . $textoIne . $textoResidencia . $direccionCompleta . ' quien se compromete a cumplir exactamente con todas las cláusulas y obligaciones que se hacen referencia a <strong>\'EL ARRENDATARIO\'</strong> establecido en el presente contrato.</p>
+';
+
+            $firmaFiador = '
+<div class="firma-row" style="margin-top:30px;">
+  <div class="firma-box" style="margin:0 auto;">
+    <p style="text-align:center;"><strong>\'OBLIGADO SOLIDARIO\'</strong></p>
+    <div class="firma-line"></div>
+    <p class="firma-nombre"><strong>' . $nombreFiador . '</strong></p>
+    <p class="firma-nombre">Por su propio derecho</p>
+  </div>
+</div>
+';
+        }
+
         return [
             // Arrendador
             'arrendador_nombre_completo' => mb_strtoupper($arrendador?->nombre_completo ?? '', 'UTF-8'),
@@ -97,6 +165,8 @@ class GeneradorContratoPdf
 
             // Montos
             'monto_renta_mensual'    => number_format($monto, 2),
+            'monto_renta_mensual_letra' => $this->numeroALetras($monto),
+            'iva_texto'              => $contrato->incluye_iva ? ' MÁS IVA' : '',
             'deposito_garantia'      => number_format($monto, 2),
             'deposito_garantia_letra' => $this->numeroALetras($monto),
             'monto_total'            => number_format((float) $contrato->monto_total, 2),
@@ -114,6 +184,13 @@ class GeneradorContratoPdf
             // Fiador
             'fiador_nombre_completo' => mb_strtoupper($fiador?->nombre_completo ?? 'N/A', 'UTF-8'),
             'fiador_tipo'            => mb_strtoupper($fiador?->tipo ?? '', 'UTF-8'),
+            'fiador_tipo_persona'    => mb_strtoupper($fiador?->tipo_persona === 'moral' ? 'moral' : 'física', 'UTF-8'),
+            'fiador_numero_ine'      => $fiador?->numero_ine ?? '',
+            'fiador_nacionalidad'    => mb_strtoupper($fiador?->nacionalidad ?? 'México', 'UTF-8'),
+            
+            // Secciones condicionales del fiador
+            'seccion_fiador' => $seccionFiador,
+            'firma_fiador'   => $firmaFiador,
 
             // Folio
             'folio' => $contrato->folio ?? '',

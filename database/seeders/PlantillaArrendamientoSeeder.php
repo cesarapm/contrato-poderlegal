@@ -84,6 +84,8 @@ CLÁUSULAS:</p>
 
 <p><span class="clausula-num">3.2.</span> &nbsp; Que en la celebración del presente Contrato no ha mediado error, dolo, violencia, coerción o mala fe por ninguna de las partes, por lo que el presente documento contiene la manifestación de su libre y espontánea voluntad y no adolece, por tanto, de ningún vicio en el consentimiento.</p>
 
+{{seccion_fiador}}
+
 <p>EN VIRTUD DE LO ANTERIOR, y considerando los intereses de las partes antes expuestas, las mismas están dispuestas a obligarse de conformidad con lo establecido en las siguientes:</p>
 
 <h2>C L A U S U L A S</h2>
@@ -92,7 +94,7 @@ CLÁUSULAS:</p>
 <p>En este acto el "ARRENDADOR" se obliga a conceder el uso y goce temporal del Inmueble ubicado en <strong>{{inmueble_direccion_completa}}</strong>, el cual incluye <strong>{{inmueble_estacionamiento}}</strong> espacio(s) para estacionamiento (El <strong>"Inmueble"</strong>) a favor del "ARRENDATARIO", quien a su vez toma posesión del Inmueble y se obliga a pagar a cambio el precio cierto previsto en la Cláusula Segunda siguiente.</p>
 
 <h3>Segunda.- La Renta.</h3>
-<p>El "ARRENDATARIO" pagará al "ARRENDADOR" una renta mensual, durante el Plazo de Vigencia del presente Contrato por el equivalente a la cantidad de <strong>${{monto_renta_mensual}} M.N. (Moneda Nacional)</strong> (<strong>"Renta Mensual"</strong>), en el entendido que dicha cantidad cubre la Cuota de Mantenimiento.</p>
+<p>El "ARRENDATARIO" pagará al "ARRENDADOR" una renta mensual, durante el Plazo de Vigencia del presente Contrato por el equivalente a la cantidad de <strong>${{monto_renta_mensual}} M.N. (Moneda Nacional){{iva_texto}}</strong> (<strong>"Renta Mensual"</strong>), en el entendido que dicha cantidad cubre la Cuota de Mantenimiento.</p>
 
 <p>El "ARRENDATARIO" debe pagar al "ARRENDADOR" la primer Renta Mensual correspondiente al mes de <strong>{{mes_primer_pago}}</strong> en la fecha de firma del presente Contrato.</p>
 
@@ -239,17 +241,8 @@ En caso de que el "ARRENDATARIO" tenga voluntad de dar por terminado el presente
     </div>
   </div>
 
-  <h2 style="margin-top:50px;">T E S T I G O S</h2>
-  <div class="firma-row">
-    <div class="firma-box">
-      <div class="firma-line"></div>
-      <p>&nbsp;</p>
-    </div>
-    <div class="firma-box">
-      <div class="firma-line"></div>
-      <p>&nbsp;</p>
-    </div>
-  </div>
+{{firma_fiador}}
+
 </div>
 
 </body>

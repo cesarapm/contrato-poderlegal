@@ -14,6 +14,7 @@ class Tramitante extends Model
         'telefono_1',
         'telefono_2',
         'email',
+        'inmobiliaria',
         'es_independiente',
         'tipo_solicitante',
         'acepto_terminos',

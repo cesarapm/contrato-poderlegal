@@ -10,7 +10,7 @@
     <meta name="language" content="es">
     <meta name="geo.region" content="MX">
     
-    <title>Genera tu Contrato de Arrendamiento - Poder Legal</title>
+    <title>Genera tu Póliza de Arrendamiento - Poder Legal</title>
     
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -23,22 +23,22 @@
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Genera tu Contrato de Arrendamiento - Poder Legal">
-    <meta property="og:description" content="Sistema profesional para generar contratos de arrendamiento en línea. 9 pasos simples, validación legal incluida.">
+    <meta property="og:title" content="Genera tu Póliza de Arrendamiento - Poder Legal">
+    <meta property="og:description" content="Sistema profesional para generar pólizas de arrendamiento en línea. 9 pasos simples, validación legal incluida.">
     <meta property="og:image" content="https://contrato.poderlegal.mx/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Poder Legal - Generador de Contratos de Arrendamiento">
+    <meta property="og:image:alt" content="Poder Legal - Generador de Pólizas de Arrendamiento">
     <meta property="og:url" content="https://contrato.poderlegal.mx">
     <meta property="og:site_name" content="Poder Legal">
     <meta property="og:locale" content="es_MX">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Genera tu Contrato de Arrendamiento - Poder Legal">
-    <meta name="twitter:description" content="Sistema profesional para generar contratos de arrendamiento en línea. 9 pasos simples, validación legal incluida.">
+    <meta name="twitter:title" content="Genera tu Póliza de Arrendamiento - Poder Legal">
+    <meta name="twitter:description" content="Sistema profesional para generar pólizas de arrendamiento en línea. 9 pasos simples, validación legal incluida.">
     <meta name="twitter:image" content="https://contrato.poderlegal.mx/og-image.png">
-    <meta name="twitter:image:alt" content="Poder Legal - Generador de Contratos">
+    <meta name="twitter:image:alt" content="Poder Legal - Generador de Pólizas de Arrendamiento">
     
     <!-- Business Info -->
     <meta name="business:contact_data:street_address" content="Francisco Petrarca 223 oficina 1005">
@@ -64,8 +64,8 @@
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Generador de Contratos de Arrendamiento - Poder Legal",
-      "description": "Sistema profesional en línea para generar contratos de arrendamiento con validación legal. Proceso guiado en 9 pasos simples.",
+      "name": "Generador de Pólizas de Arrendamiento - Poder Legal",
+      "description": "Sistema profesional en línea para generar pólizas de arrendamiento con validación legal. Proceso guiado en 9 pasos simples.",
       "url": "https://contrato.poderlegal.mx",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web",

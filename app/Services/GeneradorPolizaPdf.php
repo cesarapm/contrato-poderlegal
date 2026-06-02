@@ -10,6 +10,13 @@ use NumberFormatter;
 
 class GeneradorPolizaPdf
 {
+    protected CalculadoraPrecioPoliza $calculadora;
+
+    public function __construct()
+    {
+        $this->calculadora = new CalculadoraPrecioPoliza();
+    }
+
     public function generar(Contrato $contrato): string
     {
         $contrato->load(['tramitante', 'arrendadores', 'arrendatarios', 'inmueble']);
@@ -63,26 +70,75 @@ class GeneradorPolizaPdf
 
         $fechaInicio  = $contrato->fecha_inicio  ? Carbon::parse($contrato->fecha_inicio)  : null;
         $fechaTermino = $contrato->fecha_termino ? Carbon::parse($contrato->fecha_termino) : null;
+        
+        // Usar fecha_emision del contrato si existe, si no usar fecha actual
+        $fechaEmision = $contrato->fecha_emision ? Carbon::parse($contrato->fecha_emision) : Carbon::now();
 
         $montoRenta = (float) $contrato->monto_renta_mensual;
-        $montoTotal = (float) $contrato->monto_total;
+        
+        // Usar monto_iva_mensual del contrato si existe, si no calcularlo
+        if ($contrato->monto_iva_mensual !== null) {
+            $montoIvaRenta = (float) $contrato->monto_iva_mensual;
+        } else {
+            $montoIvaRenta = $contrato->incluye_iva ? $montoRenta * 0.16 : 0;
+        }
 
-        // El monto_total ya incluye IVA; calculamos sin IVA
-        $precioSinIva   = round($montoTotal / 1.16, 2);
-        $iva            = round($montoTotal - $precioSinIva, 2);
+        // Para los precios de la póliza, usar los valores editables si existen, si no calcularlos
+        if ($contrato->poliza_precio_completa !== null && 
+            $contrato->poliza_subtotal !== null && 
+            $contrato->poliza_total !== null) {
+            // Usar valores manuales
+            $precioSinIva = (float) $contrato->poliza_precio_completa;
+            $iva = (float) $contrato->poliza_subtotal;
+            $precioConIva = (float) $contrato->poliza_total;
+            $desglose = $this->calculadora->obtenerDesglose($montoRenta);
+            $vigenciaMeses = $desglose['vigencia_meses'];
+            $limiteRentaMensual = $desglose['limite_renta_mensual'];
+        } else {
+            // Calcular automáticamente
+            $desglose = $this->calculadora->obtenerDesglose($montoRenta);
+            $precioSinIva = $desglose['precio_sin_iva'];
+            $iva = $desglose['iva'];
+            $precioConIva = $desglose['precio_con_iva'];
+            $vigenciaMeses = $desglose['vigencia_meses'];
+            $limiteRentaMensual = $desglose['limite_renta_mensual'];
+        }
 
         return [
             'folio'                        => $contrato->folio ?? '',
+            'numero_poliza'                => $contrato->numero_poliza ?? $contrato->folio ?? '',
+            'tipo_producto'                => strtoupper($contrato->tipo_producto ?? 'SUPERIOR'),
+            'fecha_emision'                => $this->fechaTexto($fechaEmision),
+            
+            // Arrendador
             'arrendador_nombre_completo'   => $arrendador?->nombre_completo ?? '',
             'arrendador_domicilio'         => $this->formatearDireccion($arrendador?->direccion),
+            'arrendador_telefono'          => $arrendador?->telefono_1 ?? '',
+            'arrendador_email'             => $arrendador?->email ?? '',
+            
+            // Arrendatario
             'arrendatario_nombre_completo' => $arrendatario?->nombre_completo ?? '',
+            'arrendatario_telefono'        => $arrendatario?->telefono_1 ?? '',
+            'arrendatario_email'           => $arrendatario?->email ?? '',
+            
+            // Inmueble
             'inmueble_direccion_completa'  => $inmueble?->direccion_completa ?? '',
             'inmueble_uso'                 => ucfirst($inmueble?->uso_inmueble ?? 'habitacional'),
+            
+            // Tramitante
             'tramitante_nombre_completo'   => $tramitante?->nombre_completo ?? '',
+            'tramitante_inmobiliaria'      => $tramitante?->inmobiliaria ?? 'Asesor Independiente',
+            
+            // Montos
             'monto_renta_mensual'          => number_format($montoRenta, 2),
+            'monto_iva_renta'              => number_format($montoIvaRenta, 2),
             'precio_servicio_sin_iva'      => number_format($precioSinIva, 2),
             'iva_servicio'                 => number_format($iva, 2),
-            'precio_servicio_con_iva'      => number_format($montoTotal, 2),
+            'precio_servicio_con_iva'      => number_format($precioConIva, 2),
+            'vigencia_servicio'            => $vigenciaMeses . ' meses',
+            'limite_renta_mensual'         => number_format($limiteRentaMensual, 2),
+            
+            // Fechas
             'fecha_inicio_texto'           => $fechaInicio  ? $this->fechaTexto($fechaInicio)  : '',
             'fecha_termino_texto'          => $fechaTermino ? $this->fechaTexto($fechaTermino) : '',
         ];

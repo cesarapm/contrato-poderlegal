@@ -19,8 +19,8 @@
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Genera tu Contrato de Arrendamiento - Poder Legal">
-    <meta property="og:description" content="Sistema profesional para generar contratos de arrendamiento en línea. 9 pasos simples, validación legal incluida.">
+    <meta property="og:title" content="Genera tu Póliza de Arrendamiento - Poder Legal">
+    <meta property="og:description" content="Sistema profesional para generar pólizas de arrendamiento en línea. 9 pasos simples, validación legal incluida.">
     <meta property="og:url" content="https://contrato.poderlegal.mx">
     <meta property="og:locale" content="es_MX">
 
@@ -58,11 +58,11 @@
                 </div>
                 
                <h2 class="text-3xl md:text-6xl font-display font-bold text-white mb-6 leading-tight">
-    Genera tu Contrato de Arrendamiento
+    Genera tu Póliza de Arrendamiento
 </h2>
                 
                 <p class="text-xl text-white/80 mb-10 leading-relaxed">
-                    Crea contratos profesionales en minutos con nuestro asistente paso a paso.
+                    Crea la solicitud profesional en minutos con nuestro asistente paso a paso.
                     <br class="hidden md:block">
                     Seguro, rápido y completamente legal.
                 </p>
