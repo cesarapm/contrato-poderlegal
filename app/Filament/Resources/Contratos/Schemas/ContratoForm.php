@@ -129,21 +129,51 @@ class ContratoForm
                 Section::make('Datos de Cobertura de Póliza')
                     ->description('Estos montos aparecen en la tabla de DATOS DE COBERTURA del PDF')
                     ->schema([
+                        Toggle::make('poliza_incluye_iva')
+                            ->label('La póliza incluye IVA')
+                            ->inline(false)
+                            ->default(true)
+                            ->live()
+                            ->afterStateUpdated(function ($state, callable $set, callable $get) {
+                                $precio = floatval($get('poliza_precio_completa') ?? 0);
+                                
+                                if ($state) {
+                                    // Con IVA
+                                    $iva = $precio * 0.16;
+                                    $total = $precio + $iva;
+                                } else {
+                                    // Sin IVA
+                                    $iva = 0;
+                                    $total = $precio;
+                                }
+                                
+                                $set('poliza_subtotal', number_format($iva, 2, '.', ''));
+                                $set('poliza_total', number_format($total, 2, '.', ''));
+                            })
+                            ->columnSpan(3),
+
                         TextInput::make('poliza_precio_completa')
-                            ->label('Precio Completo (sin IVA)')
+                            ->label('Precio Completo')
                             ->required()
                             ->numeric()
                             ->prefix('$')
                             ->live(onBlur: true)
                             ->afterStateUpdated(function ($state, callable $set, callable $get) {
                                 $precio = floatval($state ?? 0);
-                                $iva = $precio * 0.16;
-                                $total = $precio + $iva;
+                                $incluyeIva = $get('poliza_incluye_iva') ?? true;
+                                
+                                if ($incluyeIva) {
+                                    $iva = $precio * 0.16;
+                                    $total = $precio + $iva;
+                                } else {
+                                    $iva = 0;
+                                    $total = $precio;
+                                }
                                 
                                 $set('poliza_subtotal', number_format($iva, 2, '.', ''));
                                 $set('poliza_total', number_format($total, 2, '.', ''));
                             })
-                            ->helperText('Ingrese el precio sin IVA. El subtotal y total se calcularán automáticamente.')
+                            ->helperText('Ingrese el precio base de la póliza.')
                             ->columnSpan(1),
 
                         TextInput::make('poliza_subtotal')
@@ -152,16 +182,16 @@ class ContratoForm
                             ->prefix('$')
                             ->disabled()
                             ->dehydrated()
-                            ->helperText('Se calcula automáticamente')
+                            ->helperText('Se calcula automáticamente si aplica IVA')
                             ->columnSpan(1),
 
                         TextInput::make('poliza_total')
-                            ->label('Total (con IVA)')
+                            ->label('Total')
                             ->numeric()
                             ->prefix('$')
                             ->disabled()
                             ->dehydrated()
-                            ->helperText('Precio completo + IVA')
+                            ->helperText('Precio completo + IVA (si aplica)')
                             ->columnSpan(1),
                     ])
                     ->columns(3)

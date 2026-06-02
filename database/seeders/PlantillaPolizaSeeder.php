@@ -34,7 +34,7 @@ class PlantillaPolizaSeeder extends Seeder
     position: relative;
     padding: 20px 30px 15px;
     background: #fff;
-    border-top: 10px solid #1a1a5e;
+    border-top: 10px solid #4A148C;
     overflow: hidden;
   }
   .diagonal-stripe {
@@ -43,7 +43,7 @@ class PlantillaPolizaSeeder extends Seeder
     right: 0;
     width: 200px;
     height: 150px;
-    background: #f0c040;
+    background: #FFC107;
     transform: skewX(-20deg);
     transform-origin: top right;
   }
@@ -67,7 +67,7 @@ class PlantillaPolizaSeeder extends Seeder
   .logo-poder {
     font-size: 24pt;
     font-weight: 900;
-    color: #1a1a5e;
+    color: #4A148C;
     letter-spacing: 0.5px;
     line-height: 1;
   }
@@ -77,7 +77,7 @@ class PlantillaPolizaSeeder extends Seeder
   }
   .sub-logo {
     font-size: 9pt;
-    color: #f0c040;
+    color: #FFC107;
     font-weight: 700;
     margin-top: 2px;
     letter-spacing: 1.5px;
@@ -127,13 +127,13 @@ class PlantillaPolizaSeeder extends Seeder
 
   /* Secciones con icono amarillo */
   .seccion-box {
-    border: 3px solid #1a1a5e;
+    border: 3px solid #4A148C;
     border-radius: 10px;
     overflow: hidden;
     background: #fff;
   }
   .seccion-header {
-    background: #1a1a5e;
+    background: #4A148C;
     color: #fff;
     padding: 9px 14px;
     font-size: 7.5pt;
@@ -151,13 +151,13 @@ class PlantillaPolizaSeeder extends Seeder
   .seccion-icon-img {
     width: 24px;
     height: 24px;
-    background: #f9c74f;
+    background: #FFC107;
     border-radius: 4px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     font-weight: 900;
-    color: #1a1a5e;
+    color: #4A148C;
     font-size: 11pt;
     line-height: 24px;
     text-align: center;
@@ -190,7 +190,7 @@ class PlantillaPolizaSeeder extends Seeder
   }
   .datos-table td:first-child {
     font-weight: 800;
-    color: #1a1a5e;
+    color: #4A148C;
     text-transform: uppercase;
     width: 48%;
     font-size: 7pt;
@@ -218,14 +218,14 @@ class PlantillaPolizaSeeder extends Seeder
     border: none;
   }
   .cobertura-table thead th:first-child {
-    background: #1a1a5e;
+    background: #4A148C;
     color: #fff;
     text-align: center;
     border-radius: 0;
   }
   .cobertura-table thead th:last-child {
-    background: #f9c74f;
-    color: #1a1a5e;
+    background: #FFC107;
+    color: #4A148C;
     text-align: center;
     border-radius: 0;
     font-weight: 900;
@@ -239,7 +239,7 @@ class PlantillaPolizaSeeder extends Seeder
   }
   .cobertura-table tbody td:first-child {
     font-weight: 700;
-    color: #1a1a5e;
+    color: #4A148C;
     text-transform: uppercase;
     text-align: left;
     letter-spacing: 0.3px;
@@ -250,30 +250,30 @@ class PlantillaPolizaSeeder extends Seeder
     color: #1a1a1a;
   }
   .total-row td {
-    background: #1a1a5e !important;
-    color: #f9c74f !important;
+    background: #4A148C !important;
+    color: #FFC107 !important;
     font-weight: 900 !important;
     font-size: 9pt !important;
     padding: 12px !important;
     border: none !important;
   }
   .total-row td:first-child {
-    color: #f9c74f !important;
+    color: #FFC107 !important;
     text-align: left !important;
   }
   .total-row td:last-child {
     text-align: right !important;
-    color: #f9c74f !important;
+    color: #FFC107 !important;
   }
 
   /* Footer */
   .footer-portada {
     margin-top: 350px;
-    background: #1a1a5e;
+    background: #4A148C;
     color: #fff;
     padding: 18px 30px;
     font-size: 7pt;
-    border-top: 5px solid #f9c74f;
+    border-top: 5px solid #FFC107;
   }
   .footer-grid {
     display: table;
@@ -288,14 +288,14 @@ class PlantillaPolizaSeeder extends Seeder
   .footer-icono-escudo {
     width: 50px;
     height: 50px;
-    background: #f9c74f;
-    border: 3px solid #1a1a5e;
+    background: #FFC107;
+    border: 3px solid #4A148C;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     font-size: 22pt;
-    color: #1a1a5e;
+    color: #4A148C;
     vertical-align: middle;
     margin-right: 12px;
   }
@@ -336,14 +336,14 @@ class PlantillaPolizaSeeder extends Seeder
   .contrato-header .brand-contrato {
     font-size: 16pt;
     font-weight: 900;
-    color: #1a1a5e;
+    color: #4A148C;
     letter-spacing: 3px;
     text-transform: uppercase;
   }
-  .contrato-header .brand-contrato span { color: #f0c040; }
+  .contrato-header .brand-contrato span { color: #FFC107; }
   .contrato-stripe {
     height: 3px;
-    background: linear-gradient(to right, #1a1a5e, #f0c040, #1a1a5e);
+    background: linear-gradient(to right, #4A148C, #FFC107, #4A148C);
     margin: 10px auto 18px;
     width: 60%;
   }
@@ -353,7 +353,7 @@ class PlantillaPolizaSeeder extends Seeder
     font-weight: 800;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #1a1a5e;
+    color: #4A148C;
     margin-bottom: 18px;
     border-bottom: 1.5px solid #e8eaf2;
     padding-bottom: 10px;
@@ -367,7 +367,7 @@ class PlantillaPolizaSeeder extends Seeder
     text-align: center;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: #1a1a5e;
+    color: #4A148C;
     margin: 20px 0 10px;
   }
   .declaracion {
@@ -378,7 +378,7 @@ class PlantillaPolizaSeeder extends Seeder
   }
   .declaracion .num {
     font-weight: 700;
-    color: #1a1a5e;
+    color: #4A148C;
   }
 
   .clausula {
@@ -390,7 +390,7 @@ class PlantillaPolizaSeeder extends Seeder
   .clausula .clausula-titulo {
     font-weight: 800;
     text-transform: uppercase;
-    color: #1a1a5e;
+    color: #4A148C;
   }
 
   .firmas {
@@ -410,13 +410,13 @@ class PlantillaPolizaSeeder extends Seeder
   }
   .firma-espacio { height: 55px; }
   .firma-linea {
-    border-top: 1.5px solid #1a1a5e;
+    border-top: 1.5px solid #4A148C;
     margin-bottom: 6px;
   }
   .firma-nombre {
     font-weight: 700;
     font-size: 9.5pt;
-    color: #1a1a5e;
+    color: #4A148C;
   }
   .firma-cargo {
     font-size: 8pt;
