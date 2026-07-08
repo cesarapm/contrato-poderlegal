@@ -784,16 +784,16 @@
                     <div>
                         <label class="block text-white font-semibold mb-3">¿Requiere Fiador?</label>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <label class="cursor-pointer group">
+                            <!-- <label class="cursor-pointer group">
                                 <input type="radio" wire:model.live="fiador_tipo" value="ninguno" class="hidden peer">
                                 <div class="p-4 rounded-xl bg-white/5 border-2 border-white/20 peer-checked:border-gold-accent peer-checked:bg-gold-accent/10 transition-all text-center">
                                     <div class="text-3xl mb-2">🚫</div>
                                     <p class="text-white font-semibold">Sin Fiador</p>
                                 </div>
-                            </label>
+                            </label> -->
 
                             <label class="cursor-pointer group">
-                                <input type="radio" wire:model.live="fiador_tipo" value="persona" class="hidden peer">
+                                <input type="radio" wire:model.live="fiador_tipo" value="persona" checked class="hidden peer">
                                 <div class="p-4 rounded-xl bg-white/5 border-2 border-white/20 peer-checked:border-gold-accent peer-checked:bg-gold-accent/10 transition-all text-center">
                                     <div class="text-3xl mb-2">👤</div>
                                     <p class="text-white font-semibold">Persona Física</p>
@@ -810,7 +810,7 @@
                         </div>
                     </div>
 
-                    @if($fiador_tipo !== 'ninguno')
+                    @if($fiador_tipo !== 'personal')
                         <div class="space-y-4 mt-6 p-6 rounded-2xl bg-white/5 border border-white/20">
                             <h4 class="text-xl font-bold text-gold-accent mb-4">Datos del Fiador</h4>
 
@@ -1270,8 +1270,9 @@
                     <button 
                         type="button"
                         wire:click="nextStep"
-                        class="group px-4 py-3 sm:px-6 sm:py-3.5 md:px-8 md:py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 hover:shadow-2xl text-sm sm:text-base"
-                        style="background: linear-gradient(135deg, #FFD700 0%, #FFAA00 100%); color: #1A0933; box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);">
+                        class="group px-4 py-3 sm:px-6 sm:py-3.5 md:px-8 md:py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 hover:shadow-2xl text-sm sm:text-base {{ $currentStep === 7 && $fiador_tipo === 'ninguno' ? 'opacity-50 cursor-not-allowed' : '' }}"
+                        style="background: linear-gradient(135deg, #FFD700 0%, #FFAA00 100%); color: #1A0933; box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);"
+                        {{ $currentStep === 7 && $fiador_tipo === 'ninguno' ? 'disabled' : '' }}>
                         <span class="flex items-center gap-2">
                             Siguiente
                             <svg class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1279,11 +1280,15 @@
                             </svg>
                         </span>
                     </button>
+                    @if ($currentStep === 7 && $fiador_tipo === 'ninguno')
+                        <p class="text-red-400 text-sm mt-2">Por favor, selecciona un tipo de fiador para continuar</p>
+                    @endif
                 @else
                     <button 
                         type="submit"
-                        class="group px-4 py-3 sm:px-6 sm:py-3.5 md:px-8 md:py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 hover:shadow-2xl text-white text-sm sm:text-base"
-                        style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);">
+                        class="group px-4 py-3 sm:px-6 sm:py-3.5 md:px-8 md:py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 hover:shadow-2xl text-white text-sm sm:text-base {{ $fiador_tipo === 'ninguno' ? 'opacity-50 cursor-not-allowed' : '' }}"
+                        style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);"
+                        {{ $fiador_tipo === 'ninguno' ? 'disabled' : '' }}>
                         <span class="flex items-center gap-2">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>

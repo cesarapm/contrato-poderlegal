@@ -16,10 +16,10 @@ class GeneradorContratoPdf
 
         // Usar plantilla asignada, o la plantilla por defecto si no tiene
         $plantilla = $contrato->plantilla
-            ?? \App\Models\PlantillaContrato::where('slug', 'contrato-arrendamiento-habitacional')->first();
+            ?? \App\Models\PlantillaContrato::where('slug', 'contrato-arrendamiento-ultimo')->first();
 
         if (!$plantilla) {
-            throw new \Exception('No se encontró la plantilla de contrato. Ejecuta: php artisan db:seed --class=PlantillaArrendamientoSeeder');
+            throw new \Exception('No se encontró la plantilla de contrato. Ejecuta: php artisan db:seed --class=PlantillaArrendamientoSeeder y php artisan db:seed --class=PlantillaArrendamientoUltimoSeeder');
         }
 
         $html = $plantilla->contenido_html;
@@ -54,24 +54,12 @@ class GeneradorContratoPdf
         $inmueble     = $contrato->inmueble;
         $fiador       = $contrato->fiador;
 
-        // \Log::debug('PDF variables debug', [
-        //     'arrendador_nombre'    => $arrendador?->nombre,
-        //     'arrendador_ap'       => $arrendador?->apellido_paterno,
-        //     'arrendador_am'       => $arrendador?->apellido_materno,
-        //     'arrendador_completo' => $arrendador?->nombre_completo,
-        //     'arrendatario_nombre'    => $arrendatario?->nombre,
-        //     'arrendatario_ap'       => $arrendatario?->apellido_paterno,
-        //     'arrendatario_am'       => $arrendatario?->apellido_materno,
-        //     'arrendatario_tipo'      => $arrendatario?->tipo_persona,
-        //     'arrendatario_completo' => $arrendatario?->nombre_completo,
-        // ]);
-
         $fechaInicio  = $contrato->fecha_inicio  ? Carbon::parse($contrato->fecha_inicio)  : null;
         $fechaTermino = $contrato->fecha_termino ? Carbon::parse($contrato->fecha_termino) : null;
 
         $monto = (float) $contrato->monto_renta_mensual;
 
-        // Preparar secciones condicionales del fiador
+        // Preparar secciones condicionales del fiador (para plantilla habitacional)
         $seccionFiador = '';
         $firmaFiador = '';
         
@@ -139,6 +127,39 @@ class GeneradorContratoPdf
 ';
         }
 
+        // Construir dirección completa del fiador para plantilla último
+        $fiadorDomicilioCompleto = '';
+        if ($fiador) {
+            $direccionFiadorParts = [];
+            if ($fiador->domicilio) {
+                $direccionFiadorParts[] = $fiador->domicilio;
+            }
+            if ($fiador->ciudad) {
+                $direccionFiadorParts[] = $fiador->ciudad;
+            }
+            if ($fiador->estado) {
+                $direccionFiadorParts[] = $fiador->estado;
+            }
+            if ($fiador->pais && $fiador->pais !== 'México') {
+                $direccionFiadorParts[] = $fiador->pais;
+            }
+            if ($fiador->codigo_postal) {
+                $direccionFiadorParts[] = 'C.P. ' . $fiador->codigo_postal;
+            }
+            $fiadorDomicilioCompleto = mb_strtoupper(implode(', ', $direccionFiadorParts), 'UTF-8');
+        }
+
+        // Construir sección fiador condicional para plantilla último
+        $seccionFiadorUltimo = '';
+        if ($fiador && $fiador->tipo !== 'ninguno') {
+            $seccionFiadorUltimo = '
+<p><strong>III.- DECLARA "EL OBLIGADO SOLIDARIO":</strong></p>
+<div class="viñeta">
+<p>a) Ser persona ' . mb_strtoupper($fiador->tipo_persona === 'moral' ? 'MORAL' : 'FÍSICA', 'UTF-8') . ' de nacionalidad ' . mb_strtoupper($fiador->nacionalidad ?? 'MÉXICO', 'UTF-8') . ' identificado con INE ' . ($fiador->numero_ine ?? '') . ' CURP ' . ($fiador->numero_ine ?? '') . ' y que tiene plena capacidad para la celebración del presente contrato y compromete a cumplir exactamente con todas las cláusulas y obligaciones que se hacen referencia a \'EL ARRENDATARIO\' establecido en el presente contrato y declara tener su domicilio en ' . $fiadorDomicilioCompleto . ' con email ' . mb_strtoupper($arrendador?->email ?? '', 'UTF-8') . ' teléfono ' . ($arrendador?->telefono_1 ?? '') . '</p>
+</div>
+';
+        }
+
         return [
             // Arrendador
             'arrendador_nombre_completo' => mb_strtoupper($arrendador?->nombre_completo ?? '', 'UTF-8'),
@@ -164,12 +185,12 @@ class GeneradorContratoPdf
             'inmueble_estacionamiento'    => '1',
 
             // Montos
-            'monto_renta_mensual'    => number_format($monto, 2),
+            'monto_renta_mensual'       => number_format($monto, 2),
             'monto_renta_mensual_letra' => $this->numeroALetras($monto),
-            'iva_texto'              => $contrato->incluye_iva ? ' MÁS IVA' : '',
-            'deposito_garantia'      => number_format($monto, 2),
-            'deposito_garantia_letra' => $this->numeroALetras($monto),
-            'monto_total'            => number_format((float) $contrato->monto_total, 2),
+            'iva_texto'                 => $contrato->incluye_iva ? ' MÁS IVA' : '',
+            'deposito_garantia'         => number_format($monto, 2),
+            'deposito_garantia_letra'   => $this->numeroALetras($monto),
+            'monto_total'               => number_format((float) $contrato->monto_total, 2),
 
             // Fechas
             'fecha_inicio_texto'  => $fechaInicio  ? mb_strtoupper($this->fechaTexto($fechaInicio), 'UTF-8')  : '',
@@ -181,16 +202,18 @@ class GeneradorContratoPdf
             'anio_inicio'         => $fechaInicio  ? $fechaInicio->year               : '',
             'anio_fin'            => $fechaTermino ? $fechaTermino->year              : '',
 
-            // Fiador
-            'fiador_nombre_completo' => mb_strtoupper($fiador?->nombre_completo ?? 'N/A', 'UTF-8'),
-            'fiador_tipo'            => mb_strtoupper($fiador?->tipo ?? '', 'UTF-8'),
-            'fiador_tipo_persona'    => mb_strtoupper($fiador?->tipo_persona === 'moral' ? 'moral' : 'física', 'UTF-8'),
-            'fiador_numero_ine'      => $fiador?->numero_ine ?? '',
-            'fiador_nacionalidad'    => mb_strtoupper($fiador?->nacionalidad ?? 'México', 'UTF-8'),
+            // Fiador - variables simples (sin condicionales)
+            'fiador_nombre_completo'    => mb_strtoupper($fiador?->nombre_completo ?? '', 'UTF-8'),
+            'fiador_tipo'               => mb_strtoupper($fiador?->tipo ?? '', 'UTF-8'),
+            'fiador_tipo_persona'       => mb_strtoupper($fiador?->tipo_persona === 'moral' ? 'moral' : 'física', 'UTF-8'),
+            'fiador_numero_ine'         => $fiador?->numero_ine ?? '',
+            'fiador_nacionalidad'       => mb_strtoupper($fiador?->nacionalidad ?? 'México', 'UTF-8'),
+            'fiador_domicilio_completo' => $fiadorDomicilioCompleto,
             
-            // Secciones condicionales del fiador
+            // Secciones condicionales del fiador (para plantilla habitacional)
             'seccion_fiador' => $seccionFiador,
             'firma_fiador'   => $firmaFiador,
+            'seccion_fiador_ultimo' => $seccionFiadorUltimo,
 
             // Folio
             'folio' => $contrato->folio ?? '',
