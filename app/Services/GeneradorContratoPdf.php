@@ -119,7 +119,7 @@ class GeneradorContratoPdf
 <div class="firma-row" style="margin-top:30px;">
   <div class="firma-box" style="margin:0 auto;">
     <p style="text-align:center;"><strong>\'OBLIGADO SOLIDARIO\'</strong></p>
-    <div class="firma-line"></div>
+    <div class="firma-linefiador"></div>
     <p class="firma-nombre"><strong>' . $nombreFiador . '</strong></p>
     <p class="firma-nombre">Por su propio derecho</p>
   </div>

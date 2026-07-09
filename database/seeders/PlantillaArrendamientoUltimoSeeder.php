@@ -26,6 +26,11 @@ class PlantillaArrendamientoUltimoSeeder extends Seeder
   .firma-row { display: table; width: 100%; margin-top: 20px; }
   .firma-box { display: table-cell; text-align: center; width: 50%; padding: 0 20px; }
   .firma-line { border-top: 1px solid #000; margin-top: 60px; margin-bottom: 8px; }
+  .firma-linefiador {
+    border-top: 1px solid #000;
+    width: 450px;
+    margin: 60px auto 8px auto;
+}
   .firma-nombre { text-align: center; margin-top: 4px; }
   .clausula-num { font-weight: bold; }
   .uppercase { text-transform: uppercase; }
@@ -33,7 +38,7 @@ class PlantillaArrendamientoUltimoSeeder extends Seeder
 </head>
 <body>
 
-<p style="text-align: center; font-weight: bold; margin-bottom: 15px;">
+<p style=" font-weight: bold; margin-bottom: 15px;">
 CONTRATO DE ARRENDAMIENTO QUE CELEBRAN POR UNA PARTE {{arrendador_nombre_completo}}, A QUIEN EN LO SUCESIVO Y PARA LOS EFECTOS 
 DEL PRESENTE INSTRUMENTO SE LE DENOMINARA "EL ARRENDADOR", POR LA OTRA {{arrendatario_nombre_completo}}, A QUIEN EN LO 
 SUCESIVO SE LE DENOMINARA "EL ARRENDATARIO"; Y {{fiador_nombre_completo}} A QUIEN EN LO SUCESIVO SE LE DENOMINARA EL 
@@ -126,7 +131,7 @@ SUCESIVO SE LE DENOMINARA "EL ARRENDATARIO"; Y {{fiador_nombre_completo}} A QUIE
 
 <p><strong>VIGÉSIMA SEXTA - COMPETENCIA.</strong> - Las partes expresamente convienen en someterse a la jurisdicción de las Leyes y Tribunales de la Ciudad de México, ya sea para la ejecución del laudo arbitral o para la interpretación o cumplimiento del presente contrato cuando "EL ARRENDADOR" haya elegido el procedimiento judicial.</p>
 
-<p style="margin-top: 18px; text-align: center; font-weight: bold;">
+<p style="margin-top: 18px;  font-weight: bold;">
 LEÍDO QUE FUE EL PRESENTE INSTRUMENTO, CONSTANTE DE 6 FOJAS ÚTILES Y ENTERADAS QUE FUERON LAS PARTES DE SU CONTENIDO, VALOR Y ALCANCE LEGAL, LO FIRMAN AL MARGEN EN CADA UNA DE SUS HOJAS, CON EXCEPCIÓN DE LA ÚLTIMA, QUE SE FIRMA AL CALCE POR TRIPLICADO, EL DÍA {{fecha_firma}}, EN LA CIUDAD DE MÉXICO.
 </p>
 

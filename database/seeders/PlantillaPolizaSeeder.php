@@ -664,11 +664,11 @@ class PlantillaPolizaSeeder extends Seeder
 <!-- ===================================================== -->
 <div class="contrato">
 
-  <div class="contrato-header">
+  <!-- <div class="contrato-header">
     <img src="{{logo_base64}}" alt="Pólizas Jurídicas" style="width:70px;height:auto;margin-bottom:6px;" />
     <div class="brand-contrato">PODER <span>LEGAL</span></div>
     <div class="contrato-stripe"></div>
-  </div>
+  </div> -->
 
   <div class="contrato-titulo">Contrato de Prestación de Servicios</div>
 
