@@ -15,12 +15,19 @@ class PlantillaPolizaSeeder extends Seeder
 <head>
 <meta charset="UTF-8">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+
+@page {
+    margin: 1cm 1cm;
+}
+
   body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 8.5pt;
     color: #1a1a1a;
     background: #fff;
+        margin: 0;
+    padding: 0;
   }
 
   /* PORTADA */
@@ -268,7 +275,7 @@ class PlantillaPolizaSeeder extends Seeder
 
   /* Footer */
   .footer-portada {
-    margin-top: 350px;
+    margin-top: 260px;
     background: #4A148C;
     color: #fff;
     padding: 18px 30px;
@@ -326,8 +333,8 @@ class PlantillaPolizaSeeder extends Seeder
 
   /* ===== ESTILOS CONTRATO ===== */
   .contrato {
-    padding: 2cm 2.5cm;
     page-break-before: always;
+    padding: 0;
   }
   .contrato-header {
     text-align: center;
@@ -876,7 +883,7 @@ class PlantillaPolizaSeeder extends Seeder
   </div>
 
   <div class="contrato-footer-num">
-    Póliza No. {{numero_poliza}} &nbsp;·&nbsp; GW NETWORK S.A. DE C.V. (PODER LEGAL) &nbsp;·&nbsp; Página 1 de 1
+    Póliza No. {{numero_poliza}} &nbsp;·&nbsp; GW NETWORK S.A. DE C.V. (PODER LEGAL) 
   </div>
 
 </div>

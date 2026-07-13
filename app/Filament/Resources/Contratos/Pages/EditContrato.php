@@ -22,7 +22,7 @@ class EditContrato extends EditRecord
     {
         return [
             Action::make('generar_pdf')
-                ->label('Generar PDF')
+                ->label('Generar Contrato PDF')
                 ->icon('heroicon-o-document-arrow-down')
                 ->color('success')
                 ->requiresConfirmation()
@@ -58,7 +58,7 @@ class EditContrato extends EditRecord
                 }),
 
             Action::make('generar_poliza')
-                ->label('Generar Póliza')
+                ->label('Generar Póliza PDF')
                 ->icon('heroicon-o-shield-check')
                 ->color('warning')
                 ->requiresConfirmation()
@@ -93,33 +93,33 @@ class EditContrato extends EditRecord
                     }
                 }),
 
-            Action::make('descargar_poliza')
-                ->label('Descargar Póliza')
-                ->icon('heroicon-o-arrow-down-tray')
-                ->color('gray')
-                ->visible(fn () => $this->record->poliza_pdf_path && Storage::disk('local')->exists($this->record->poliza_pdf_path))
-                ->action(function (): StreamedResponse {
-                    $contrato = $this->record;
-                    return response()->streamDownload(function () use ($contrato) {
-                        echo Storage::disk('local')->get($contrato->poliza_pdf_path);
-                    }, $contrato->folio . '-poliza.pdf', [
-                        'Content-Type' => 'application/pdf',
-                    ]);
-                }),
+            // Action::make('descargar_poliza')
+            //     ->label('Descargar Póliza')
+            //     ->icon('heroicon-o-arrow-down-tray')
+            //     ->color('gray')
+            //     ->visible(fn () => $this->record->poliza_pdf_path && Storage::disk('local')->exists($this->record->poliza_pdf_path))
+            //     ->action(function (): StreamedResponse {
+            //         $contrato = $this->record;
+            //         return response()->streamDownload(function () use ($contrato) {
+            //             echo Storage::disk('local')->get($contrato->poliza_pdf_path);
+            //         }, $contrato->folio . '-poliza.pdf', [
+            //             'Content-Type' => 'application/pdf',
+            //         ]);
+            //     }),
 
-            Action::make('descargar_pdf')
-                ->label('Descargar PDF')
-                ->icon('heroicon-o-arrow-down-tray')
-                ->color('info')
-                ->visible(fn () => $this->record->pdf_path && Storage::disk('local')->exists($this->record->pdf_path))
-                ->action(function (): StreamedResponse {
-                    $contrato = $this->record;
-                    return response()->streamDownload(function () use ($contrato) {
-                        echo Storage::disk('local')->get($contrato->pdf_path);
-                    }, $contrato->folio . '.pdf', [
-                        'Content-Type' => 'application/pdf',
-                    ]);
-                }),
+            // Action::make('descargar_pdf')
+            //     ->label('Descargar PDF')
+            //     ->icon('heroicon-o-arrow-down-tray')
+            //     ->color('info')
+            //     ->visible(fn () => $this->record->pdf_path && Storage::disk('local')->exists($this->record->pdf_path))
+            //     ->action(function (): StreamedResponse {
+            //         $contrato = $this->record;
+            //         return response()->streamDownload(function () use ($contrato) {
+            //             echo Storage::disk('local')->get($contrato->pdf_path);
+            //         }, $contrato->folio . '.pdf', [
+            //             'Content-Type' => 'application/pdf',
+            //         ]);
+            //     }),
 
             DeleteAction::make(),
             ForceDeleteAction::make(),
