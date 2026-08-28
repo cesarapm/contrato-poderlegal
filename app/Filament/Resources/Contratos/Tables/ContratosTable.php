@@ -108,6 +108,50 @@ class ContratosTable
                     ->trueColor('success')
                     ->falseColor('gray'),
 
+                IconColumn::make('incluye_mantenimiento')
+                    ->label('Mantenimiento')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-wrench-screwdriver')
+                    ->falseIcon('heroicon-o-x-circle')
+                    ->trueColor('success')
+                    ->falseColor('gray'),
+
+                TextColumn::make('costo_mantenimiento')
+                    ->label('Costo Mantenimiento')
+                    ->money('MXN')
+                    ->sortable()
+                    ->alignEnd()
+                    ->toggleable()
+                    ->placeholder('-'),
+
+                TextColumn::make('forma_pago')
+                    ->label('Forma de Pago')
+                    ->badge()
+                    ->colors([
+                        'gray' => 'efectivo',
+                        'info' => 'transferencia',
+                    ])
+                    ->icons([
+                        'heroicon-o-banknotes' => 'efectivo',
+                        'heroicon-o-credit-card' => 'transferencia',
+                    ])
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'efectivo' => 'Efectivo',
+                        'transferencia' => 'Transferencia',
+                        default => $state,
+                    })
+                    ->toggleable(),
+
+                TextColumn::make('banco')
+                    ->label('Banco')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->placeholder('-'),
+
+                TextColumn::make('clabe')
+                    ->label('CLABE')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->placeholder('-'),
+
                 TextColumn::make('fecha_inicio')
                     ->label('Inicio')
                     ->date('d/M/Y')

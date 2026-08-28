@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Contrato de Arrendamiento - Poder Legal</title>
+    <style>
+        @page {
+            margin: 1.5cm !important;  
+         
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Liberation Sans Narrow', 'DejaVu Sans', Arial, sans-serif;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Liberation Sans Narrow', 'DejaVu Sans', Arial, sans-serif;
+        font-size: 12px;
+            line-height: 1;
+            padding: 30px !important;
+            border: 2px solid #5b2c83 !important;
+            color: #222222;
+        }
+        
+        .page-container {
+            padding: 20px;
+            margin-bottom: 0;
+           
+        }
+        
+ 
+        .header {
+    position: fixed;
+    top: -85px;
+    left: 0;
+    right: 0;
+    height: 55px;
+}
+
+.header-line {
+    position: fixed;
+    top: -20px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #d9a900;
+}
+        
+        .header-left {
+            display: inline;
+            font-size: 13px;
+            font-weight: bold;
+            color: #5b2c83;
+        }
+        
+        .header-middle {
+            display: inline;
+            font-size: 12px;
+            color: #666666;
+            margin-left: 5px;
+        }
+        
+        .header-middle strong {
+            font-weight: bold;
+        }
+        
+        .header-right {
+            float: right;
+            font-size: 11px;
+            font-weight: bold;
+            color: #5b2c83;
+        }
+        
+        /* footer manejado por canvas->page_text() en el controlador */
+        /* .header-line {
+            width: 100%;
+            height: 3px;
+            background-color: #E8B44A;
+            margin-bottom: 15px;
+            clear: both;
+        } */
+        
+        .content {
+            margin-top: 10px;
+            text-align: justify;
+        }
+        
+        .page-break {
+            page-break-after: always;
+        }
+        
+        .folio-header {
+            text-align: right;
+            font-size: 14px;
+            font-weight: normal;
+            color: #5b2c83;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+        
+        .title-intro {
+            font-size: 17px;
+            line-height: 1.2;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+        
+        .title-intro .blank {
+         
+            
+            font-weight: bold;
+            color: #222222;
+        }
+        
+     .section-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    letter-spacing: 4px;
+    margin: 25px 0 20px 0;
+    padding: 12px 0;
+    background-color: #5b2c83;
+    border: none;
+    position: relative;
+}
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: #f2c94c;
+}
+        
+        .declaration {
+            margin-bottom: 15px;
+        }
+        
+.declaration-title {
+    display: inline-block;
+    width: auto;
+    font-size: 17px;
+    font-weight: bold;
+    color: #44205f;
+    margin-bottom: 10px;
+    background-color: rgba(91, 44, 131, 0.2);
+    padding: 2px 6px;
+}
+        .declaration-item {
+            margin-bottom: 10px;
+            margin-left: 10px;
+            text-align: justify;
+            font-size: 16px;
+            line-height: 1.2;
+        }
+        
+        .declaration-item-letter {
+            display: inline-block;
+            width: 16px;
+            margin-left: 5px;
+            font-size: 15px;
+        }
+        
+        .declaration-item-letter-bold {
+            font-weight: bold;
+        }
+        
+        .clausula {
+            margin-bottom: 15px;
+        }
+        
+        .clausula-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #5b2c83;
+            margin-bottom: 5px;
+            background-color: rgb(91, 44, 131,.2);
+        }
+        
+        .clausula-text {
+            font-size: 16px;
+            text-align: justify;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+        
+        .clausula-item {
+            margin-left: 30px;
+            margin-bottom: 10px;
+            text-align: justify;
+            font-size: 16px;
+            line-height: 1.2;
+        }
+        
+        .clausula-item-letter {
+            display: inline-block;
+            width: 15px;
+            margin-left: -5px;
+            font-size: 15px;
+        }
+        
+        .blank-line {
+            display: inline-block;
+            border-bottom: 1px solid #222222;
+            min-width: 80px;
+            font-weight: normal;
+            color: #222222;
+            margin: 0 2px;
+        }
+        
+        .blank-short {
+            display: inline-block;
+            border-bottom: 1px solid #222222;
+            min-width: 40px;
+            font-weight: normal;
+            color: #222222;
+            margin: 0 2px;
+        }
+        
+        .data-box {
+            background-color: #5b2c83;
+            color: #ffffff;
+            padding: 8px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            margin: 15px 50px 10px 50px;
+        }
+        
+        .data-row {
+            margin: 10px 50px;
+            font-size: 15px;
+        }
+        
+        .data-label {
+            display: inline-block;
+            width: 180px;
+            font-weight: bold;
+            color: #44205f;
+        }
+        
+        .data-value {
+            border-bottom: 1px solid #222222;
+            display: inline-block;
+            min-width: 250px;
+        }
+        
+        .bold-text {
+            font-weight: bold;
+            color: #222222;
+        }
+        
+        .banco-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        .banco-table-header {
+            background-color: #5b2c83;
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            border: 1px solid #5b2c83;
+        }
+        
+        .banco-table-row {
+            border: 1px solid #cccccc;
+        }
+        
+        .banco-table-row td {
+            padding: 8px;
+            font-size: 13px;
+            border-right: 1px solid #cccccc;
+        }
+        
+        .banco-table-row td:last-child {
+            border-right: none;
+        }
+        
+        .banco-table-label {
+            font-weight: bold;
+            color: #5b2c83;
+            width: 40%;
+        }
+        
+        .page-break {
+            page-break-after: always;
+        }
+        
+        .indent {
+            margin-left: 2px;
+        }
+        
+        .signature-section {
+            margin-top: 50px;
+            display: table;
+            width: 100%;
+        }
+        
+        .signature-box {
+            display: table-cell;
+            text-align: center;
+            vertical-align: bottom;
+            width: 33%;
+            padding: 0 10px;
+        }
+        
+        .signature-line {
+            border-top: 1px solid #000000;
+            margin-top: 40px;
+            margin-bottom: 5px;
+        }
+        
+        .signature-label {
+            font-size: 10px;
+            color: #222222;
+            font-weight: bold;
+        }
+        
+        .signature-name {
+            font-size: 9px;
+            color: #222222;
+            margin-top: 3px;
+        }
+    </style>
+</head>
+<body>
+
+
+        <div class="header">
+        <div class="header-left">PODER LEGAL</div>
+        <div class="header-middle"><strong>|   CONTRATO DE ARRENDAMIENTO</strong></div>
+        <div class="header-right">No. {{folio}}</div>
+        <div style="clear: both;"></div>
+    </div>
+    
+    <!-- Línea decorativa amarilla -->
+    <div class="header-line"></div>
+
+<div class="page-container">
+    <!-- Header -->
+
+
+    <!-- Contenido -->
+    <div class="content">
+        
+        <div class="folio-header">
+            FOLIO DE CONTRATO: {{folio}}
+        </div>
+
+        <div class="title-intro">
+            CONTRATO DE ARRENDAMIENTO QUE CELEBRAN POR UNA PARTE <span class="blank">{{arrendador_nombre_o_razon}}</span>, A QUIEN EN LO SUCESIVO Y PARA LOS EFECTOS DEL PRESENTE INSTRUMENTO SE LE DENOMINARÁ "EL ARRENDADOR"; POR LA OTRA <span class="blank">{{arrendatario_nombre_o_razon}}</span>, A QUIEN EN LO SUCESIVO SE LE DENOMINARÁ "EL ARRENDATARIO"; Y <span class="blank">{{fiador_nombre_o_razon}}</span>, A QUIEN EN LO SUCESIVO SE LE DENOMINARÁ "EL OBLIGADO SOLIDARIO / FIADOR"; TODOS LOS CUALES SE SUJETAN A LAS SIGUIENTES DECLARACIONES Y CLÁUSULAS:
+        </div>
+
+        <div class="section-title">D E C L A R A C I O N E S</div>
+
+        <!-- DECLARACIÓN I -->
+        <div class="declaration">
+            <div class="declaration-title">I.- DECLARA "EL ARRENDADOR":</div>
+            
+            <div class="declaration-item">
+                <span class="declaration-item-letter">a)</span> Que cuenta con la capacidad jurídica suficiente y bastante para celebrar el presente contrato.
+            </div>
+            
+            <div class="declaration-item">
+                <span class="declaration-item-letter declaration-item-letter">b)</span> Que es propietario(a) del inmueble ubicado en <span >{{inmueble_direccion_completa}}</span>. <span class="indent">Identificación: <span >{{arrendador_identificacion}}</span>; correo electrónico: <span >{{arrendador_email}}</span>; teléfono: <span >{{arrendador_telefono}}</span>.</span>
+            </div>
+            
+            <div class="declaration-item">
+                <span class="declaration-item-letter declaration-item-letter">c)</span> Que para efectos de este contrato señala como su domicilio para recibir y oír toda clase de notificaciones el ubicado en <span >{{arrendador_domicilio}}</span>.
+            </div>
+        </div>
+
+        <!-- DECLARACIÓN II -->
+        <div class="declaration">
+            <div class="declaration-title">II.- DECLARA "EL ARRENDATARIO":</div>
+            
+            <div class="declaration-item">
+                <span class="declaration-item-letter">a)</span> Que tiene las facultades suficientes y bastantes para obligarse en términos del presente instrumento.
+            </div>
+            
+            <div class="declaration-item">
+                <span class="declaration-item-letter">b)</span> Que tiene interés en recibir en arrendamiento  el  inmueble  que  se  describe  en  el  inciso  b),  de  la  declaración  número  I,  el  cual sabe y le consta, se encuentra en las condiciones necesarias de seguridad, higiene y salubridad para ser  habitado  y  que cuenta con el equipo en perfecto estado por lo que no condicionará el pago de rentas a ningún tipo de mejora.
+            </div>
+            
+            <div class="declaration-item">
+                <span class="declaration-item-letter declaration-item-letter">c)</span> Que  para  efectos  del  presente  contrato  señala  como  domicilio  para  recibir  y  oír  notificaciones <span >{{arrendatario_domicilio_completo}}</span>. Identificación: <span >{{arrendatario_identificacion}}</span>; teléfono: <span >{{arrendatario_telefono}}</span>; correo electrónico: <span >{{arrendatario_email}}</span>.
+            </div>
+            
+            <div class="declaration-item">
+                <span class="declaration-item-letter">d)</span> Ser  una  persona <span >{{arrendatario_tipo_persona}}</span>,  con  capacidad  económica  para  fungir  en  el  presente  contrato  como  "EL ARRENDATARIO", obligándose en los términos del mismo.
+            </div>
+        </div>
+
+        <!-- DECLARACIÓN III -->
+        <div class="declaration">
+            <div class="declaration-title">III.- DECLARA "EL OBLIGADO SOLIDARIO / FIADOR":</div>
+            
+            <div class="declaration-item">
+                Ser persona <span >{{fiador_tipo_persona}}</span>, identificada con <span >{{fiador_identificacion}}</span>, con plena capacidad para la celebración del presente contrato y obligándose solidariamente en los términos del mismo. Domicilio: <span >{{fiador_domicilio_completo}}</span>; correo electrónico: <span >{{fiador_email}}</span>; teléfono: <span >{{fiador_telefono}}</span>.
+            </div>
+        </div>
+
+        <!-- DECLARACIÓN IV -->
+        <div class="declaration">
+            <div class="declaration-title">IV.- DECLARAN LAS PARTES</div>
+            
+            <div class="declaration-item">
+                <span class="declaration-item-letter">a)</span> Que en el presente contrato no existe dolo, error, mala fe o cualquier otro vicio de la voluntad, por lo que expresamente renuncian a invocarlos en cualquier tiempo.
+            </div>
+            
+            <div class="declaration-item">
+                <span class="declaration-item-letter">b)</span> Que se reconocen la personalidad con la que comparecen a la celebración de este contrato y expresamente convienen en someterse a las obligaciones contenidas en las siguientes:
+            </div>
+        </div>
+
+        <div class="section-title">C L Á U S U L A S</div>
+
+        <!-- PRIMERA -->
+        <div class="clausula">
+            <span class="clausula-title">PRIMERA. -  OBJETO. -</span> <span class="clausula-text">"EL ARRENDADOR" da en arrendamiento al "ARRENDATARIO", y éste toma en dicha calidad, el inmueble que se describe en el inciso b) de la declaración I que antecede.</span>
+        </div>
+
+        <!-- SEGUNDA -->
+        <div class="clausula">
+            <span class="clausula-title">SEGUNDA. - RENTA. -</span> <span class="clausula-text">Las partes convienen voluntariamente y de común acuerdo que "EL ARRENDATARIO" pagará a "EL ARRENDADOR" o a quien sus derechos representen, por concepto de contraprestación una renta mensual en los siguientes términos:</span>
+            
+            <div class="clausula-item">
+                <span class="clausula-item-letter declaration-item-letter">a)</span> El  monto  de  la  renta  mensual  será  de  $ <span >{{monto_renta_mensual}}</span> (<span >{{monto_renta_mensual_letra}} PESOS 00/100 M.N.</span>).
+            </div>
+            
+            <div class="clausula-item">
+                <span class="clausula-item-letter">b)</span> El pago de la renta  mensual  será  por  meses  adelantados,  siéndole  forzoso  todo  el  mes  y  debiendo  cubrir  íntegra  la  mensualidad, aun cuando no usare el inmueble de tiempo completo.
+            </div>
+            
+            <div class="clausula-item">
+                <span class="clausula-item-letter">c)</span> A la fecha de firma del presente contrato, "EL ARRENDATARIO" paga a "EL ARRENDADOR", el primer mes de renta, sirviendo el presente contrato como el recibo más eficaz que en derecho corresponda.
+            </div>
+            
+            <div class="clausula-item">
+                <!-- <span class="clausula-item-letter">d)</span> Por mutuo acuerdo de las partes, <span class="bold-text">EL PAGO DE LA RENTA MENSUAL</span> se cubrirá por meses adelantados, dentro de los primeros <span class="bold-text">CINCO DÍAS NATURALES</span> contados a partir del <span class="bold-text">DÍA {{dia_pago_renta}} DE CADA MES</span>. El "ARRENDATARIO" podrá efectuar el pago <span class="bold-text">{{texto_pago_forma}}</span> en el domicilio de "EL ARRENDADOR" señalado en el presente contrato. El pago deberá realizarse íntegramente en tiempo, modo y lugar convenidos. -->
+
+
+                <span class="clausula-item-letter">d)</span> Por mutuo acuerdo de las partes, EL PAGO DE LA RENTA MENSUAL se cubrirá por meses adelantados, dentro de los primeros CINCO DÍAS NATURALES contados a partir del DÍA {{dia_pago_renta}} DE CADA MES. El "ARRENDATARIO" pagará la renta EN EFECTIVO EN EL DOMICILIO DE "EL ARRENDADOR" o mediante TRANSFERENCIA BANCARIA A LA CUENTA DESIGNADA POR "EL ARRENDADOR" EN EL RECUADRO QUE SE DETALLA A CONTINUACIÓN. El pago deberá realizarse íntegramente en tiempo, modo y lugar convenidos.
+            </div>
+            
+            <!-- DATOS BANCARIOS - Solo si hay transferencia bancaria disponible -->
+            <!-- Para mostrar esta sección, usar variable: {{seccion_datos_bancarios}} -->
+            <!-- Si hay transferencia, esta variable contendrá el HTML completo de la tabla -->
+            <!-- Si solo hay efectivo, esta variable estará vacía -->
+            {{seccion_datos_bancarios}}
+            
+            <div class="clausula-item">
+                <span class="clausula-item-letter">e)</span> No podrá en ningún caso "EL ARRENDATARIO", retener las rentas, bajo ningún título judicial, ni extrajudicialmente, debiendo hacer el pago íntegro, a
+más tardar en el plazo que se describe en el inciso d) de esta cláusula, por lo que de no hacerlo en el tiempo, modo y lugar convenidos, pagará la
+pena convencional del 1% (uno por ciento) diario, sobre el importe de la renta, sin perjuicio de lo que estipula dicho inciso d).
+            </div>
+            
+            <div class="clausula-item">
+                <span class="clausula-item-letter">f)</span>Cuando "EL ARRENDATARIO" pague la renta con cheque, y éste no fuere cubierto por el banco emisor, por cualquier causa, se considerará que el
+pago de la pensión rentística de que se trate no fue recibido por el arrendador en tiempo y forma, quedando obligado "EL ARRENDATARIO" a cubrir
+los gastos que dicho ilícito genere, incluyendo el 20% del valor del cheque, conforme a lo estipulado en el artículo 193 de la Ley General de Títulos y
+Operaciones de Crédito, así como las comisiones vigentes de la institución bancaria de que se trate, sin perjuicio de lo estipulado en los incisos
+d) y e) de esta cláusula, reservándose "EL ARRENDADOR" o quien sus derechos represente a recibir o no el pago de la renta con cheque, debiendo en
+todo caso "EL ARRENDATARIO" pagar su importe en moneda de curso legal.
+            </div>
+            
+            <div class="clausula-item">
+                <span class="clausula-item-letter">g)</span> Si "EL ARRENDADOR" recibe la renta en fecha y forma distinta de la estipulada, o recibe abonos a cuenta de las mismas, no se entenderá novado el
+contrato, ni en cuanto a los términos ni en cuanto a la fecha y forma de pago.
+            </div>
+        </div>
+
+        <!-- TERCERA -->
+        <div class="clausula">
+            <span class="clausula-title">TERCERA.- SERVICIOS.- </span><span class="clausula-text">"EL ARRENDATARIO" se obliga a cubrir oportunamente el importe de los servicios de energía eléctrica, servicio de agua potable y gas,  así  como  a  entregar  los  recibos  originales  liquidados  por  tales  conceptos  y  por  el  servicio  telefónico  si  es  que  lo  hubiere,  a  "EL ARRENDADOR" o a quien sus derechos representen inmediatamente después de haber sido pagados.  La localidad arrendada se entrega sin línea telefónica, por lo que, si "EL ARRENDATARIO" decide contratar e instalar una línea será por su cuenta y responsabilidad, y sin afectación alguna para "EL ARRENDADOR". Al término del contrato "EL ARRENDATARIO" deberá cancelar dicho servicio y cubrir todos los pagos que se hayan originado. Todos  los  asuntos  relacionados  con  cualquier  servicio  del  inmueble  deberán  ser  comunicados  por  escrito  a  "EL  ARRENDADOR",  o  a quien sus derechos representen.</span>
+        </div>
+
+        <!-- CUARTA -->
+        <div class="clausula">
+            <span class="clausula-title">CUARTA.- ESTACIONAMIENTO.- </span><span class="clausula-text">"EL ARRENDATARIO" deberá ocupar como área de estacionamiento únicamente los <span >{{numero_estacionamientos}}</span> espacio(s) que le sean asignados para ello. En caso de que el inmueble no incluya estacionamiento, deberá asentarse expresamente <span >N/A</span>. "EL ARRENDADOR" no será responsable de los daños que sufran los vehículos de "EL ARRENDATARIO" en el estacionamiento ni de la seguridad de los mismos o de los objetos que se dejen en su interior.</span>
+        </div>
+
+        <!-- QUINTA -->
+        <div class="clausula">
+            <span class="clausula-title">QUINTA. - MEJORAS. - </span><span class="clausula-text">Todas las mejoras, modificaciones y adaptaciones que se realicen en el inmueble, serán cubiertas por "EL ARRENDATARIO", incluyendo los  desperfectos  no  atribuibles  al  uso  normal  del  inmueble,  u  originados  por  descuido  de  "EL  ARRENDATARIO",  con  excepción  de  las reparaciones  de  desperfectos  estructurales y/o vicios ocultos. Dichas mejoras, modificaciones  y adaptaciones se deberán poner a consideración de "EL ARRENDADOR"   y   se   realizarán   únicamente   con   la   autorización   por   escrito   de   éste.   El   incumplimiento   a   la   presente   cláusula   obliga   a   "EL ARRENDATARIO" al pago a favor de "EL ARRENDADOR", de los daños y perjuicios que llegare a ocasionar, independientemente de la rescisión de este  contrato.  "EL  ARRENDADOR" tendrá la facultad y el derecho de decidir cuáles  son  las  mejoras,  modificaciones  y  adaptaciones  que  "EL ARRENDATARIO" deba retirar a su costa, al desocupar el inmueble y cuáles no, en la inteligencia de que no podrá el segundo exigir al primero pago o indemnización por ninguna de ellas, debiendo entregar el inmueble en las mismas condiciones físicas en que lo recibió salvo el deterioro de su uso normal y las mejoras y adaptaciones que "EL ARRENDADOR" decida que queden en beneficio del inmueble.</span>
+        </div>
+
+        <!-- SEXTA -->
+        <div class="clausula">
+            <span class="clausula-title">SEXTA. - LIMPIEZA. - </span><span class="clausula-text">"EL ARRENDATARIO", deberá tener limpias todas las áreas que correspondan al inmueble, así mismos conductos de cañerías y drenajes  que  a éste  correspondan,  para  evitar  humedades  y  goteras;  de  no  hacerlo,  cualquier  daño  corre  por  su  cuenta, ya que el mantenimiento es su responsabilidad.</span>
+        </div>
+
+        <!-- SÉPTIMA -->
+        <div class="clausula">
+            <span class="clausula-title">SÉPTIMA. -  FORMA DE USO. -</span><span class="clausula-text">"EL  ARRENDATARIO"  podrá  gozar  y  disponer  del  inmueble  arrendado  en  forma  ordenada  y  tranquila no debiendo destinarlo a usos contrarios a la moral y a las buenas costumbres, observando las disposiciones, limitaciones y prohibiciones establecidas por la legislación aplicable. Ambas partes convienen en que queda prohibido tener animales o ejecutar actos que perturben la seguridad o tranquilidad de los vecinos; igualmente acto u omisión alguno  que  afecte  o  comprometa  la estabilidad, seguridad, higiene, salubridad o comodidad del inmueble.</span>
+        </div>
+
+        <!-- OCTAVA -->
+        <div class="clausula">
+            <span class="clausula-title">OCTAVA.- USO DE SUELO.- </span><span class="clausula-text">El inmueble será destinado únicamente para uso <span >{{inmueble_uso}}</span>, quedándole prohibido a "EL ARRENDATARIO", y éste lo acepta expresamente, cambiar el uso referido o destinarlo a un uso distinto, salvo  autorización escrita de "EL ARRENDADOR". Las partes convienen que  "EL  ARRENDADOR"  no  es  responsable  de  las  autorizaciones  y  licencias  relacionadas  con  el  uso  de  suelo del inmueble, siendo responsabilidad total de "EL ARRENDATARIO" el cerciorarse previamente a la celebración del presente contrato de que el uso que pretende dar al inmueble  en materia  de  esta  operación  esté  permitido  por las  autoridades,  por  lo  que en  este  acto acepta tener conocimiento pleno de los usos autorizados para el inmueble en cuestión por lo que libera de toda responsabilidad a "EL ARRENDADOR" a este respecto.</span>
+        </div>
+
+        <!-- NOVENA -->
+        <div class="clausula">
+            <span class="clausula-title">NOVENA. - CESIÓN DE DERECHOS. - </span><span class="clausula-text">"EL ARRENDATARIO" tampoco podrá subarrendar, traspasar o ceder sus derechos de inquilino del inmueble en todo o en parte,  a  cualquier otra persona. El incumplimiento a esta cláusula tendrá como consecuencia que "EL  ARRENDATARIO" deberá pagar a "EL ARRENDADOR" la cantidad  equivalente al cien por ciento de las rentas correspondientes, al término  del  arrendamiento  a  título  de pena convencional, siendo nulo el convenio que haya celebrado con terceros y además dará lugar a la rescisión de este contrato si "EL ARRENDADOR" así lo desea.</span>
+        </div>
+
+        <!-- DÉCIMA -->
+        <div class="clausula">
+            <span class="clausula-title">DÉCIMA. - SUSTANCIAS PELIGROSAS. - </span><span class="clausula-text">Las partes acuerdan que queda prohibido almacenar sustancias peligrosas, inflamables, corrosivas, deletéreas o ilegales dentro del inmueble. En caso de siniestro, "EL ARRENDATARIO" deberá cubrir a "EL ARRENDADOR" y a los demás vecinos que resulten afectados los daños y perjuicios que les ocasione.</span>
+        </div>
+
+        <!-- DÉCIMA PRIMERA -->
+        <div class="clausula">
+            <span class="clausula-title">DÉCIMA PRIMERA. - DAÑOS O FALTANTES. - </span><span class="clausula-text">"EL ARRENDADOR" no se hace responsable de los daños o faltantes sufridos en vehículos, bienes muebles o patrimonio de "EL ARRENDATARIO", durante la ocupación o desocupación del inmueble, ni durante el tiempo que dure su estancia en el mismo, ya que "EL ARRENDATARIO" queda a cargo de la seguridad de su propia localidad, por lo que desde este momento "EL ARRENDADOR" le autoriza modificar la combinación de la cerradura que da acceso a la localidad arrendada.</span>
+        </div>
+
+        <!-- DÉCIMA SEGUNDA -->
+        <div class="clausula">
+            <span class="clausula-title">DÉCIMA SEGUNDA. - CUIDADO DEL INMUEBLE. - </span><span class="clausula-text">"EL ARRENDATARIO" se obliga a no perforar azulejos, pisos, puertas, o colocar muebles que dañen los acabados del inmueble, sin previa autorización por escrito de "EL ARRENDADOR" y a darle el mantenimiento adecuado y oportuno a los muebles que forman parte de las instalaciones del inmueble. Asimismo, en caso de rotura de vidrios, deberá "EL ARRENDATARIO" reponerlos de inmediato. "EL ARRENDADOR" no será responsable de los daños ocasionados a las personas y/o a sus bienes, por la falta del mantenimiento antes mencionado.</span>
+        </div>
+
+        <!-- DÉCIMA TERCERA -->
+        <div class="clausula">
+            <span class="clausula-title">DÉCIMA TERCERA.- VIGENCIA.- </span><span class="clausula-text">El presente contrato tendrá un plazo forzoso para ambas partes de <span >{{plazo_contrato}}</span>, con vigencia del <span >{{fecha_inicio_formato}}</span> al <span >{{fecha_termino_formato}}</span>, debiendo avisar "EL ARRENDATARIO" a "EL ARRENDADOR" por escrito con treinta días de anticipación a su vencimiento, si es su deseo continuar con el arrendamiento, reservándose "EL ARRENDADOR" el derecho de aceptar dicha renovación, lo cual en todo caso lo hará mediante la celebración de un nuevo contrato y siempre y cuando "EL ARRENDATARIO" haya cumplido en tiempo y forma con el pago de todas sus pensiones rentísticas y sean renovadas y actualizadas las garantías señaladas en dicho contrato. Cuando "EL ARRENDATARIO" sea el que desee dar por terminado el presente contrato, además del aviso por escrito antes mencionado, autoriza a "EL ARRENDADOR" a poner cédulas visibles y a mostrar el interior del inmueble a las personas que pretendan verlo. Ambas partes convienen que, a la renovación, la renta se incrementará EN UN 10% O CONFORME AL ÍNDICE INFLACIONARIO DETERMINADO POR EL INEGI (INSTITUTO NACIONAL DE ESTADÍSTICA Y GEOGRAFÍA), lo que resulte mayor, salvo pacto en contrario que conste por escrito.</span>
+        </div>
+
+        <!-- DÉCIMA CUARTA -->
+        <div class="clausula">
+            <span class="clausula-title">DÉCIMA CUARTA.- DESOCUPACIÓN.- </span><span class="clausula-text">Las partes acuerdan que si al término del presente contrato no hubiere renovación del mismo, "EL ARRENDATARIO" estará obligado a desocupar el inmueble arrendado a más tardar en la fecha de su vencimiento y si por cualquier motivo no lo hiciere, deberá pagar el doble de la renta pactada por cada uno de los doce meses siguientes que siga ocupándolo, y el triple de dicha renta durante cada mes que le siga, hasta la total desocupación y entrega legal del inmueble materia del presente contrato sin que esto implique renovación o prórroga del mismo y por lo tanto sin perjuicio de la acción jurídica que "EL ARRENDADOR" ejerza para exigir dicha desocupación, acordando las partes, por así convenir a sus intereses que, por lo que hace al término del aviso previo de terminación que prevé el artículo 2478 del Código Civil para la Ciudad de México, el mismo lo modifican para quedar en 15 (quince) días naturales, para todos los efectos legales a que haya lugar.</span>
+        </div>
+
+        <!-- DÉCIMA QUINTA -->
+        <div class="clausula">
+            <span class="clausula-title">DÉCIMA QUINTA.- TERMINACIÓN ANTICIPADA.- </span><span class="clausula-text">En caso de que "EL ARRENDATARIO" pretenda dar por concluido el arrendamiento antes de su vencimiento, cualquiera que sea la causa, pagará como pena convencional el importe de tres meses de renta al 100% (cien por ciento), o el importe de los meses que falten para el vencimiento de este contrato, lo que resulte menor, debiendo desocupar en un plazo no mayor a diez días posteriores a dicho pago, obligándose a acudir al domicilio de "EL ARRENDADOR" o de quien sus derechos representen, para recabar sus firmas y la constancia de finiquito correspondiente, ya que en caso contrario este contrato seguirá produciendo sus efectos en todas y cada una de sus cláusulas.</span>
+        </div>
+
+        <!-- DÉCIMA SEXTA -->
+        <div class="clausula">
+            <span class="clausula-title">DÉCIMA SEXTA.- SINIESTROS Y CLAUSURAS.- </span><span class="clausula-text">Los daños ocasionados al inmueble, así como a los colindantes, por siniestros originados por culpa o negligencia de "EL ARRENDATARIO" y/o de toda persona que viva en o visite por cualquier motivo el inmueble, serán de la exclusiva responsabilidad de los primeros, por lo que en caso de detectar algún equipo o instalación en mal estado en el primer mes de la ocupación del mismo, se deberá dar aviso por escrito a "EL ARRENDADOR", con acuse de recibo, para proceder a la reparación, por cuenta de "EL ARRENDADOR", siempre y cuando no sea imputable la falla a "EL ARRENDATARIO". Cuando el inmueble materia del arrendamiento sea clausurado o suspendido en su uso por disposición de autoridad competente y/o por causas imputables a "EL ARRENDATARIO", se obliga a llevar a cabo todas las gestiones y trámites ante las autoridades correspondientes así como pagar las multas, derechos, recargos o lo que imponga la autoridad para efectos de que levanten los sellos de clausura o suspensión, obligándose a sacar en paz y a salvo a "EL ARRENDADOR", asimismo se obliga a continuar pagando las pensiones rentísticas pactadas en el plazo convenido. El incumplimiento de esta obligación originará el pago de una pena convencional a cargo de "EL ARRENDATARIO" por el equivalente a dos meses de renta pactada en favor de "EL ARRENDADOR", sin perjuicio de lo estipulado en los incisos d y e de la cláusula segunda que antecede. En el caso de que el bien inmueble objeto del presente contrato sea clausurado o sea asegurado por cualquier autoridad, por causas imputables a "EL ARRENDATARIO", será causa de rescisión del presente contrato y "EL ARRENDADOR" podrá exigir dicha rescisión de conformidad con lo establecido por la fracción IV del artículo 2489 del Código Civil para el Distrito Federal.</span>
+        </div>
+
+        <!-- DÉCIMA SÉPTIMA -->
+        <div class="clausula">
+            <span class="clausula-title">DÉCIMA SÉPTIMA. - EXTINCIÓN DE DOMINIO</span><br/>
+            <span class="clausula-text">Las partes manifiestan que conocen el contenido y alcance de la Ley Federal de Extinción de Dominio, reglamentaria del artículo 22 de la Constitución Política de los Estados Unidos Mexicanos, y por tal motivo el "ARRENDADOR" declara que el bien objeto del presente Contrato no es producto o se encuentra relacionado o vinculados a los delitos de delincuencia organizada, delitos contra la salud, secuestro, robo de vehículos, trata de personas o enriquecimiento ilícito o cualquier otro a que se refiere la ley de referencia, su Reglamento y las Leyes Locales de la materia. El "ARRENDATARIO" manifiesta BAJO PROTESTA DE DECIR VERDAD que todas las actividades que se realizarán dentro del "INMUEBLE" serán lícitas, por lo que cualquier acto que tenga lugar al interior de la localidad arrendada es de su más estricta responsabilidad y sin conocimiento ni responsabilidad alguna por parte del "ARRENDADOR", por lo que respecto a tales actos responderá en lo personal el "ARRENDATARIO". Lo anterior para todos los efectos legales a los que haya lugar, incluyendo, pero sin limitarse a, juicios de nulidad del contrato, juicios de extinción de dominio y devolución de garantías.</span>
+        </div>
+
+        <!-- DÉCIMA OCTAVA -->
+        <div class="clausula">
+            <span class="clausula-title">DÉCIMA OCTAVA.- DEPÓSITO EN GARANTÍA.-</span> <span class="clausula-text">A la fecha de firma del presente contrato "EL ARRENDATARIO" entrega a "EL ARRENDADOR" por concepto de depósito en garantía la cantidad de <span >${{deposito_garantia}}</span> (<span class="blank-line bold-text">{{deposito_garantia_letra}}</span>), equivalente a <span >{{deposito_garantia_meses}}</span> mes(es) de renta. En caso de variación en el monto de la renta, este depósito se ajustará dentro de los cinco días siguientes para que corresponda al monto pactado por las partes.</span><br/><br/>
+            <span class="clausula-text">Las partes acuerdan que "EL ARRENDADOR" no podrá a solicitud de "EL ARRENDATARIO" aplicar el depósito al pago de cualquier mensualidad vencida, o al pago de cualquier otra obligación incumplida por "EL ARRENDATARIO" ya que dicho depósito no podrá utilizarse para compensar la falta de pago de los anteriores conceptos. Tampoco podrá "EL ARRENDATARIO" dejar de pagar rentas, basado en que las mismas quedarán cubiertas con el mencionado depósito.</span><br/><br/>
+            <span class="clausula-text">"EL ARRENDATARIO" autoriza expresamente a "EL ARRENDADOR" a conservar dicho depósito (liberándolo de la obligación de depositarlo judicialmente) durante un plazo máximo de sesenta días posteriores a que haya desocupado y entregado la localidad arrendada a satisfacción de "EL ARRENDADOR". Transcurrido este plazo, "EL ARRENDADOR" devolverá a "EL ARRENDATARIO" el mencionado depósito sin interés ni rendimiento financiero alguno, siempre y cuando éste no se hubiere ocupado o no existiere ningún saldo pendiente a cargo de "EL ARRENDATARIO" por cualquier concepto.</span>
+        </div>
+
+        <!-- DÉCIMA NOVENA -->
+        <div class="clausula">
+            <span class="clausula-title">DÉCIMA NOVENA.- OBLIGADO SOLIDARIO / FIADOR.- </span><span class="clausula-text">En garantía al cumplimiento de las obligaciones contraídas en el presente contrato por parte de “EL ARRENDATARIO”, “EL OBLIGADO SOLIDARIO” lo firma solidariamente, constituyéndose así en pagador de todas y cada una de dichas obligaciones, renunciando expresamente a los beneficios de orden y excusión en el presente contrato; por tanto, “EL ARRENDADOR” está en aptitud de demandar el cumplimiento de las obligaciones contraídas contra “EL ARRENDATARIO”, contra “EL OBLIGADO SOLIDARIO” o contra ambos, en una o diversas acciones. “EL OBLIGADO SOLIDARIO” conviene en que su responsabilidad legal no cesa sino hasta el momento en que “EL ARRENDADOR” se dé por recibido del inmueble y/o del pago total de lo adeudado a su entera satisfacción, renunciando a los beneficios contenidos en los artículos 2460, 2461, 2462 del Código Civil vigente para la Ciudad de México. “EL ARRENDADOR” podrá rehusarse a aceptar aquella persona que en su concepto no reúna los requisitos necesarios para garantizar como “OBLIGADO SOLIDARIO” el debido cumplimiento del presente contrato. “EL OBLIGADO SOLIDARIO” conviene en que su responsabilidad legal no cesa sino hasta el momento en que “EL ARRENDADOR” se dé por recibido del inmueble y/o del pago total de lo adeudado a su entera satisfacción, renunciando a los beneficios contenidos en los artículos 2846, 2847 y 2848 del Código Civil vigente para el Distrito Federal. “EL ARRENDATARIO” autoriza a “EL OBLIGADO SOLIDARIO / FIADOR” para que entregue el inmueble cuando él por ausencia o negligencia no lo haga, designándolo además representantes de sucesión únicamente en relación con el contrato, a fin de que en caso de que fallezca durante su vigencia, el garante esté en posibilidad de reintegrar el inmueble arrendado y quedar liberado. Si durante la vigencia del presente contrato “EL OBLIGADO SOLIDARIO / FIADOR” quedara incapacitado para cumplir con las obligaciones derivadas del presente contrato, “EL ARRENDATARIO” deberá avisar de inmediato a “EL ARRENDADOR” y señalar nuevo OBLIGADO SOLIDARIO que tenga capacidad para obligarse y bienes suficientes para garantizar el cumplimiento de este contrato, ya que en caso contrario “EL ARRENDADOR” podrá rescindir de pleno derecho este contrato.</span>
+        </div>
+
+        
+
+        <!-- VIGÉSIMA-->
+        <div class="clausula">
+            <span class="clausula-title">VIGÉSIMA.- PÓLIZA JURÍDICA.-</span> <span class="clausula-text">"EL ARRENDATARIO" se obliga a tramitar una PÓLIZA JURÍDICA, para garantizar la desocupación por el incumplimiento en el pago de rentas y pago de servicios. Así mismo las partes convienen que los gastos y honorarios que se generen serán por cuenta de "EL ARRENDATARIO".</span><br/><br/>
+            <span class="clausula-text">"EL ARRENDATARIO" se compromete a renovar la PÓLIZA JURÍDICA para el siguiente año, si continúa ocupando el inmueble, treinta (30) días antes de su inicio, siendo motivo de rescisión de contrato la falta oportuna del cumplimiento de la presente cláusula, por tal motivo</span><br/><br/>
+            <span class="clausula-text">"EL ARRENDADOR" podrá renovar la PÓLIZA JURÍDICA antes mencionada sin autorización de "EL ARRENDATARIO" a cuenta de este último.</span>
+        </div>
+
+        <!-- VIGÉSIMA SEGUNDA -->
+        <div class="clausula">
+            <span class="clausula-title">VIGÉSIMA PRIMERA.- DE NO RESPONSABILIDAD PENAL.-</span> <span class="clausula-text">Las partes de conformidad con lo manifestado en el capítulo de declaraciones, ratifican que el presente contrato de arrendamiento es celebrado de buena fe, concediendo por tanto "EL ARRENDADOR" en su calidad de propietario, el uso y goce del bien inmueble objeto del arrendamiento a "EL ARRENDATARIO" el cual deberá destinarlo a un uso pacífico, tranquilo y conforme a las buenas costumbres, por lo que bajo ese orden de ideas, "EL ARRENDATARIO" libera a "EL ARRENDADOR" de toda responsabilidad en la que pudiera verse involucrado, derivado de la comisión de delitos consumados dentro o fuera del inmueble referido (hechos típicos y antijurídicos) relacionados o equiparados con la delincuencia organizada, de los cuales se mencionan de manera enunciativa mas no limitativa los siguientes: narcotráfico, secuestro, robo de vehículo y trata de personas, comprometiéndose asimismo a sacar en paz y a salvo tanto a "EL ARRENDADOR" como al inmueble objeto del arrendamiento.</span>
+        </div>
+
+        <!-- VIGÉSIMA TERCERA -->
+        <div class="clausula">
+            <span class="clausula-title">VIGÉSIMA SEGUNDA.- CAUSAL DE RESCISIÓN AUTOMÁTICA.-</span> <span class="clausula-text">Será causa de rescisión automática del presente contrato de arrendamiento, el solo hecho de que el bien inmueble objeto del presente instrumento sea asegurado o resguardado por cualquier autoridad o que se inicie averiguación previa en contra de "EL ARRENDATARIO" y/o un tercero en la que se vea afecto el inmueble objeto del presente contrato, derivado de la sospecha o comprobación de la comisión de delitos consumados dentro o fuera del inmueble referido, (hechos típicos y antijurídicos) constitutivos de cualesquiera de los delitos de delincuencia organizada, de los cuales se mencionan entre otros de manera enunciativa mas no limitativa los siguientes: narcotráfico, secuestro, robo de vehículo y trata de personas, esto con independencia de que el Juez que conozca del asunto penal dicte la sentencia correspondiente.</span>
+        </div>
+
+        <!-- VIGÉSIMA CUARTA -->
+        <div class="clausula">
+            <span class="clausula-title">VIGÉSIMA TERCERA.- RESCISIÓN.-</span> <span class="clausula-text">La falsedad en las declaraciones vertidas en este contrato y/o el incumplimiento de las partes a cualquiera de las cláusulas contenidas en el mismo, será motivo de su rescisión, sin perjuicio de las consecuencias legales procedentes.</span>
+        </div>
+
+        <!-- VIGÉSIMA QUINTA -->
+        <div class="clausula">
+            <span class="clausula-title">VIGÉSIMA CUARTA.- CONVENIOS MODIFICATORIOS.-</span> <span class="clausula-text">Las partes están de acuerdo en que se efectúen modificaciones al presente contrato, éstas podrán ser únicamente de forma y no de fondo. Para su validez deberán constar por escrito, con firma autógrafa y se añadirán al presente contrato formando parte integrante del mismo.</span>
+        </div>
+
+        <!-- VIGÉSIMA SEXTA -->
+        <div class="clausula">
+            <span class="clausula-title">VIGÉSIMA QUINTA.- COMPETENCIA.-</span> <span class="clausula-text">Las partes expresamente convienen en someterse a la jurisdicción de las Leyes y Tribunales de la Ciudad de México, ya sea para la ejecución del laudo arbitral o para la interpretación o cumplimiento del presente contrato cuando "EL ARRENDADOR" haya elegido el procedimiento judicial, renunciando al efecto a cualquier fuero que pudiera corresponderles en razón de su domicilio o ubicación de sus bienes, presente o futuro.</span>
+        </div>
+
+        <div style="margin-top: 30px; margin-bottom: 20px; text-align: justify; font-size: 16px; line-height: 1.2;">
+            LEÍDO QUE FUE EL PRESENTE INSTRUMENTO, CONSTANTE DE LAS FOJAS ÚTILES QUE LO INTEGRAN, ENTERADAS QUE FUERON LAS PARTES DE SU CONTENIDO, VALOR Y ALCANCE LEGAL, LO FIRMAN AL MARGEN EN CADA UNA DE SUS HOJAS, CON EXCEPCIÓN DE LA ÚLTIMA, QUE SE FIRMA AL CALCE POR TRIPLICADO, EL <span >{{dia_firma}}</span> DE <span >{{mes_firma}}</span> DE <span >{{anio_firma}}</span>, EN LA CIUDAD DE MÉXICO.
+        </div>
+
+        <!-- SECCIÓN DE FIRMAS -->
+        <div style="margin-top: 40px;">
+            <div class="section-title">F I R M A S</div>
+            
+            <table style="width: 100%; border-collapse: collapse; margin-top: 0;">
+                <tr>
+                    <td style="width: 33%; border: 1px solid #000000; padding: 20px; vertical-align: top; text-align: center;">
+                        <div style="color: #5b2c83; font-weight: bold; font-size: 13px; margin-bottom: 20px;">"EL ARRENDADOR"</div>
+                        <div style="margin-bottom: 30px; border-bottom: 1px solid #000000; min-height: 40px;"></div>
+                        <div style="font-size: 11px; color: #5b2c83; font-weight: bold; margin-bottom: 10px;">FIRMA</div>
+                        <div style="margin-top: 15px; font-weight: bold; font-size: 11px; text-align: center;">NOMBRE: <span style="font-weight: normal;">{{arrendador_nombre_o_razon}}</span></div>
+                        <div style="font-weight: bold; font-size: 11px; text-align: center; margin-top: 5px;">IDENTIFICACIÓN: <span style="font-weight: normal;">{{arrendador_identificacion}}</span></div>
+                    </td>
+                    <td style="width: 33%; border: 1px solid #000000; border-left: none; padding: 20px; vertical-align: top; text-align: center;">
+                        <div style="color: #5b2c83; font-weight: bold; font-size: 13px; margin-bottom: 20px;">"EL ARRENDATARIO"</div>
+                        <div style="margin-bottom: 30px; border-bottom: 1px solid #000000; min-height: 40px;"></div>
+                        <div style="font-size: 11px; color: #5b2c83; font-weight: bold; margin-bottom: 10px;">FIRMA</div>
+                        <div style="margin-top: 15px; font-weight: bold; font-size: 11px; text-align: center;">NOMBRE: <span style="font-weight: normal;">{{arrendatario_nombre_o_razon}}</span></div>
+                        <div style="font-weight: bold; font-size: 11px; text-align: center; margin-top: 5px;">IDENTIFICACIÓN: <span style="font-weight: normal;">{{arrendatario_identificacion}}</span></div>
+                    </td>
+                    <td style="width: 33%; border: 1px solid #000000; border-left: none; padding: 20px; vertical-align: top; text-align: center;">
+                        <div style="color: #5b2c83; font-weight: bold; font-size: 13px; margin-bottom: 20px;">"EL OBLIGADO SOLIDARIO / FIADOR"</div>
+                        <div style="margin-bottom: 30px; border-bottom: 1px solid #000000; min-height: 40px;"></div>
+                        <div style="font-size: 11px; color: #5b2c83; font-weight: bold; margin-bottom: 10px;">FIRMA</div>
+                        <div style="margin-top: 15px; font-weight: bold; font-size: 11px; text-align: center;">NOMBRE: <span style="font-weight: normal;">{{fiador_nombre_o_razon}}</span></div>
+                        <div style="font-weight: bold; font-size: 11px; text-align: center; margin-top: 5px;">IDENTIFICACIÓN: <span style="font-weight: normal;">{{fiador_identificacion}}</span></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+  
+
+    </div>
+
+</body>
+</html>

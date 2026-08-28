@@ -53,16 +53,18 @@ class ArrendadoresRelationManager extends RelationManager
                                     ->helperText('Orden en el contrato (1, 2, 3...)'),
 
                                 Grid::make(1)
+                                    ->visible(fn($get) => $get('tipo_persona') === 'fisica')
                                     ->schema([
                                         Checkbox::make('tiene_representante_legal')
-                                        ->label('Tiene Representante Legal'),
+                                            ->label('Tiene Representante Legal'),
 
-                                        Checkbox::make('en_proceso_sucesorio')
-                                            ->label('En Proceso Sucesorio'),
+                                        // Checkbox::make('en_proceso_sucesorio')
+                                        //     ->label('En Proceso Sucesorio'),
                                     ]),
                             ]),
 
                         Grid::make(2)
+                            ->visible(fn($get) => $get('tipo_persona') === 'fisica')
                             ->schema([
                                 TextInput::make('nombre')
                                     ->label('Nombre')
@@ -80,6 +82,7 @@ class ArrendadoresRelationManager extends RelationManager
                             ]),
 
                         Grid::make(2)
+                            ->visible(fn($get) => $get('tipo_persona') === 'fisica')
                             ->schema([
                                 TextInput::make('telefono_1')
                                     ->label('Teléfono Principal')
@@ -98,10 +101,76 @@ class ArrendadoresRelationManager extends RelationManager
                                     ->email()
                                     ->maxLength(100),
                             ]),
+
+                        Grid::make(2)
+                            ->visible(fn($get) => $get('tipo_persona') === 'fisica')
+                            ->schema([
+                                TextInput::make('numero_ine')
+                                    ->label('Número de INE')
+                                    ->maxLength(20),
+
+                                TextInput::make('curp')
+                                    ->label('CURP')
+                                    ->maxLength(18)
+                                    ->formatStateUsing(fn(?string $state) => strtoupper($state ?? ''))
+                                    ->dehydrateStateUsing(fn(?string $state) => strtoupper($state ?? '')),
+                            ]),
+                    ]),
+
+                Section::make('Datos de la Empresa')
+                    ->visible(fn($get) => $get('tipo_persona') === 'moral')
+                    ->schema([
+                        Grid::make(1)
+                            ->schema([
+                                TextInput::make('razon_social')
+                                    ->label('Razón Social')
+                                    ->maxLength(255),
+
+                                TextInput::make('rfc')
+                                    ->label('RFC')
+                                    ->maxLength(13)
+                                    ->formatStateUsing(fn(?string $state) => strtoupper($state ?? ''))
+                                    ->dehydrateStateUsing(fn(?string $state) => strtoupper($state ?? '')),
+
+                                TextInput::make('direccion_empresa')
+                                    ->label('Dirección de la Empresa')
+                                    ->maxLength(255),
+                            ]),
+                    ]),
+
+                Section::make('Representante Legal')
+                    ->visible(fn($get) => $get('tipo_persona') === 'moral')
+                    ->schema([
+                        Grid::make(2)
+                            ->schema([
+                                TextInput::make('representante_legal_nombre')
+                                    ->label('Nombre')
+                                    ->maxLength(100),
+
+                                TextInput::make('representante_legal_email')
+                                    ->label('Email')
+                                    ->email()
+                                    ->maxLength(100),
+
+                                TextInput::make('representante_legal_telefono')
+                                    ->label('Teléfono')
+                                    ->tel()
+                                    ->maxLength(15),
+
+                                TextInput::make('representante_legal_numero_ine')
+                                    ->label('INE')
+                                    ->maxLength(20),
+
+                                TextInput::make('representante_legal_curp')
+                                    ->label('CURP')
+                                    ->maxLength(18)
+                                    ->formatStateUsing(fn(?string $state) => strtoupper($state ?? ''))
+                                    ->dehydrateStateUsing(fn(?string $state) => strtoupper($state ?? '')),
+                            ]),
                     ]),
 
                 Section::make('Acta Constitutiva')
-                    ->visible(fn ($get) => $get('tipo_persona') === 'moral')
+                    ->visible(fn($get) => $get('tipo_persona') === 'moral')
                     ->schema([
                         Grid::make(2)
                             ->schema([
@@ -163,7 +232,7 @@ class ArrendadoresRelationManager extends RelationManager
                     ]),
 
                 Section::make('Documentos adicionales (persona moral)')
-                    ->visible(fn ($get) => $get('tipo_persona') === 'moral')
+                    ->visible(fn($get) => $get('tipo_persona') === 'moral')
                     ->schema([
                         Grid::make(2)
                             ->schema([
@@ -200,30 +269,94 @@ class ArrendadoresRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                TextColumn::make('orden')
-                    ->label('#')
-                    ->sortable(),
-                TextColumn::make('nombre')
-                    ->label('Nombre')
-                    ->searchable()
-                    ->formatStateUsing(fn ($record) => trim("{$record->nombre} {$record->apellido_paterno} {$record->apellido_materno}")),
+                // TextColumn::make('orden')
+                //     ->label('#')
+                //     ->sortable(),
                 TextColumn::make('tipo_persona')
                     ->label('Tipo')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'fisica' => 'success',
                         'moral' => 'info',
                         default => 'gray',
                     }),
-                TextColumn::make('telefono_1')
-                    ->label('Teléfono')
-                    ->searchable(),
-                TextColumn::make('email')
-                    ->label('Email')
-                    ->searchable(),
-                IconColumn::make('tiene_representante_legal')
-                    ->label('Rep. Legal')
-                    ->boolean(),
+                TextColumn::make('nombre')
+                    ->label('Nombre o Empresa')
+                    ->searchable()
+                    ->state(function ($record) {
+                        if ($record->tipo_persona === 'moral') {
+                            return $record->razon_social ?? 'Sin razón social';
+                        }
+
+                        return trim(
+                            ($record->nombre ?? '') . ' ' .
+                            ($record->apellido_paterno ?? '') . ' ' .
+                            ($record->apellido_materno ?? '')
+                        );
+                    }),
+                TextColumn::make('rfc')
+                    ->label('RFC o Identificación')
+                    ->searchable()
+                    ->state(function ($record) {
+                        if (!$record) {
+                            return 'Sin datos';
+                        }
+
+                        return $record->tipo_persona === 'moral'
+                            ? ($record->rfc ?? 'Sin RFC')
+                            : ($record->numero_ine ?? 'Sin INE');
+                    }),
+                // TextColumn::make('representante_legal_nombre')
+                //     ->label('Contacto')
+                //     ->searchable()
+                //     ->formatStateUsing(function ($state, $record) {
+                //         if (!$record)
+                //             return 'Sin contacto';
+                //         return $record->tipo_persona === 'moral'
+                //             ? ($record->representante_legal_nombre ?? $record->representante_legal_email ?? 'Sin contacto')
+                //             : ($record->email ?? $record->telefono_1 ?? 'Sin contacto');
+                //     }),
+                // // Columnas adicionales toggleables
+                // TextColumn::make('telefono_1')
+                //     ->label('Teléfono')
+                //     ->searchable()
+                //     ->toggleable(isToggledHiddenByDefault: true)
+                //     ->visible(fn($record) => $record?->tipo_persona === 'fisica'),
+                // TextColumn::make('email')
+                //     ->label('Email')
+                //     ->searchable()
+                //     ->toggleable(isToggledHiddenByDefault: true)
+                //     ->visible(fn($record) => $record?->tipo_persona === 'fisica'),
+                // TextColumn::make('numero_ine')
+                //     ->label('INE')
+                //     ->searchable()
+                //     ->toggleable(isToggledHiddenByDefault: false)
+                //     ->visible(fn($record) => $record?->tipo_persona === 'fisica'),
+                // TextColumn::make('curp')
+                //     ->label('CURP')
+                //     ->searchable()
+                //     ->toggleable(isToggledHiddenByDefault: true)
+                //     ->visible(fn($record) => $record?->tipo_persona === 'fisica'),
+                // IconColumn::make('tiene_representante_legal')
+                //     ->label('Rep. Legal')
+                //     ->boolean()
+                //     ->toggleable(isToggledHiddenByDefault: true)
+                //     ->visible(fn($record) => $record?->tipo_persona === 'fisica'),
+                // TextColumn::make('direccion_empresa')
+                //     ->label('Dirección Empresa')
+                //     ->searchable()
+                //     ->toggleable(isToggledHiddenByDefault: true)
+                //     ->visible(fn($record) => $record?->tipo_persona === 'moral'),
+                // TextColumn::make('representante_legal_telefono')
+                //     ->label('Tel. Representante')
+                //     ->searchable()
+                //     ->toggleable(isToggledHiddenByDefault: true)
+                //     ->visible(fn($record) => $record?->tipo_persona === 'moral'),
+                // TextColumn::make('representante_legal_email')
+                //     ->label('Email Representante')
+                //     ->searchable()
+                //     ->toggleable(isToggledHiddenByDefault: true)
+                //     ->visible(fn($record) => $record?->tipo_persona === 'moral'),
             ])
             ->headerActions([
                 CreateAction::make()

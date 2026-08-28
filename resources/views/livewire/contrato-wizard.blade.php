@@ -176,7 +176,7 @@
                             <div class="relative h-full p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/10 border-2 border-white/20 peer-checked:border-gold-accent peer-checked:shadow-2xl peer-checked:shadow-gold-accent/30 peer-checked:scale-105 transition-all duration-300 hover:scale-102 backdrop-blur-sm">
                                 <div class="absolute -top-3 -right-3 px-3 py-1 bg-gradient-to-r from-gold-accent to-gold-warm rounded-full text-purple-deep text-xs font-bold">POPULAR</div>
                                 <div class="text-6xl mb-4">⭐</div>
-                                <h4 class="text-2xl font-bold text-white mb-3">Superior</h4>
+                                <h4 class="text-2xl font-bold text-white mb-3">Completa</h4>
                                 <p class="text-white/70 mb-4">Incluye cláusulas adicionales y asesoría legal</p>
                                 <div class="absolute top-4 right-4 w-8 h-8 rounded-full border-2 border-white/30 peer-checked:border-gold-accent peer-checked:bg-gold-accent flex items-center justify-center">
                                     <svg class="w-5 h-5 text-white opacity-0 peer-checked:opacity-100" fill="currentColor" viewBox="0 0 20 20">
@@ -275,7 +275,7 @@
                     <div>
                         <label class="block text-white font-semibold mb-3">Servicios Incluidos (Opcional)</label>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                            @foreach(['agua' => '💧 Agua', 'luz' => '⚡ Luz', 'gas' => '🔥 Gas', 'internet' => '📡 Internet', 'mantenimiento' => '🔧 Mantenimiento', 'seguridad' => '🛡️ Seguridad'] as $key => $label)
+                            @foreach(['agua' => '💧 Agua', 'luz' => '⚡ Luz', 'gas' => '🔥 Gas', 'internet' => '📡 Internet',  'seguridad' => '🛡️ Seguridad'] as $key => $label)
                                 <label class="flex items-center space-x-2 cursor-pointer group px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/20 transition-all">
                                     <input 
                                         type="checkbox" 
@@ -285,6 +285,100 @@
                                     <span class="text-white text-sm">{{ $label }}</span>
                                 </label>
                             @endforeach
+                        </div>
+                    </div>
+
+                    <div x-data="{ mantenimiento: @entangle('inmueble_incluye_mantenimiento') }">
+                        <label class="flex items-center space-x-3 cursor-pointer group">
+                            <input 
+                                type="checkbox" 
+                                wire:model="inmueble_incluye_mantenimiento"
+                                @change="mantenimiento = $event.target.checked"
+                                class="w-5 h-5 rounded border-white/30 bg-white/10 text-gold-accent focus:ring-gold-accent/50">
+                            <span class="text-white group-hover:text-gold-accent transition-colors">🔧 Incluir costo de mantenimiento</span>
+                        </label>
+
+                        <div x-show="mantenimiento" class="mt-4 animate-fadeIn">
+                            <label class="block text-white font-semibold mb-2">Costo Mensual de Mantenimiento *</label>
+                            <input 
+                                type="number" 
+                                wire:model="inmueble_costo_mantenimiento"
+                                class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                placeholder="500.00"
+                                step="0.01">
+                            @error('inmueble_costo_mantenimiento') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+
+                    <div x-data="{ formaPago: @entangle('forma_pago') }">
+                        <label class="block text-white font-semibold mb-3">Forma de Pago *</label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <label class="flex items-center space-x-3 cursor-pointer group px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/20 transition-all">
+                                <input 
+                                    type="radio" 
+                                    wire:model="forma_pago"
+                                    value="efectivo"
+                                    @change="formaPago = 'efectivo'"
+                                    class="w-4 h-4 rounded-full border-white/30 bg-white/10 text-gold-accent focus:ring-gold-accent/50">
+                                <span class="text-white text-sm">💵 Efectivo</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer group px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/20 transition-all">
+                                <input 
+                                    type="radio" 
+                                    wire:model="forma_pago"
+                                    value="transferencia"
+                                    @change="formaPago = 'transferencia'"
+                                    class="w-4 h-4 rounded-full border-white/30 bg-white/10 text-gold-accent focus:ring-gold-accent/50">
+                                <span class="text-white text-sm">💳 Transferencia Bancaria</span>
+                            </label>
+                        </div>
+
+                        <div x-show="formaPago === 'transferencia'" class="mt-6 p-6 rounded-xl bg-white/5 border border-white/20 space-y-4 animate-fadeIn">
+                            <h4 class="text-lg font-semibold text-gold-accent mb-4">Datos Bancarios</h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-white font-semibold mb-2">Banco *</label>
+                                    <input 
+                                        type="text" 
+                                        wire:model="banco"
+                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                        placeholder="Ej: BBVA México">
+                                    @error('banco') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                </div>
+
+                                <div>
+                                    <label class="block text-white font-semibold mb-2">Beneficiario *</label>
+                                    <input 
+                                        type="text" 
+                                        wire:model="beneficiario"
+                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                        placeholder="Ej: Poder Legal S.A. de C.V.">
+                                    @error('beneficiario') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-white font-semibold mb-2">Cuenta / CLABE *</label>
+                                <input 
+                                    type="text" 
+                                    wire:model="cuenta"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                    placeholder="Ej: 123456789012345678">
+                                @error('cuenta') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            <div>
+                                <label class="block text-white font-semibold mb-2">CLABE (18 dígitos) *</label>
+                                <input 
+                                    type="text" 
+                                    wire:model="clabe"
+                                    maxlength="18"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                    placeholder="Ej: 012180000123456789"
+                                    pattern="\d{18}">
+                                @error('clabe') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -384,6 +478,20 @@
                                 placeholder="301">
                         </div>
                     </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-white font-semibold mb-2">🚗 Número de Estacionamientos</label>
+                            <input 
+                                type="number" 
+                                wire:model="numero_estacionamientos"
+                                min="0"
+                                class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                placeholder="0">
+                            @error('numero_estacionamientos') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                            <p class="text-white/50 text-xs mt-1">Cantidad de espacios de estacionamiento incluidos</p>
+                        </div>
+                    </div>
                 </div>
             @endif
 
@@ -404,6 +512,25 @@
                             + Agregar Arrendatario
                         </button>
                     </div>
+
+                    @if ($errors->any())
+                        <div class="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 backdrop-blur-sm">
+                            <p class="text-red-300 font-semibold mb-2 flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                </svg>
+                                Falta información obligatoria:
+                            </p>
+                            <ul class="text-red-200 text-sm space-y-1">
+                                @foreach ($errors->all() as $error)
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-red-400">•</span>
+                                        {{ $error }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
                     @foreach($arrendatarios as $index => $arrendatario)
                         <div class="p-6 rounded-2xl bg-white/5 border border-white/20 space-y-4">
@@ -429,67 +556,92 @@
                                 </select>
                             </div>
 
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div>
-                                    <label class="block text-white font-semibold mb-2">Nombre *</label>
-                                    <input 
-                                        type="text" 
-                                        wire:model="arrendatarios.{{ $index }}.nombre"
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                        placeholder="María">
-                                    @error("arrendatarios.{$index}.nombre") <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                            @if($arrendatario['tipo_persona'] === 'fisica')
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Nombre *</label>
+                                        <input 
+                                            type="text" 
+                                            wire:model="arrendatarios.{{ $index }}.nombre"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="María">
+                                        @error("arrendatarios.{$index}.nombre") <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Apellido Paterno *</label>
+                                        <input 
+                                            type="text" 
+                                            wire:model="arrendatarios.{{ $index }}.apellido_paterno"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="López">
+                                        @error("arrendatarios.{$index}.apellido_paterno") <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Apellido Materno</label>
+                                        <input 
+                                            type="text" 
+                                            wire:model="arrendatarios.{{ $index }}.apellido_materno"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="Martínez">
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Teléfono Principal *</label>
+                                        <input 
+                                            type="tel" 
+                                            wire:model="arrendatarios.{{ $index }}.telefono_1"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="55 1234 5678">
+                                        @error("arrendatarios.{$index}.telefono_1") <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Teléfono Secundario</label>
+                                        <input 
+                                            type="tel" 
+                                            wire:model="arrendatarios.{{ $index }}.telefono_2"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="55 8765 4321">
+                                    </div>
                                 </div>
 
                                 <div>
-                                    <label class="block text-white font-semibold mb-2">Apellido Paterno *</label>
+                                    <label class="block text-white font-semibold mb-2">Correo Electrónico *</label>
                                     <input 
-                                        type="text" 
-                                        wire:model="arrendatarios.{{ $index }}.apellido_paterno"
+                                        type="email" 
+                                        wire:model="arrendatarios.{{ $index }}.email"
                                         class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                        placeholder="López">
-                                    @error("arrendatarios.{$index}.apellido_paterno") <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                        placeholder="arrendatario@ejemplo.com">
+                                    @error("arrendatarios.{$index}.email") <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                                 </div>
+                            @endif
 
-                                <div>
-                                    <label class="block text-white font-semibold mb-2">Apellido Materno</label>
-                                    <input 
-                                        type="text" 
-                                        wire:model="arrendatarios.{{ $index }}.apellido_materno"
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                        placeholder="Martínez">
+                            @if($arrendatario['tipo_persona'] === 'fisica')
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Número INE</label>
+                                        <input 
+                                            type="text" 
+                                            wire:model="arrendatarios.{{ $index }}.numero_ine"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="123456789012345">
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">CURP</label>
+                                        <input 
+                                            type="text" 
+                                            wire:model="arrendatarios.{{ $index }}.curp"
+                                            maxlength="18"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm uppercase"
+                                            placeholder="ABCD123456HDFXYZ09">
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-white font-semibold mb-2">Teléfono Principal *</label>
-                                    <input 
-                                        type="tel" 
-                                        wire:model="arrendatarios.{{ $index }}.telefono_1"
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                        placeholder="55 1234 5678">
-                                    @error("arrendatarios.{$index}.telefono_1") <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-                                </div>
-
-                                <div>
-                                    <label class="block text-white font-semibold mb-2">Teléfono Secundario</label>
-                                    <input 
-                                        type="tel" 
-                                        wire:model="arrendatarios.{{ $index }}.telefono_2"
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                        placeholder="55 8765 4321">
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="block text-white font-semibold mb-2">Correo Electrónico *</label>
-                                <input 
-                                    type="email" 
-                                    wire:model="arrendatarios.{{ $index }}.email"
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                    placeholder="arrendatario@ejemplo.com">
-                                @error("arrendatarios.{$index}.email") <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-                            </div>
+                            @endif
 
                             @if($arrendatario['tipo_persona'] === 'moral')
                                 @include('formulario.persona-moral-fields', [
@@ -609,6 +761,25 @@
                         </button>
                     </div>
 
+                    @if ($errors->any())
+                        <div class="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 backdrop-blur-sm">
+                            <p class="text-red-300 font-semibold mb-2 flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                </svg>
+                                Falta información obligatoria:
+                            </p>
+                            <ul class="text-red-200 text-sm space-y-1">
+                                @foreach ($errors->all() as $error)
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-red-400">•</span>
+                                        {{ $error }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     @foreach($arrendadores as $index => $arrendador)
                         <div class="p-6 rounded-2xl bg-white/5 border border-white/20 space-y-4">
                             <div class="flex justify-between items-center mb-4">
@@ -633,67 +804,92 @@
                                 </select>
                             </div>
 
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div>
-                                    <label class="block text-white font-semibold mb-2">Nombre *</label>
-                                    <input 
-                                        type="text" 
-                                        wire:model="arrendadores.{{ $index }}.nombre"
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                        placeholder="Carlos">
-                                    @error("arrendadores.{$index}.nombre") <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                            @if($arrendador['tipo_persona'] === 'fisica')
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Nombre *</label>
+                                        <input 
+                                            type="text" 
+                                            wire:model="arrendadores.{{ $index }}.nombre"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="Carlos">
+                                        @error("arrendadores.{$index}.nombre") <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Apellido Paterno *</label>
+                                        <input 
+                                            type="text" 
+                                            wire:model="arrendadores.{{ $index }}.apellido_paterno"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="Ramírez">
+                                        @error("arrendadores.{$index}.apellido_paterno") <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Apellido Materno</label>
+                                        <input 
+                                            type="text" 
+                                            wire:model="arrendadores.{{ $index }}.apellido_materno"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="González">
+                                    </div>
                                 </div>
 
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Teléfono Principal *</label>
+                                        <input 
+                                            type="tel" 
+                                            wire:model="arrendadores.{{ $index }}.telefono_1"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="55 1234 5678">
+                                        @error("arrendadores.{$index}.telefono_1") <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Teléfono Secundario</label>
+                                        <input 
+                                            type="tel" 
+                                            wire:model="arrendadores.{{ $index }}.telefono_2"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="55 8765 4321">
+                                    </div>
+                                </div>
+                            @endif
+
+                            @if($arrendador['tipo_persona'] === 'fisica')
                                 <div>
-                                    <label class="block text-white font-semibold mb-2">Apellido Paterno *</label>
+                                    <label class="block text-white font-semibold mb-2">Correo Electrónico *</label>
                                     <input 
-                                        type="text" 
-                                        wire:model="arrendadores.{{ $index }}.apellido_paterno"
+                                        type="email" 
+                                        wire:model="arrendadores.{{ $index }}.email"
                                         class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                        placeholder="Ramírez">
-                                    @error("arrendadores.{$index}.apellido_paterno") <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                        placeholder="propietario@ejemplo.com">
+                                    @error("arrendadores.{$index}.email") <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                                 </div>
 
-                                <div>
-                                    <label class="block text-white font-semibold mb-2">Apellido Materno</label>
-                                    <input 
-                                        type="text" 
-                                        wire:model="arrendadores.{{ $index }}.apellido_materno"
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                        placeholder="González">
-                                </div>
-                            </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Número INE</label>
+                                        <input 
+                                            type="text" 
+                                            wire:model="arrendadores.{{ $index }}.numero_ine"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="123456789012345">
+                                    </div>
 
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-white font-semibold mb-2">Teléfono Principal *</label>
-                                    <input 
-                                        type="tel" 
-                                        wire:model="arrendadores.{{ $index }}.telefono_1"
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                        placeholder="55 1234 5678">
-                                    @error("arrendadores.{$index}.telefono_1") <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">CURP</label>
+                                        <input 
+                                            type="text" 
+                                            wire:model="arrendadores.{{ $index }}.curp"
+                                            maxlength="18"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm uppercase"
+                                            placeholder="ABCD123456HDFXYZ09">
+                                    </div>
                                 </div>
-
-                                <div>
-                                    <label class="block text-white font-semibold mb-2">Teléfono Secundario</label>
-                                    <input 
-                                        type="tel" 
-                                        wire:model="arrendadores.{{ $index }}.telefono_2"
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                        placeholder="55 8765 4321">
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="block text-white font-semibold mb-2">Correo Electrónico *</label>
-                                <input 
-                                    type="email" 
-                                    wire:model="arrendadores.{{ $index }}.email"
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                    placeholder="propietario@ejemplo.com">
-                                @error("arrendadores.{$index}.email") <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-                            </div>
+                            @endif
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <label class="flex items-center space-x-3 cursor-pointer group px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/20 transition-all">
@@ -704,13 +900,13 @@
                                     <span class="text-white group-hover:text-gold-accent transition-colors">Tiene representante legal</span>
                                 </label>
 
-                                <label class="flex items-center space-x-3 cursor-pointer group px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/20 transition-all">
+                                <!-- <label class="flex items-center space-x-3 cursor-pointer group px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/20 transition-all">
                                     <input 
                                         type="checkbox" 
                                         wire:model="arrendadores.{{ $index }}.en_proceso_sucesorio"
                                         class="w-5 h-5 rounded border-white/30 bg-white/10 text-gold-accent focus:ring-gold-accent/50">
                                     <span class="text-white group-hover:text-gold-accent transition-colors">En proceso sucesorio</span>
-                                </label>
+                                </label> -->
                             </div>
 
                             @if($arrendador['tipo_persona'] === 'moral')
@@ -781,6 +977,25 @@
                         <p class="text-white/70">Datos del garante o aval (si aplica)</p>
                     </div>
 
+                    @if ($errors->any())
+                        <div class="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 backdrop-blur-sm">
+                            <p class="text-red-300 font-semibold mb-2 flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                </svg>
+                                Falta información obligatoria:
+                            </p>
+                            <ul class="text-red-200 text-sm space-y-1">
+                                @foreach ($errors->all() as $error)
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-red-400">•</span>
+                                        {{ $error }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <div>
                         <label class="block text-white font-semibold mb-3">¿Requiere Fiador?</label>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -812,176 +1027,188 @@
 
                     @if($fiador_tipo !== 'personal')
                         <div class="space-y-4 mt-6 p-6 rounded-2xl bg-white/5 border border-white/20">
-                            <h4 class="text-xl font-bold text-gold-accent mb-4">Datos del Fiador</h4>
+                            @if($fiador_tipo === 'persona')
+                                <h4 class="text-xl font-bold text-gold-accent mb-4">Datos del Fiador</h4>
 
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Nombre *</label>
+                                        <input 
+                                            type="text" 
+                                            wire:model="fiador_nombre"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="Roberto">
+                                        @error('fiador_nombre') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Apellido Paterno *</label>
+                                        <input 
+                                            type="text" 
+                                            wire:model="fiador_apellido_paterno"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="Sánchez">
+                                        @error('fiador_apellido_paterno') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Apellido Materno</label>
+                                        <input 
+                                            type="text" 
+                                            wire:model="fiador_apellido_materno"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="Cruz">
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Teléfono Principal *</label>
+                                        <input 
+                                            type="tel" 
+                                            wire:model="fiador_telefono_1"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="55 1234 5678">
+                                        @error('fiador_telefono_1') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Teléfono Secundario</label>
+                                        <input 
+                                            type="tel" 
+                                            wire:model="fiador_telefono_2"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="55 8765 4321">
+                                    </div>
+                                </div>
+
                                 <div>
-                                    <label class="block text-white font-semibold mb-2">Nombre *</label>
+                                    <label class="block text-white font-semibold mb-2">Correo Electrónico *</label>
+                                    <input 
+                                        type="email" 
+                                        wire:model="fiador_email"
+                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                        placeholder="fiador@ejemplo.com">
+                                    @error('fiador_email') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Estado civil *</label>
+                                        <select 
+                                            wire:model="fiador_estado_civil"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm">
+                                            <option value="">SELECCIONA</option>
+                                            <option value="SOLTERO">SOLTERO</option>
+                                            <option value="CASADO">CASADO</option>
+                                            <option value="DIVORCIADO">DIVORCIADO</option>
+                                            <option value="VIUDO">VIUDO</option>
+                                            <option value="UNION_LIBRE">UNIÓN LIBRE</option>
+                                        </select>
+                                        @error('fiador_estado_civil') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Nacionalidad *</label>
+                                        <input 
+                                            type="text" 
+                                            wire:model="fiador_nacionalidad"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="México">
+                                        @error('fiador_nacionalidad') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">
+                                            Número INM
+                                            <button type="button" class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-white/10 hover:bg-white/20 transition-colors ml-1" 
+                                                    title="Solo para extranjeros con residencia permanente en México">
+                                                <span class="text-xs">?</span>
+                                            </button>
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            wire:model="fiador_numero_inm"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="11883224">
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Número de INE</label>
+                                        <input 
+                                            type="text" 
+                                            wire:model="fiador_numero_ine"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="1234567890123">
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">CURP</label>
+                                        <input 
+                                            type="text" 
+                                            wire:model="fiador_curp"
+                                            maxlength="18"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm uppercase"
+                                            placeholder="ABCD123456HDFXYZ09">
+                                    </div>
+                                </div>
+
+                                <h5 class="text-lg font-bold text-gold-accent mt-6 mb-3">Dirección</h5>
+
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Código postal*</label>
+                                        <input 
+                                            type="text" 
+                                            wire:model="fiador_codigo_postal"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="01234">
+                                        @error('fiador_codigo_postal') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Estado*</label>
+                                        <input 
+                                            type="text" 
+                                            wire:model="fiador_estado"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="Ciudad de México">
+                                        @error('fiador_estado') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Alcaldía / Municipio*</label>
+                                        <input 
+                                            type="text" 
+                                            wire:model="fiador_ciudad"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                            placeholder="Cuauhtémoc">
+                                        @error('fiador_ciudad') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-white font-semibold mb-2">País *</label>
                                     <input 
                                         type="text" 
-                                        wire:model="fiador_nombre"
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                        placeholder="Roberto">
-                                    @error('fiador_nombre') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-                                </div>
-
-                                <div>
-                                    <label class="block text-white font-semibold mb-2">Apellido Paterno *</label>
-                                    <input 
-                                        type="text" 
-                                        wire:model="fiador_apellido_paterno"
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                        placeholder="Sánchez">
-                                    @error('fiador_apellido_paterno') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-                                </div>
-
-                                <div>
-                                    <label class="block text-white font-semibold mb-2">Apellido Materno</label>
-                                    <input 
-                                        type="text" 
-                                        wire:model="fiador_apellido_materno"
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                        placeholder="Cruz">
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-white font-semibold mb-2">Teléfono Principal *</label>
-                                    <input 
-                                        type="tel" 
-                                        wire:model="fiador_telefono_1"
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                        placeholder="55 1234 5678">
-                                    @error('fiador_telefono_1') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-                                </div>
-
-                                <div>
-                                    <label class="block text-white font-semibold mb-2">Teléfono Secundario</label>
-                                    <input 
-                                        type="tel" 
-                                        wire:model="fiador_telefono_2"
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                        placeholder="55 8765 4321">
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="block text-white font-semibold mb-2">Correo Electrónico *</label>
-                                <input 
-                                    type="email" 
-                                    wire:model="fiador_email"
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                    placeholder="fiador@ejemplo.com">
-                                @error('fiador_email') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-                            </div>
-
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-white font-semibold mb-2">Estado civil *</label>
-                                    <select 
-                                        wire:model="fiador_estado_civil"
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm">
-                                        <option value="">SELECCIONA</option>
-                                        <option value="SOLTERO">SOLTERO</option>
-                                        <option value="CASADO">CASADO</option>
-                                        <option value="DIVORCIADO">DIVORCIADO</option>
-                                        <option value="VIUDO">VIUDO</option>
-                                        <option value="UNION_LIBRE">UNIÓN LIBRE</option>
-                                    </select>
-                                    @error('fiador_estado_civil') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-                                </div>
-
-                                <div>
-                                    <label class="block text-white font-semibold mb-2">Nacionalidad *</label>
-                                    <input 
-                                        type="text" 
-                                        wire:model="fiador_nacionalidad"
+                                        wire:model="fiador_pais"
                                         class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                         placeholder="México">
-                                    @error('fiador_nacionalidad') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-white font-semibold mb-2">
-                                        Número INM
-                                        <button type="button" class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-white/10 hover:bg-white/20 transition-colors ml-1" 
-                                                title="Solo para extranjeros con residencia permanente en México">
-                                            <span class="text-xs">?</span>
-                                        </button>
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        wire:model="fiador_numero_inm"
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                        placeholder="11883224">
+                                    @error('fiador_pais') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                                 </div>
 
                                 <div>
-                                    <label class="block text-white font-semibold mb-2">Número de INE</label>
+                                    <label class="block text-white font-semibold mb-2">Calle *</label>
                                     <input 
                                         type="text" 
-                                        wire:model="fiador_numero_ine"
+                                        wire:model="fiador_domicilio"
                                         class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                        placeholder="1234567890123">
+                                        placeholder="Avenida Insurgentes Sur 123, Colonia Roma">
+                                    @error('fiador_domicilio') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                                 </div>
-                            </div>
-
-                            <h5 class="text-lg font-bold text-gold-accent mt-6 mb-3">Dirección</h5>
-
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div>
-                                    <label class="block text-white font-semibold mb-2">Código postal*</label>
-                                    <input 
-                                        type="text" 
-                                        wire:model="fiador_codigo_postal"
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                        placeholder="01234">
-                                    @error('fiador_codigo_postal') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-                                </div>
-
-                                <div>
-                                    <label class="block text-white font-semibold mb-2">Estado*</label>
-                                    <input 
-                                        type="text" 
-                                        wire:model="fiador_estado"
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                        placeholder="Ciudad de México">
-                                    @error('fiador_estado') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-                                </div>
-
-                                <div>
-                                    <label class="block text-white font-semibold mb-2">Alcaldía / Municipio*</label>
-                                    <input 
-                                        type="text" 
-                                        wire:model="fiador_ciudad"
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                        placeholder="Cuauhtémoc">
-                                    @error('fiador_ciudad') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="block text-white font-semibold mb-2">País *</label>
-                                <input 
-                                    type="text" 
-                                    wire:model="fiador_pais"
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                    placeholder="México">
-                                @error('fiador_pais') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-                            </div>
-
-                            <div>
-                                <label class="block text-white font-semibold mb-2">Calle *</label>
-                                <input 
-                                    type="text" 
-                                    wire:model="fiador_domicilio"
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                    placeholder="Avenida Insurgentes Sur 123, Colonia Roma">
-                                @error('fiador_domicilio') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-                            </div>
+                            @endif
 
                             @if($fiador_tipo === 'empresa')
                                 @include('formulario.persona-moral-fields', [
@@ -1111,29 +1338,29 @@
                             @foreach([
                                 'inventario' => ['🏠', 'Inventario de Inmueble', 'Lista detallada de muebles y acabados'],
                                 'poliza_seguro' => ['🛡️', 'Póliza de Seguro', 'Seguro de daños y responsabilidad civil'],
-                                'clausula_mascotas' => ['🐕', 'Cláusula de Mascotas', 'Especifica condiciones para mascotas'],
-                                'opcion_compra' => ['💰', 'Opción a Compra', 'Derecho de adquisición preferente'],
-                                'renovacion_automatica' => ['🔄', 'Renovación Automática', 'Prorroga automática del contrato'],
-                                'penalizacion_anticipada' => ['⚖️', 'Penalización por Término Anticipado', 'Cláusula de salida anticipada']
+                                'clausula_mascotas' => ['🐕', 'Cláusula de Mascotas', 'Especifica condiciones para mascotas']
                             ] as $key => $data)
-                                <label class="cursor-pointer group">
-                                    <input type="checkbox" wire:model="complementos" value="{{ $key }}" class="hidden peer">
-                                    <div class="p-4 rounded-xl bg-white/5 border-2 border-white/20 peer-checked:border-gold-accent peer-checked:bg-gold-accent/10 transition-all">
-                                        <div class="flex items-start gap-3">
-                                            <div class="text-3xl">{{ $data[0] }}</div>
-                                            <div class="flex-1">
-                                                <p class="text-white font-semibold">{{ $data[1] }}</p>
-                                                <p class="text-white/60 text-sm mt-1">{{ $data[2] }}</p>
-                                            </div>
-                                            <div class="w-6 h-6 rounded-full border-2 border-white/30 peer-checked:border-gold-accent peer-checked:bg-gold-accent flex items-center justify-center">
-                                                <svg class="w-4 h-4 text-white opacity-0 peer-checked:opacity-100" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                                                </svg>
-                                            </div>
+                                <div class="p-4 rounded-xl bg-white/5 border-2 border-white/20 opacity-60 cursor-default">
+                                    <div class="flex items-start gap-3">
+                                        <div class="text-3xl">{{ $data[0] }}</div>
+                                        <div class="flex-1">
+                                            <p class="text-white font-semibold">{{ $data[1] }}</p>
+                                            <p class="text-white/60 text-sm mt-1">{{ $data[2] }}</p>
                                         </div>
                                     </div>
-                                </label>
+                                </div>
                             @endforeach
+
+                            <!-- Opción de información solo lectura -->
+                            <div class="p-4 rounded-xl bg-white/5 border-2 border-white/20 opacity-60 cursor-default">
+                                <div class="flex items-start gap-3">
+                                    <div class="text-3xl">👨‍⚖️</div>
+                                    <div class="flex-1">
+                                        <p class="text-white font-semibold">Consulta con tu Asesor</p>
+                                        <p class="text-white/60 text-sm mt-1">Si tienes dudas o necesitas cláusulas especiales, coméntalo con tu asesor</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

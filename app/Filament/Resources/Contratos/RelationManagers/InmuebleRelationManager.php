@@ -110,7 +110,11 @@ class InmuebleRelationManager extends RelationManager
                                 //     ->maxLength(50),
                             ]),
 
-                        Select::make('uso_inmueble')
+               
+
+                Grid::make(2)
+                            ->schema([
+                              Select::make('uso_inmueble')
                             ->label('Uso del Inmueble')
                             ->required()
                             ->options([
@@ -118,6 +122,15 @@ class InmuebleRelationManager extends RelationManager
                                 'comercial' => 'Comercial',
                                 'industrial' => 'Industrial',
                                 'mixto' => 'Mixto',
+                            ]),
+
+                                TextInput::make('numero_estacionamientos')
+                                    ->label('Número de Estacionamientos')
+                                    ->maxLength(20),
+
+                                // TextInput::make('edificio')
+                                //     ->label('Edificio')
+                                //     ->maxLength(50),
                             ]),
                     ])->columnSpanFull(),
             ]);

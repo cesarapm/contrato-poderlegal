@@ -38,6 +38,11 @@ class ContratoWizard extends Component
     public $fecha_inicio = '';
     public $fecha_termino = '';
     public $servicios_incluidos = [];
+    public $forma_pago = 'efectivo';
+    public $banco = '';
+    public $clabe = '';
+    public $cuenta = '';
+    public $beneficiario = '';
 
     // Paso 4: Datos del Inmueble
     public $inmueble_codigo_postal = '';
@@ -49,6 +54,9 @@ class ContratoWizard extends Component
     public $inmueble_edificio = '';
     public $inmueble_numero_interior = '';
     public $inmueble_uso = 'habitacional';
+    public $inmueble_incluye_mantenimiento = false;
+    public $inmueble_costo_mantenimiento = '';
+    public $numero_estacionamientos = 0;
 
     // Paso 5: Arrendatario(s)
     public $arrendatarios = [
@@ -60,7 +68,19 @@ class ContratoWizard extends Component
             'telefono_1' => '',
             'telefono_2' => '',
             'email' => '',
-            // Persona moral
+            'numero_ine' => '',
+            'curp' => '',
+            // Persona moral - Datos de la empresa
+            'razon_social' => '',
+            'rfc' => '',
+            'direccion_empresa' => '',
+            // Persona moral - Representante legal
+            'representante_legal_nombre' => '',
+            'representante_legal_email' => '',
+            'representante_legal_telefono' => '',
+            'representante_legal_numero_ine' => '',
+            'representante_legal_curp' => '',
+            // Persona moral - Acta constitutiva
             'no_acta_constitutiva' => '',
             'fecha_acta_constitutiva' => '',
             'fecha_registro_acta' => '',
@@ -87,9 +107,21 @@ class ContratoWizard extends Component
             'telefono_1' => '',
             'telefono_2' => '',
             'email' => '',
+            'numero_ine' => '',
+            'curp' => '',
             'tiene_representante_legal' => false,
             'en_proceso_sucesorio' => false,
-            // Persona moral
+            // Persona moral - Datos de la empresa
+            'razon_social' => '',
+            'rfc' => '',
+            'direccion_empresa' => '',
+            // Persona moral - Representante legal
+            'representante_legal_nombre' => '',
+            'representante_legal_email' => '',
+            'representante_legal_telefono' => '',
+            'representante_legal_numero_ine' => '',
+            'representante_legal_curp' => '',
+            // Persona moral - Acta constitutiva
             'no_acta_constitutiva' => '',
             'fecha_acta_constitutiva' => '',
             'fecha_registro_acta' => '',
@@ -118,13 +150,24 @@ class ContratoWizard extends Component
     public $fiador_estado_civil = '';
     public $fiador_numero_inm = '';
     public $fiador_numero_ine = '';
+    public $fiador_curp = '';
     public $fiador_nacionalidad = 'México';
     public $fiador_domicilio = '';
     public $fiador_codigo_postal = '';
     public $fiador_ciudad = '';
     public $fiador_estado = '';
     public $fiador_pais = 'México';
-    // Fiador persona moral
+    // Fiador persona moral - Datos de la empresa
+    public $fiador_razon_social = '';
+    public $fiador_rfc = '';
+    public $fiador_direccion_empresa = '';
+    // Fiador persona moral - Representante legal
+    public $fiador_representante_legal_nombre = '';
+    public $fiador_representante_legal_email = '';
+    public $fiador_representante_legal_telefono = '';
+    public $fiador_representante_legal_numero_ine = '';
+    public $fiador_representante_legal_curp = '';
+    // Fiador persona moral - Acta constitutiva
     public $fiador_no_acta_constitutiva = '';
     public $fiador_fecha_acta_constitutiva = '';
     public $fiador_fecha_registro_acta = '';
@@ -202,6 +245,19 @@ class ContratoWizard extends Component
             'telefono_1' => '',
             'telefono_2' => '',
             'email' => '',
+            'numero_ine' => '',
+            'curp' => '',
+            // Persona moral - Datos de la empresa
+            'razon_social' => '',
+            'rfc' => '',
+            'direccion_empresa' => '',
+            // Persona moral - Representante legal
+            'representante_legal_nombre' => '',
+            'representante_legal_email' => '',
+            'representante_legal_telefono' => '',
+            'representante_legal_numero_ine' => '',
+            'representante_legal_curp' => '',
+            // Persona moral - Acta constitutiva
             'no_acta_constitutiva' => '',
             'fecha_acta_constitutiva' => '',
             'fecha_registro_acta' => '',
@@ -233,8 +289,21 @@ class ContratoWizard extends Component
             'telefono_1' => '',
             'telefono_2' => '',
             'email' => '',
+            'numero_ine' => '',
+            'curp' => '',
             'tiene_representante_legal' => false,
             'en_proceso_sucesorio' => false,
+            // Persona moral - Datos de la empresa
+            'razon_social' => '',
+            'rfc' => '',
+            'direccion_empresa' => '',
+            // Persona moral - Representante legal
+            'representante_legal_nombre' => '',
+            'representante_legal_email' => '',
+            'representante_legal_telefono' => '',
+            'representante_legal_numero_ine' => '',
+            'representante_legal_curp' => '',
+            // Persona moral - Acta constitutiva
             'no_acta_constitutiva' => '',
             'fecha_acta_constitutiva' => '',
             'fecha_registro_acta' => '',
@@ -311,48 +380,136 @@ class ContratoWizard extends Component
                 'inmueble_calle' => 'required|string|max:255',
                 'inmueble_numero_exterior' => 'required|string|max:50',
             ],
-            5 => [
-                'arrendatarios.*.nombre' => 'required|string|max:255',
-                'arrendatarios.*.apellido_paterno' => 'required|string|max:255',
-                'arrendatarios.*.telefono_1' => 'required|string|max:20',
-                'arrendatarios.*.email' => 'required|email|max:255',
-                'actas_arrendatarios.*' => 'nullable|file|max:5120',
-                'comprobantes_arrendatarios.*' => 'nullable|array',
-                'comprobantes_arrendatarios.*.*' => 'nullable|file|max:5120',
-                'poderes_arrendatarios.*' => 'nullable|file|max:5120',
-                'constancias_arrendatarios.*' => 'nullable|file|max:5120',
-                'ines_arrendatarios.*' => 'nullable|array',
-                'ines_arrendatarios.*.*' => 'nullable|file|max:5120',
-            ],
-            6 => [
-                'arrendadores.*.nombre' => 'required|string|max:255',
-                'arrendadores.*.apellido_paterno' => 'required|string|max:255',
-                'arrendadores.*.telefono_1' => 'required|string|max:20',
-                'arrendadores.*.email' => 'required|email|max:255',
-                'actas_arrendadores.*' => 'nullable|file|max:5120',
-                'poderes_arrendadores.*' => 'nullable|file|max:5120',
-                'constancias_arrendadores.*' => 'nullable|file|max:5120',
-                'ines_arrendadores.*' => 'nullable|array',
-                'ines_arrendadores.*.*' => 'nullable|file|max:5120',
-            ],
-            7 => [
-                'fiador_tipo' => 'required|in:ninguno,persona,empresa',
-                'fiador_nombre' => 'required_if:fiador_tipo,persona,empresa|string|max:255',
-                'fiador_apellido_paterno' => 'required_if:fiador_tipo,persona|string|max:255',
-                'fiador_telefono_1' => 'required_if:fiador_tipo,persona,empresa|string|max:20',
-                'fiador_email' => 'required_if:fiador_tipo,persona,empresa|email|max:255',
-                'fiador_acta_constitutiva' => 'nullable|file|max:5120',
-                'fiador_poderes_representante' => 'nullable|file|max:5120',
-                'fiador_constancia_situacion_fiscal' => 'nullable|file|max:5120',
-                'comprobantes_fiador.*' => 'nullable|file|max:5120',
-                'ine_fiador.*' => 'nullable|file|max:5120',
-            ],
+            5 => $this->getArrendatarioValidationRules(),
+            6 => $this->getArrendadorValidationRules(),
+            7 => $this->getFiadorValidationRules(),
             9 => [
                 'acepto_terminos' => 'accepted',
                 'acepto_privacidad' => 'accepted',
             ],
             default => [],
         };
+    }
+
+    /**
+     * Genera reglas de validación condicionales para Arrendatarios (Paso 5)
+     * Según tipo_persona: 'fisica' o 'moral'
+     */
+    protected function getArrendatarioValidationRules()
+    {
+        $rules = [
+            'actas_arrendatarios.*' => 'nullable|file|max:5120',
+            'comprobantes_arrendatarios.*' => 'nullable|array',
+            'comprobantes_arrendatarios.*.*' => 'nullable|file|max:5120',
+            'poderes_arrendatarios.*' => 'nullable|file|max:5120',
+            'constancias_arrendatarios.*' => 'nullable|file|max:5120',
+            'ines_arrendatarios.*' => 'nullable|array',
+            'ines_arrendatarios.*.*' => 'nullable|file|max:5120',
+        ];
+
+        // Agregar reglas condicionales para cada arrendatario
+        foreach ($this->arrendatarios as $index => $arrendatario) {
+            $tipo = $arrendatario['tipo_persona'] ?? 'fisica';
+
+            // Validar tipo_persona siempre
+            $rules["arrendatarios.{$index}.tipo_persona"] = 'required|in:fisica,moral';
+
+            if ($tipo === 'fisica') {
+                // Persona Física: requiere nombre, apellido, teléfono, email
+                $rules["arrendatarios.{$index}.nombre"] = 'required|string|max:255';
+                $rules["arrendatarios.{$index}.apellido_paterno"] = 'required|string|max:255';
+                $rules["arrendatarios.{$index}.telefono_1"] = 'required|string|max:20';
+                $rules["arrendatarios.{$index}.email"] = 'required|email|max:255';
+            } else {
+                // Persona Moral: requiere datos de empresa y representante
+                $rules["arrendatarios.{$index}.razon_social"] = 'required|string|max:255';
+                $rules["arrendatarios.{$index}.rfc"] = 'required|string|max:13';
+                $rules["arrendatarios.{$index}.direccion_empresa"] = 'required|string|max:255';
+                $rules["arrendatarios.{$index}.representante_legal_nombre"] = 'required|string|max:255';
+                $rules["arrendatarios.{$index}.representante_legal_email"] = 'required|email|max:255';
+                $rules["arrendatarios.{$index}.representante_legal_telefono"] = 'required|string|max:20';
+            }
+        }
+
+        return $rules;
+    }
+
+    /**
+     * Genera reglas de validación condicionales para Arrendadores (Paso 6)
+     * Según tipo_persona: 'fisica' o 'moral'
+     */
+    protected function getArrendadorValidationRules()
+    {
+        $rules = [
+            'actas_arrendadores.*' => 'nullable|file|max:5120',
+            'poderes_arrendadores.*' => 'nullable|file|max:5120',
+            'constancias_arrendadores.*' => 'nullable|file|max:5120',
+            'ines_arrendadores.*' => 'nullable|array',
+            'ines_arrendadores.*.*' => 'nullable|file|max:5120',
+        ];
+
+        // Agregar reglas condicionales para cada arrendador
+        foreach ($this->arrendadores as $index => $arrendador) {
+            $tipo = $arrendador['tipo_persona'] ?? 'fisica';
+
+            // Validar tipo_persona siempre
+            $rules["arrendadores.{$index}.tipo_persona"] = 'required|in:fisica,moral';
+
+            if ($tipo === 'fisica') {
+                // Persona Física: requiere nombre, apellido, teléfono, email
+                $rules["arrendadores.{$index}.nombre"] = 'required|string|max:255';
+                $rules["arrendadores.{$index}.apellido_paterno"] = 'required|string|max:255';
+                $rules["arrendadores.{$index}.telefono_1"] = 'required|string|max:20';
+                $rules["arrendadores.{$index}.email"] = 'required|email|max:255';
+            } else {
+                // Persona Moral: requiere datos de empresa y representante
+                $rules["arrendadores.{$index}.razon_social"] = 'required|string|max:255';
+                $rules["arrendadores.{$index}.rfc"] = 'required|string|max:13';
+                $rules["arrendadores.{$index}.direccion_empresa"] = 'required|string|max:255';
+                $rules["arrendadores.{$index}.representante_legal_nombre"] = 'required|string|max:255';
+                $rules["arrendadores.{$index}.representante_legal_email"] = 'required|email|max:255';
+                $rules["arrendadores.{$index}.representante_legal_telefono"] = 'required|string|max:20';
+            }
+        }
+
+        return $rules;
+    }
+
+    /**
+     * Genera reglas de validación condicionales para Fiador (Paso 7)
+     * Según fiador_tipo: 'persona' o 'empresa'
+     */
+    protected function getFiadorValidationRules()
+    {
+        $rules = [
+            'fiador_tipo' => 'required|in:ninguno,persona,empresa',
+            'fiador_acta_constitutiva' => 'nullable|file|max:5120',
+            'fiador_poderes_representante' => 'nullable|file|max:5120',
+            'fiador_constancia_situacion_fiscal' => 'nullable|file|max:5120',
+            'comprobantes_fiador.*' => 'nullable|file|max:5120',
+            'ine_fiador.*' => 'nullable|file|max:5120',
+        ];
+
+        // Reglas condicionales según tipo de fiador
+        if ($this->fiador_tipo === 'persona') {
+            // Persona Física: requiere nombre, apellido, teléfono, email
+            $rules['fiador_nombre'] = 'required|string|max:255';
+            $rules['fiador_apellido_paterno'] = 'required|string|max:255';
+            $rules['fiador_telefono_1'] = 'required|string|max:20';
+            $rules['fiador_email'] = 'required|email|max:255';
+            $rules['fiador_estado_civil'] = 'required|string|max:50';
+            $rules['fiador_nacionalidad'] = 'required|string|max:255';
+        } elseif ($this->fiador_tipo === 'empresa') {
+            // Persona Moral: requiere datos de empresa y representante
+            $rules['fiador_razon_social'] = 'required|string|max:255';
+            $rules['fiador_rfc'] = 'required|string|max:13';
+            $rules['fiador_direccion_empresa'] = 'required|string|max:255';
+            $rules['fiador_representante_legal_nombre'] = 'required|string|max:255';
+            $rules['fiador_representante_legal_email'] = 'required|email|max:255';
+            $rules['fiador_representante_legal_telefono'] = 'required|string|max:20';
+        }
+
+        return $rules;
     }
 
     public function submit()
@@ -405,6 +562,13 @@ class ContratoWizard extends Component
                 'monto_renta_mensual' => floatval($this->monto_renta_mensual),
                 'monto_total' => $monto_total,
                 'incluye_iva' => $this->incluye_iva,
+                'incluye_mantenimiento' => $this->inmueble_incluye_mantenimiento,
+                'costo_mantenimiento' => $this->inmueble_incluye_mantenimiento ? floatval($this->inmueble_costo_mantenimiento) : null,
+                'forma_pago' => $this->forma_pago,
+                'banco' => $this->forma_pago === 'transferencia' ? $this->banco : null,
+                'clabe' => $this->forma_pago === 'transferencia' ? $this->clabe : null,
+                'cuenta' => $this->forma_pago === 'transferencia' ? $this->cuenta : null,
+                'beneficiario' => $this->forma_pago === 'transferencia' ? $this->beneficiario : null,
                 'fecha_inicio' => $this->fecha_inicio,
                 'fecha_termino' => $this->fecha_termino,
                 'estado' => 'borrador',
@@ -428,6 +592,7 @@ class ContratoWizard extends Component
                 'edificio' => $this->inmueble_edificio,
                 'numero_interior' => $this->inmueble_numero_interior,
                 'uso_inmueble' => $this->inmueble_uso,
+                'numero_estacionamientos' => $this->numero_estacionamientos ?? 0,
             ]);
 
             // \Log::info('Inmueble creado');
@@ -472,6 +637,8 @@ class ContratoWizard extends Component
                     'telefono_1' => $arr['telefono_1'],
                     'telefono_2' => $arr['telefono_2'] ?? null,
                     'email' => $arr['email'],
+                    'numero_ine' => $arr['numero_ine'] ?? null,
+                    'curp' => $arr['curp'] ?? null,
                     'domicilio_notificaciones' => [
                         'calle' => $this->inmueble_calle,
                         'numero_exterior' => $this->inmueble_numero_exterior,
@@ -484,7 +651,17 @@ class ContratoWizard extends Component
                     'orden' => $index + 1,
                     'comprobantes_ingresos' => !empty($comprobantesArr) ? $comprobantesArr : null,
                     'ine_paths' => !empty($ineArr) ? $ineArr : null,
-                    // Persona moral
+                    // Persona moral - Datos de la empresa
+                    'razon_social' => $arr['tipo_persona'] === 'moral' ? ($arr['razon_social'] ?? null) : null,
+                    'rfc' => $arr['tipo_persona'] === 'moral' ? ($arr['rfc'] ?? null) : null,
+                    'direccion_empresa' => $arr['tipo_persona'] === 'moral' ? ($arr['direccion_empresa'] ?? null) : null,
+                    // Persona moral - Representante legal
+                    'representante_legal_nombre' => $arr['tipo_persona'] === 'moral' ? ($arr['representante_legal_nombre'] ?? null) : null,
+                    'representante_legal_email' => $arr['tipo_persona'] === 'moral' ? ($arr['representante_legal_email'] ?? null) : null,
+                    'representante_legal_telefono' => $arr['tipo_persona'] === 'moral' ? ($arr['representante_legal_telefono'] ?? null) : null,
+                    'representante_legal_numero_ine' => $arr['tipo_persona'] === 'moral' ? ($arr['representante_legal_numero_ine'] ?? null) : null,
+                    'representante_legal_curp' => $arr['tipo_persona'] === 'moral' ? ($arr['representante_legal_curp'] ?? null) : null,
+                    // Persona moral - Acta constitutiva
                     'no_acta_constitutiva' => $arr['tipo_persona'] === 'moral' ? ($arr['no_acta_constitutiva'] ?? null) : null,
                     'fecha_acta_constitutiva' => $arr['tipo_persona'] === 'moral' ? ($arr['fecha_acta_constitutiva'] ?: null) : null,
                     'fecha_registro_acta' => $arr['tipo_persona'] === 'moral' ? ($arr['fecha_registro_acta'] ?: null) : null,
@@ -536,6 +713,8 @@ class ContratoWizard extends Component
                     'telefono_1' => $arr['telefono_1'],
                     'telefono_2' => $arr['telefono_2'] ?? null,
                     'email' => $arr['email'],
+                    'numero_ine' => $arr['numero_ine'] ?? null,
+                    'curp' => $arr['curp'] ?? null,
                     'tiene_representante_legal' => $arr['tiene_representante_legal'] ?? false,
                     'en_proceso_sucesorio' => $arr['en_proceso_sucesorio'] ?? false,
                     'direccion' => [
@@ -549,7 +728,17 @@ class ContratoWizard extends Component
                     ],
                     'orden' => $index + 1,
                     'comprobantes_ingresos' => !empty($comprobantesArr) ? $comprobantesArr : null,
-                    // Persona moral
+                    // Persona moral - Datos de la empresa
+                    'razon_social' => $arr['tipo_persona'] === 'moral' ? ($arr['razon_social'] ?? null) : null,
+                    'rfc' => $arr['tipo_persona'] === 'moral' ? ($arr['rfc'] ?? null) : null,
+                    'direccion_empresa' => $arr['tipo_persona'] === 'moral' ? ($arr['direccion_empresa'] ?? null) : null,
+                    // Persona moral - Representante legal
+                    'representante_legal_nombre' => $arr['tipo_persona'] === 'moral' ? ($arr['representante_legal_nombre'] ?? null) : null,
+                    'representante_legal_email' => $arr['tipo_persona'] === 'moral' ? ($arr['representante_legal_email'] ?? null) : null,
+                    'representante_legal_telefono' => $arr['tipo_persona'] === 'moral' ? ($arr['representante_legal_telefono'] ?? null) : null,
+                    'representante_legal_numero_ine' => $arr['tipo_persona'] === 'moral' ? ($arr['representante_legal_numero_ine'] ?? null) : null,
+                    'representante_legal_curp' => $arr['tipo_persona'] === 'moral' ? ($arr['representante_legal_curp'] ?? null) : null,
+                    // Persona moral - Acta constitutiva
                     'no_acta_constitutiva' => $arr['tipo_persona'] === 'moral' ? ($arr['no_acta_constitutiva'] ?? null) : null,
                     'fecha_acta_constitutiva' => $arr['tipo_persona'] === 'moral' ? ($arr['fecha_acta_constitutiva'] ?: null) : null,
                     'fecha_registro_acta' => $arr['tipo_persona'] === 'moral' ? ($arr['fecha_registro_acta'] ?: null) : null,
@@ -617,6 +806,7 @@ class ContratoWizard extends Component
                     'estado_civil' => $this->fiador_estado_civil,
                     'numero_inm' => $this->fiador_numero_inm,
                     'numero_ine' => $this->fiador_numero_ine,
+                    'curp' => $this->fiador_curp,
                     'nacionalidad' => $this->fiador_nacionalidad,
                     'domicilio' => $this->fiador_domicilio,
                     'codigo_postal' => $this->fiador_codigo_postal,
@@ -625,7 +815,17 @@ class ContratoWizard extends Component
                     'pais' => $this->fiador_pais,
                     'comprobantes_ingresos' => !empty($comprobantesArrFiador) ? $comprobantesArrFiador : null,
                     'ine_paths' => !empty($ineArrFiador) ? $ineArrFiador : null,
-                    // Persona moral
+                    // Persona moral - Datos de la empresa
+                    'razon_social' => $tipo_persona_fiador === 'moral' ? $this->fiador_razon_social : null,
+                    'rfc' => $tipo_persona_fiador === 'moral' ? $this->fiador_rfc : null,
+                    'direccion_empresa' => $tipo_persona_fiador === 'moral' ? $this->fiador_direccion_empresa : null,
+                    // Persona moral - Representante legal
+                    'representante_legal_nombre' => $tipo_persona_fiador === 'moral' ? $this->fiador_representante_legal_nombre : null,
+                    'representante_legal_email' => $tipo_persona_fiador === 'moral' ? $this->fiador_representante_legal_email : null,
+                    'representante_legal_telefono' => $tipo_persona_fiador === 'moral' ? $this->fiador_representante_legal_telefono : null,
+                    'representante_legal_numero_ine' => $tipo_persona_fiador === 'moral' ? $this->fiador_representante_legal_numero_ine : null,
+                    'representante_legal_curp' => $tipo_persona_fiador === 'moral' ? $this->fiador_representante_legal_curp : null,
+                    // Persona moral - Acta constitutiva
                     'no_acta_constitutiva' => $tipo_persona_fiador === 'moral' ? $this->fiador_no_acta_constitutiva : null,
                     'fecha_acta_constitutiva' => $tipo_persona_fiador === 'moral' ? ($this->fiador_fecha_acta_constitutiva ?: null) : null,
                     'fecha_registro_acta' => $tipo_persona_fiador === 'moral' ? ($this->fiador_fecha_registro_acta ?: null) : null,

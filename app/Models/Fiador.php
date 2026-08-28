@@ -35,6 +35,7 @@ class Fiador extends Model
         'estado_civil',
         'numero_inm',
         'numero_ine',
+        'curp',
         'nacionalidad',
         'identificacion_path',
         'domicilio',
@@ -42,7 +43,17 @@ class Fiador extends Model
         'estado',
         'pais',
         'codigo_postal',
-        // Campos persona moral
+        // Campos persona moral - Datos de la empresa
+        'razon_social',
+        'rfc',
+        'direccion_empresa',
+        // Campos persona moral - Representante legal
+        'representante_legal_nombre',
+        'representante_legal_email',
+        'representante_legal_telefono',
+        'representante_legal_numero_ine',
+        'representante_legal_curp',
+        // Campos persona moral - Acta constitutiva
         'no_acta_constitutiva',
         'fecha_acta_constitutiva',
         'fecha_registro_acta',

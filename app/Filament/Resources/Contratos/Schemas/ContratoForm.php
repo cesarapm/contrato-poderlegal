@@ -73,10 +73,9 @@ class ContratoForm
                         Select::make('tipo_producto')
                             ->label('Tipo de Cobertura')
                             ->options([
-                                'basica' => 'Básica',
-                                'superior' => 'Superior',
-                                'premium' => 'Premium',
-                                'empresarial' => 'Empresarial',
+                           
+                                'superior' => 'Completa',
+                          
                             ])
                             ->required()
                             ->helperText('Este valor aparecerá como COBERTURA en el PDF')
@@ -123,6 +122,66 @@ class ContratoForm
                             ->label('Incluye IVA')
                             ->inline(false)
                             ->columnSpan(2),
+
+                        Toggle::make('incluye_mantenimiento')
+                            ->label('Incluye Costo de Mantenimiento')
+                            ->inline(false)
+                            ->live()
+                            ->columnSpan(1),
+
+                        TextInput::make('costo_mantenimiento')
+                            ->label('Costo Mensual de Mantenimiento')
+                            ->numeric()
+                            ->prefix('$')
+                            ->placeholder('500.00')
+                            ->visible(fn (callable $get) => $get('incluye_mantenimiento'))
+                            ->required(fn (callable $get) => $get('incluye_mantenimiento'))
+                            ->columnSpan(1),
+                    ])
+                    ->columns(2),
+
+                Section::make('Forma de Pago')
+                    ->schema([
+                        Select::make('forma_pago')
+                            ->label('Método de Pago')
+                            ->options([
+                                'efectivo' => 'Efectivo',
+                                'transferencia' => 'Transferencia Bancaria',
+                            ])
+                            ->default('efectivo')
+                            ->required()
+                            ->live()
+                            ->columnSpan(2),
+
+                        TextInput::make('banco')
+                            ->label('Banco')
+                            ->placeholder('Ej: BBVA México')
+                            ->visible(fn (callable $get) => $get('forma_pago') === 'transferencia')
+                            ->required(fn (callable $get) => $get('forma_pago') === 'transferencia')
+                            ->columnSpan(1),
+
+                        TextInput::make('beneficiario')
+                            ->label('Beneficiario')
+                            ->placeholder('Ej: Poder Legal S.A. de C.V.')
+                            ->visible(fn (callable $get) => $get('forma_pago') === 'transferencia')
+                            ->required(fn (callable $get) => $get('forma_pago') === 'transferencia')
+                            ->columnSpan(1),
+
+                        TextInput::make('cuenta')
+                            ->label('Número de Cuenta')
+                            ->placeholder('Ej: 123456789012345678')
+                            ->visible(fn (callable $get) => $get('forma_pago') === 'transferencia')
+                            ->required(fn (callable $get) => $get('forma_pago') === 'transferencia')
+                            ->columnSpan(1),
+
+                        TextInput::make('clabe')
+                            ->label('CLABE (18 dígitos)')
+                            ->placeholder('Ej: 012180000123456789')
+                            ->length(18)
+                            ->mask('999999999999999999')
+                            ->visible(fn (callable $get) => $get('forma_pago') === 'transferencia')
+                            ->required(fn (callable $get) => $get('forma_pago') === 'transferencia')
+                            ->columnSpan(1),
                     ])
                     ->columns(2),
 

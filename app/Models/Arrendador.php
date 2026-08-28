@@ -10,6 +10,8 @@ class Arrendador extends Model
 {
     use EliminaArchivosAlBorrar;
 
+    protected $table = 'arrendadors';
+
     protected array $camposArchivoSimple = [
         'identificacion_path',
         'titulo_propiedad_path',
@@ -32,13 +34,25 @@ class Arrendador extends Model
         'telefono_1',
         'telefono_2',
         'email',
+        'numero_ine',
+        'curp',
         'identificacion_path',
         'titulo_propiedad_path',
         'tiene_representante_legal',
         'en_proceso_sucesorio',
         'direccion',
         'orden',
-        // Campos persona moral
+        // Campos persona moral - Datos de la empresa
+        'razon_social',
+        'rfc',
+        'direccion_empresa',
+        // Campos persona moral - Representante legal
+        'representante_legal_nombre',
+        'representante_legal_email',
+        'representante_legal_telefono',
+        'representante_legal_numero_ine',
+        'representante_legal_curp',
+        // Campos persona moral - Acta constitutiva
         'no_acta_constitutiva',
         'fecha_acta_constitutiva',
         'fecha_registro_acta',

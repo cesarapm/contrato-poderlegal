@@ -12,8 +12,98 @@
 @php $sep = $sep ?? '.'; @endphp
 
 <div class="mt-4 space-y-4 pt-4 border-t border-white/20">
-    {{-- Título sección --}}
-    <h5 class="text-base font-bold text-white/80 uppercase tracking-wide">Acta Constitutiva</h5>
+    {{-- Datos de la Empresa --}}
+    <h5 class="text-base font-bold text-white/80 uppercase tracking-wide">Datos de la Empresa</h5>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div>
+            <label class="block text-white font-semibold mb-2 text-sm">Razón Social *</label>
+            <input
+                type="text"
+                wire:model="{{ $prefix }}{{ $sep }}razon_social"
+                class="w-full px-3 py-2 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm text-sm"
+                placeholder="Empresa S.A. de C.V.">
+            @error("{{ $prefix }}.razon_social") <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
+        </div>
+
+        <div>
+            <label class="block text-white font-semibold mb-2 text-sm">RFC *</label>
+            <input
+                type="text"
+                wire:model="{{ $prefix }}{{ $sep }}rfc"
+                maxlength="13"
+                class="w-full px-3 py-2 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm text-sm uppercase"
+                placeholder="ABC123456XYZ">
+            @error("{{ $prefix }}.rfc") <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
+        </div>
+
+        <div>
+            <label class="block text-white font-semibold mb-2 text-sm">Dirección de la Empresa *</label>
+            <input
+                type="text"
+                wire:model="{{ $prefix }}{{ $sep }}direccion_empresa"
+                class="w-full px-3 py-2 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm text-sm"
+                placeholder="Avenida Principal 123, Oficina 45">
+            @error("{{ $prefix }}.direccion_empresa") <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
+        </div>
+    </div>
+
+    {{-- Datos del Representante Legal --}}
+    <h5 class="text-base font-bold text-white/80 uppercase tracking-wide mt-6 mb-3">Representante Legal</h5>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div>
+            <label class="block text-white font-semibold mb-2 text-sm">Nombre del Representante *</label>
+            <input
+                type="text"
+                wire:model="{{ $prefix }}{{ $sep }}representante_legal_nombre"
+                class="w-full px-3 py-2 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm text-sm"
+                placeholder="Juan Pérez García">
+            @error("{{ $prefix }}.representante_legal_nombre") <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
+        </div>
+
+        <div>
+            <label class="block text-white font-semibold mb-2 text-sm">Email del Representante *</label>
+            <input
+                type="email"
+                wire:model="{{ $prefix }}{{ $sep }}representante_legal_email"
+                class="w-full px-3 py-2 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm text-sm"
+                placeholder="representante@empresa.com">
+            @error("{{ $prefix }}.representante_legal_email") <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
+        </div>
+
+        <div>
+            <label class="block text-white font-semibold mb-2 text-sm">Teléfono del Representante *</label>
+            <input
+                type="tel"
+                wire:model="{{ $prefix }}{{ $sep }}representante_legal_telefono"
+                class="w-full px-3 py-2 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm text-sm"
+                placeholder="55 8765 4321">
+            @error("{{ $prefix }}.representante_legal_telefono") <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
+        </div>
+
+        <div>
+            <label class="block text-white font-semibold mb-2 text-sm">INE del Representante</label>
+            <input
+                type="text"
+                wire:model="{{ $prefix }}{{ $sep }}representante_legal_numero_ine"
+                class="w-full px-3 py-2 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm text-sm"
+                placeholder="123456789012345">
+        </div>
+
+        <div>
+            <label class="block text-white font-semibold mb-2 text-sm">CURP del Representante</label>
+            <input
+                type="text"
+                wire:model="{{ $prefix }}{{ $sep }}representante_legal_curp"
+                maxlength="18"
+                class="w-full px-3 py-2 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm text-sm uppercase"
+                placeholder="ABCD123456HDFXYZ09">
+        </div>
+    </div>
+
+    {{-- Acta Constitutiva --}}
+    <h5 class="text-base font-bold text-white/80 uppercase tracking-wide mt-6 mb-3">Acta Constitutiva</h5>
 
     {{-- Fila 1: No. acta | Fecha acta | Fecha registro | Estado inscrita | Copia (archivo) --}}
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">

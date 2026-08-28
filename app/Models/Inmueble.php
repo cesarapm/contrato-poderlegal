@@ -18,6 +18,7 @@ class Inmueble extends Model
         'edificio',
         'numero_interior',
         'uso_inmueble',
+        'numero_estacionamientos',
         'abogado_id',
     ];
 

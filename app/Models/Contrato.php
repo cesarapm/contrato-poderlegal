@@ -24,6 +24,13 @@ class Contrato extends Model
         'monto_iva_mensual',
         'monto_total',
         'incluye_iva',
+        'incluye_mantenimiento',
+        'costo_mantenimiento',
+        'forma_pago',
+        'banco',
+        'clabe',
+        'cuenta',
+        'beneficiario',
         'fecha_inicio',
         'fecha_termino',
         'fecha_emision',
@@ -62,6 +69,18 @@ class Contrato extends Model
         static::creating(function ($contrato) {
             if (empty($contrato->folio)) {
                 $contrato->folio = 'CON-' . strtoupper(Str::random(8));
+            }
+        });
+
+        // Enviar notificación al tramitante cuando se crea un contrato
+        static::created(function ($contrato) {
+            if ($contrato->tramitante && $contrato->tramitante->email) {
+                try {
+                    \Mail::to($contrato->tramitante->email)
+                        ->send(new \App\Mail\NuevoContratoCreado($contrato));
+                } catch (\Exception $e) {
+                    \Log::error('Error al enviar email de nuevo contrato: ' . $e->getMessage());
+                }
             }
         });
 
