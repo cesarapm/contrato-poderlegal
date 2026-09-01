@@ -177,7 +177,6 @@ class ContratoForm
                         TextInput::make('clabe')
                             ->label('CLABE (18 dígitos)')
                             ->placeholder('Ej: 012180000123456789')
-                            ->length(18)
                             ->mask('999999999999999999')
                             ->visible(fn (callable $get) => $get('forma_pago') === 'transferencia')
                             ->required(fn (callable $get) => $get('forma_pago') === 'transferencia')
