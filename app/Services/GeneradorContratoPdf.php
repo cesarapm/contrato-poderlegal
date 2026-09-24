@@ -328,7 +328,7 @@ class GeneradorContratoPdf
             'fecha_inicio_formato' => $fechaInicio ? $this->fechaTexto($fechaInicio) : '',
             'fecha_termino_formato' => $fechaTermino ? $this->fechaTexto($fechaTermino) : '',
             'plazo_contrato' => ($fechaInicio && $fechaTermino)
-                ? mb_strtoupper($fechaInicio->diffInMonths($fechaTermino) . ' MESES', 'UTF-8')
+                ? mb_strtoupper(round($fechaInicio->diffInMonths($fechaTermino)) . ' MESES', 'UTF-8')
                 : '',
             'dia_firma' => $fechaInicio ? $fechaInicio->day : '',
             'mes_firma' => $fechaInicio ? mb_strtoupper($this->mesNombre($fechaInicio), 'UTF-8') : '',
