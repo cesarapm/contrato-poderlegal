@@ -15,6 +15,10 @@ class ContratoForm
 {
     public static function schema(Schema $schema): Schema
     {
+        if ($schema->getOperation() === 'create') {
+            return ContratoCreateWizardForm::schema($schema);
+        }
+
         return $schema
             ->schema([
                 Section::make('Información General')
