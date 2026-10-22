@@ -282,7 +282,7 @@ class ArrendatariosRelationManager extends RelationManager
                 //     ->searchable()
                 //     ->formatStateUsing(function ($state, $record) {
                 //         if (!$record) return 'Sin datos';
-                //         return $record->tipo_persona === 'moral' 
+                //         return $record->tipo_persona === 'moral'
                 //             ? ($record->razon_social ?? 'Sin razón social')
                 //             : trim(($record->nombre ?? '') . ' ' . ($record->apellido_paterno ?? '') . ' ' . ($record->apellido_materno ?? ''));
                 //     }),
@@ -291,7 +291,7 @@ class ArrendatariosRelationManager extends RelationManager
                 //     ->searchable()
                 //     ->formatStateUsing(function ($state, $record) {
                 //         if (!$record) return 'Sin datos';
-                //         return $record->tipo_persona === 'moral' 
+                //         return $record->tipo_persona === 'moral'
                 //             ? ($record->rfc ?? 'Sin RFC')
                 //             : ($record->numero_ine ?? 'Sin INE');
                 //     }),
@@ -326,7 +326,7 @@ class ArrendatariosRelationManager extends RelationManager
                 //     ->searchable()
                 //     ->formatStateUsing(function ($state, $record) {
                 //         if (!$record) return 'Sin contacto';
-                //         return $record->tipo_persona === 'moral' 
+                //         return $record->tipo_persona === 'moral'
                 //             ? ($record->representante_legal_nombre ?? $record->representante_legal_email ?? 'Sin contacto')
                 //             : ($record->email ?? $record->telefono_1 ?? 'Sin contacto');
                 //     }),

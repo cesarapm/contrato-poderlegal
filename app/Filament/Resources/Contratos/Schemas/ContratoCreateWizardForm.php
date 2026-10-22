@@ -40,6 +40,19 @@ class ContratoCreateWizardForm
                                     'asesor' => 'Asesor', 'propietario' => 'Propietario',
                                 ])->default('asesor')->required(),
                                 Toggle::make('es_independiente')->label('Asesor independiente')->default(false),
+                            ])
+                            ->editOptionForm([
+                                TextInput::make('nombre')->required(),
+                                TextInput::make('apellido_paterno')->required(),
+                                TextInput::make('apellido_materno'),
+                                TextInput::make('telefono_1')->tel()->required(),
+                                TextInput::make('telefono_2')->tel(),
+                                TextInput::make('email')->email()->required(),
+                                TextInput::make('inmobiliaria')->label('Inmobiliaria'),
+                                Select::make('tipo_solicitante')->label('Tipo de solicitante')->options([
+                                    'asesor' => 'Asesor', 'propietario' => 'Propietario',
+                                ])->required(),
+                                Toggle::make('es_independiente')->label('Asesor independiente'),
                             ]),
                         Select::make('tipo_producto')->label('Tipo de cobertura')->options([
                             'superior' => 'Completa',
@@ -93,23 +106,23 @@ class ContratoCreateWizardForm
                     ]),
 
                 Step::make('Arrendatario(s)')->icon('heroicon-o-users')
-                    ->description('Agrega una o varias personas físicas o morales')
-                    ->schema([Repeater::make('arrendatarios')->relationship()->label('Arrendatarios')->minItems(1)->defaultItems(1)
-                        ->schema(self::partyFields(true))->columns(2)->collapsible()->itemLabel(fn (array $state): ?string => $state['nombre'] ?? $state['razon_social'] ?? 'Arrendatario'),
+                    ->description('Agrega la información de la persona física o moral arrendataria')
+                    ->schema([Repeater::make('arrendatarios')->relationship()->label('Arrendatario')->minItems(1)->maxItems(1)->defaultItems(1)
+                        ->schema(self::partyFields(true))->columns(2)
                     ]),
 
                 Step::make('Arrendador(es)')->icon('heroicon-o-user-group')
-                    ->description('Agrega una o varias personas arrendadoras')
-                    ->schema([Repeater::make('arrendadores')->relationship()->label('Arrendadores')->minItems(1)->defaultItems(1)
-                        ->schema(self::partyFields(false))->columns(2)->collapsible()->itemLabel(fn (array $state): ?string => $state['nombre'] ?? $state['razon_social'] ?? 'Arrendador'),
+                    ->description('Agrega la información de la persona arrendadora')
+                    ->schema([Repeater::make('arrendadores')->relationship()->label('Arrendador')->minItems(1)->maxItems(1)->defaultItems(1)
+                        ->schema(self::partyFields(false))->columns(2)
                     ]),
 
                 Step::make('Fiador y revisión')->icon('heroicon-o-shield-check')
                     ->description('El fiador es opcional. Revisa la información antes de guardar.')
                     ->schema([
-                        Select::make('fiador_tipo')->label('Fiador')->options(['ninguno' => 'Sin fiador', 'persona' => 'Persona física', 'empresa' => 'Persona moral'])
-                            ->default('ninguno')->live()->dehydrated(false)
-                            ->afterStateUpdated(fn ($state, $set) => $set('fiador.tipo_persona', $state === 'empresa' ? 'moral' : 'fisica')),
+                        // Select::make('fiador_tipo')->label('Fiador')->options(['ninguno' => 'Sin fiador', 'persona' => 'Persona física', 'empresa' => 'Persona moral'])
+                        //     ->default('ninguno')->live()->dehydrated(false)
+                        //     ->afterStateUpdated(fn ($state, $set) => $set('fiador.tipo_persona', $state === 'empresa' ? 'moral' : 'fisica')),
                         Group::make()->relationship('fiador')->schema([
                             Hidden::make('tipo')->default('fiador'),
                             Select::make('tipo_persona')->label('Tipo de persona')->options(['fisica' => 'Física', 'moral' => 'Moral'])
@@ -157,7 +170,7 @@ class ContratoCreateWizardForm
     {
         return [
             Select::make('tipo_persona')->label('Tipo de persona')->options(['fisica' => 'Persona física', 'moral' => 'Persona moral'])->default('fisica')->required()->live(),
-            TextInput::make('orden')->label('Orden')->numeric()->default(1)->required(),
+            // TextInput::make('orden')->label('Orden')->numeric()->default(1)->required(),
             TextInput::make('nombre')->label(fn ($get) => $get('tipo_persona') === 'moral' ? 'Nombre del representante/contacto' : 'Nombre')->required(),
             TextInput::make('apellido_paterno')->label('Apellido paterno')->required(fn ($get) => $get('tipo_persona') === 'fisica')->visible(fn ($get) => $get('tipo_persona') === 'fisica'),
             TextInput::make('apellido_materno')->label('Apellido materno')->visible(fn ($get) => $get('tipo_persona') === 'fisica'),

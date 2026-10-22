@@ -45,12 +45,12 @@ class ArrendadoresRelationManager extends RelationManager
                                     ->default('fisica')
                                     ->live(),
 
-                                TextInput::make('orden')
-                                    ->label('Orden')
-                                    ->numeric()
-                                    ->default(1)
-                                    ->minValue(1)
-                                    ->helperText('Orden en el contrato (1, 2, 3...)'),
+                                // TextInput::make('orden')
+                                //     ->label('Orden')
+                                //     ->numeric()
+                                //     ->default(1)
+                                //     ->minValue(1)
+                                //     ->helperText('Orden en el contrato (1, 2, 3...)'),
 
                                 Grid::make(1)
                                     ->visible(fn($get) => $get('tipo_persona') === 'fisica')
@@ -272,7 +272,7 @@ class ArrendadoresRelationManager extends RelationManager
                 // TextColumn::make('orden')
                 //     ->label('#')
                 //     ->sortable(),
-                TextColumn::make('tipo_persona')
+                TextColumn::make('tipo_persona ma')
                     ->label('Tipo')
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {

@@ -29,7 +29,7 @@ class ContratoForm
                             ->placeholder('Ej: POL-2026-001')
                             ->helperText('Este número aparecerá en el campo PÓLIZA del PDF')
                             ->columnSpan(1),
-                        
+
                         TextInput::make('folio')
                             ->label('Número de Contrato')
                             ->disabled()
@@ -37,7 +37,7 @@ class ContratoForm
                             ->placeholder('Se genera automáticamente')
                             ->helperText('Se genera automáticamente como CON-XXXXXXXX')
                             ->columnSpan(1),
-                        
+
                         Select::make('estado')
                             ->label('Estado')
                             ->options([
@@ -77,9 +77,9 @@ class ContratoForm
                         Select::make('tipo_producto')
                             ->label('Tipo de Cobertura')
                             ->options([
-                           
+
                                 'superior' => 'Completa',
-                          
+
                             ])
                             ->required()
                             ->helperText('Este valor aparecerá como COBERTURA en el PDF')
@@ -115,12 +115,12 @@ class ContratoForm
                             ->prefix('$')
                             ->columnSpan(1),
 
-                        TextInput::make('monto_total')
-                            ->label('Monto Total')
-                            ->required()
-                            ->numeric()
-                            ->prefix('$')
-                            ->columnSpan(1),
+                        // TextInput::make('monto_total')
+                        //     ->label('Monto Total')
+                        //     ->required()
+                        //     ->numeric()
+                        //     ->prefix('$')
+                        //     ->columnSpan(1),
 
                         Toggle::make('incluye_iva')
                             ->label('Incluye IVA')
@@ -198,7 +198,7 @@ class ContratoForm
                             ->live()
                             ->afterStateUpdated(function ($state, callable $set, callable $get) {
                                 $precio = floatval($get('poliza_precio_completa') ?? 0);
-                                
+
                                 if ($state) {
                                     // Con IVA
                                     $iva = $precio * 0.16;
@@ -208,7 +208,7 @@ class ContratoForm
                                     $iva = 0;
                                     $total = $precio;
                                 }
-                                
+
                                 $set('poliza_subtotal', number_format($iva, 2, '.', ''));
                                 $set('poliza_total', number_format($total, 2, '.', ''));
                             })
@@ -223,7 +223,7 @@ class ContratoForm
                             ->afterStateUpdated(function ($state, callable $set, callable $get) {
                                 $precio = floatval($state ?? 0);
                                 $incluyeIva = $get('poliza_incluye_iva') ?? true;
-                                
+
                                 if ($incluyeIva) {
                                     $iva = $precio * 0.16;
                                     $total = $precio + $iva;
@@ -231,7 +231,7 @@ class ContratoForm
                                     $iva = 0;
                                     $total = $precio;
                                 }
-                                
+
                                 $set('poliza_subtotal', number_format($iva, 2, '.', ''));
                                 $set('poliza_total', number_format($total, 2, '.', ''));
                             })

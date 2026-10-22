@@ -44,15 +44,15 @@ class FiadorRelationManager extends RelationManager
                                     ->default('fiador')
                                     ->live(),
 
-                                Select::make('tipo_persona')
-                                    ->label('Tipo de Persona')
-                                    ->options([
-                                        'fisica' => 'Persona Física',
-                                        'moral' => 'Persona Moral',
-                                    ])
-                                    ->default('fisica')
-                                    ->live()
-                                    ->visible(fn ($get) => $get('tipo') !== 'ninguno'),
+                                // Select::make('tipo_persona')
+                                //     ->label('Tipo de Persona')
+                                //     ->options([
+                                //         'fisica' => 'Persona Física',
+                                //         'moral' => 'Persona Moral',
+                                //     ])
+                                //     ->default('fisica')
+                                //     ->live()
+                                //     ->visible(fn ($get) => $get('tipo') !== 'ninguno'),
                             ]),
 
                         Grid::make(2)
@@ -345,7 +345,7 @@ class FiadorRelationManager extends RelationManager
                 //     ->searchable()
                 //     ->formatStateUsing(function ($state, $record) {
                 //         if (!$record) return 'Sin datos';
-                //         return $record->tipo_persona === 'moral' 
+                //         return $record->tipo_persona === 'moral'
                 //             ? ($record->razon_social ?? 'Sin razón social')
                 //             : trim(($record->nombre ?? '') . ' ' . ($record->apellido_paterno ?? '') . ' ' . ($record->apellido_materno ?? ''));
                 //     }),
@@ -354,7 +354,7 @@ class FiadorRelationManager extends RelationManager
                 //     ->searchable()
                 //     ->formatStateUsing(function ($state, $record) {
                 //         if (!$record) return 'Sin datos';
-                //         return $record->tipo_persona === 'moral' 
+                //         return $record->tipo_persona === 'moral'
                 //             ? ($record->rfc ?? 'Sin RFC')
                 //             : ($record->numero_ine ?? 'Sin INE');
                 //     }),
@@ -389,7 +389,7 @@ class FiadorRelationManager extends RelationManager
                 //     ->searchable()
                 //     ->formatStateUsing(function ($state, $record) {
                 //         if (!$record) return 'Sin contacto';
-                //         return $record->tipo_persona === 'moral' 
+                //         return $record->tipo_persona === 'moral'
                 //             ? ($record->representante_legal_nombre ?? $record->representante_legal_email ?? 'Sin contacto')
                 //             : ($record->email ?? $record->telefono_1 ?? 'Sin contacto');
                 //     }),
