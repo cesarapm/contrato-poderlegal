@@ -28,6 +28,7 @@ class Arrendatario extends Model
         'nombre',
         'apellido_paterno',
         'apellido_materno',
+        'nacionalidad',
         'telefono_1',
         'telefono_2',
         'email',

@@ -103,6 +103,13 @@ class ArrendatariosRelationManager extends RelationManager
                                     ->formatStateUsing(fn (?string $state) => strtoupper($state ?? ''))
                                     ->dehydrateStateUsing(fn (?string $state) => strtoupper($state ?? '')),
                             ]),
+
+                        Grid::make(2)
+                            ->schema([
+                                TextInput::make('nacionalidad')
+                                    ->label('Nacionalidad')
+                                    ->maxLength(50),
+                            ]),
                     ]),
 
                 Section::make('Datos de la Empresa')

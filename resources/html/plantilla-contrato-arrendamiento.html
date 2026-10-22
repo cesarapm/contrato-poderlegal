@@ -5,17 +5,17 @@
     <title>Contrato de Arrendamiento - Poder Legal</title>
     <style>
         @page {
-            margin: 1.5cm !important;  
-         
+            margin: 1.5cm !important;
+
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             font-family: 'Liberation Sans Narrow', 'DejaVu Sans', Arial, sans-serif;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Liberation Sans Narrow', 'DejaVu Sans', Arial, sans-serif;
         font-size: 12px;
@@ -24,14 +24,14 @@
             border: 2px solid #5b2c83 !important;
             color: #222222;
         }
-        
+
         .page-container {
             padding: 20px;
             margin-bottom: 0;
-           
+
         }
-        
- 
+
+
         .header {
     position: fixed;
     top: -85px;
@@ -48,32 +48,32 @@
     height: 2px;
     background: #d9a900;
 }
-        
+
         .header-left {
             display: inline;
             font-size: 13px;
             font-weight: bold;
             color: #5b2c83;
         }
-        
+
         .header-middle {
             display: inline;
             font-size: 12px;
             color: #666666;
             margin-left: 5px;
         }
-        
+
         .header-middle strong {
             font-weight: bold;
         }
-        
+
         .header-right {
             float: right;
             font-size: 11px;
             font-weight: bold;
             color: #5b2c83;
         }
-        
+
         /* footer manejado por canvas->page_text() en el controlador */
         /* .header-line {
             width: 100%;
@@ -82,16 +82,16 @@
             margin-bottom: 15px;
             clear: both;
         } */
-        
+
         .content {
             margin-top: 10px;
             text-align: justify;
         }
-        
+
         .page-break {
             page-break-after: always;
         }
-        
+
         .folio-header {
             text-align: right;
             font-size: 14px;
@@ -100,21 +100,21 @@
             margin-bottom: 20px;
             margin-top: 10px;
         }
-        
+
         .title-intro {
             font-size: 17px;
             line-height: 1.2;
             text-align: justify;
             margin-bottom: 20px;
         }
-        
+
         .title-intro .blank {
-         
-            
+
+
             font-weight: bold;
             color: #222222;
         }
-        
+
      .section-title {
     font-size: 18px;
     font-weight: bold;
@@ -137,11 +137,11 @@
     height: 4px;
     background-color: #f2c94c;
 }
-        
+
         .declaration {
             margin-bottom: 15px;
         }
-        
+
 .declaration-title {
     display: inline-block;
     width: auto;
@@ -159,22 +159,22 @@
             font-size: 16px;
             line-height: 1.2;
         }
-        
+
         .declaration-item-letter {
             display: inline-block;
             width: 16px;
             margin-left: 5px;
             font-size: 15px;
         }
-        
+
         .declaration-item-letter-bold {
             font-weight: bold;
         }
-        
+
         .clausula {
             margin-bottom: 15px;
         }
-        
+
         .clausula-title {
             font-size: 16px;
             font-weight: bold;
@@ -182,14 +182,14 @@
             margin-bottom: 5px;
             background-color: rgb(91, 44, 131,.2);
         }
-        
+
         .clausula-text {
             font-size: 16px;
             text-align: justify;
             line-height: 1.2;
             margin-bottom: 8px;
         }
-        
+
         .clausula-item {
             margin-left: 30px;
             margin-bottom: 10px;
@@ -197,14 +197,14 @@
             font-size: 16px;
             line-height: 1.2;
         }
-        
+
         .clausula-item-letter {
             display: inline-block;
             width: 15px;
             margin-left: -5px;
             font-size: 15px;
         }
-        
+
         .blank-line {
             display: inline-block;
             border-bottom: 1px solid #222222;
@@ -213,7 +213,7 @@
             color: #222222;
             margin: 0 2px;
         }
-        
+
         .blank-short {
             display: inline-block;
             border-bottom: 1px solid #222222;
@@ -222,7 +222,7 @@
             color: #222222;
             margin: 0 2px;
         }
-        
+
         .data-box {
             background-color: #5b2c83;
             color: #ffffff;
@@ -232,36 +232,36 @@
             font-weight: bold;
             margin: 15px 50px 10px 50px;
         }
-        
+
         .data-row {
             margin: 10px 50px;
             font-size: 15px;
         }
-        
+
         .data-label {
             display: inline-block;
             width: 180px;
             font-weight: bold;
             color: #44205f;
         }
-        
+
         .data-value {
             border-bottom: 1px solid #222222;
             display: inline-block;
             min-width: 250px;
         }
-        
+
         .bold-text {
             font-weight: bold;
             color: #222222;
         }
-        
+
         .banco-table {
             width: 100%;
             border-collapse: collapse;
             margin: 15px 0;
         }
-        
+
         .banco-table-header {
             background-color: #5b2c83;
             color: #ffffff;
@@ -271,41 +271,41 @@
             font-weight: bold;
             border: 1px solid #5b2c83;
         }
-        
+
         .banco-table-row {
             border: 1px solid #cccccc;
         }
-        
+
         .banco-table-row td {
             padding: 8px;
             font-size: 13px;
             border-right: 1px solid #cccccc;
         }
-        
+
         .banco-table-row td:last-child {
             border-right: none;
         }
-        
+
         .banco-table-label {
             font-weight: bold;
             color: #5b2c83;
             width: 40%;
         }
-        
+
         .page-break {
             page-break-after: always;
         }
-        
+
         .indent {
             margin-left: 2px;
         }
-        
+
         .signature-section {
             margin-top: 50px;
             display: table;
             width: 100%;
         }
-        
+
         .signature-box {
             display: table-cell;
             text-align: center;
@@ -313,19 +313,19 @@
             width: 33%;
             padding: 0 10px;
         }
-        
+
         .signature-line {
             border-top: 1px solid #000000;
             margin-top: 40px;
             margin-bottom: 5px;
         }
-        
+
         .signature-label {
             font-size: 10px;
             color: #222222;
             font-weight: bold;
         }
-        
+
         .signature-name {
             font-size: 9px;
             color: #222222;
@@ -342,7 +342,7 @@
         <div class="header-right">No. {{folio}}</div>
         <div style="clear: both;"></div>
     </div>
-    
+
     <!-- Línea decorativa amarilla -->
     <div class="header-line"></div>
 
@@ -352,13 +352,13 @@
 
     <!-- Contenido -->
     <div class="content">
-        
+
         <div class="folio-header">
             FOLIO DE CONTRATO: {{folio}}
         </div>
 
         <div class="title-intro">
-            CONTRATO DE ARRENDAMIENTO QUE CELEBRAN POR UNA PARTE <span class="blank">{{arrendador_nombre_o_razon}}</span>, A QUIEN EN LO SUCESIVO Y PARA LOS EFECTOS DEL PRESENTE INSTRUMENTO SE LE DENOMINARÁ "EL ARRENDADOR"; POR LA OTRA <span class="blank">{{arrendatario_nombre_o_razon}}</span>, A QUIEN EN LO SUCESIVO SE LE DENOMINARÁ "EL ARRENDATARIO"; Y <span class="blank">{{fiador_nombre_o_razon}}</span>, A QUIEN EN LO SUCESIVO SE LE DENOMINARÁ "EL OBLIGADO SOLIDARIO / FIADOR"; TODOS LOS CUALES SE SUJETAN A LAS SIGUIENTES DECLARACIONES Y CLÁUSULAS:
+            CONTRATO DE ARRENDAMIENTO QUE CELEBRAN POR UNA PARTE <span class="blank">{{arrendador_nombre_o_razon}}</span>, A QUIEN EN LO SUCESIVO Y PARA LOS EFECTOS DEL PRESENTE INSTRUMENTO SE LE DENOMINARA “EL ARRENDADOR”, POR LA OTRA <span class="blank">{{arrendatario_nombre_o_razon}}</span>, A QUIEN EN LO SUCESIVO SE LE DENOMINARÁ "EL ARRENDATARIO"; Y <span class="blank">{{fiador_nombre_o_razon}}</span>, A QUIEN EN LO SUCESIVO SE LE DENOMINARÁ "EL OBLIGADO SOLIDARIO" TODOS LOS CUALES SE SUJETAN A LAS SIGUIENTES DECLARACIONES Y CLÁUSULAS:
         </div>
 
         <div class="section-title">D E C L A R A C I O N E S</div>
@@ -366,15 +366,15 @@
         <!-- DECLARACIÓN I -->
         <div class="declaration">
             <div class="declaration-title">I.- DECLARA "EL ARRENDADOR":</div>
-            
+
             <div class="declaration-item">
                 <span class="declaration-item-letter">a)</span> Que cuenta con la capacidad jurídica suficiente y bastante para celebrar el presente contrato.
             </div>
-            
+
             <div class="declaration-item">
                 <span class="declaration-item-letter declaration-item-letter">b)</span> Que es propietario(a) del inmueble ubicado en <span >{{inmueble_direccion_completa}}</span>. <span class="indent">Identificación: <span >{{arrendador_identificacion}}</span>; correo electrónico: <span >{{arrendador_email}}</span>; teléfono: <span >{{arrendador_telefono}}</span>.</span>
             </div>
-            
+
             <div class="declaration-item">
                 <span class="declaration-item-letter declaration-item-letter">c)</span> Que para efectos de este contrato señala como su domicilio para recibir y oír toda clase de notificaciones el ubicado en <span >{{arrendador_domicilio}}</span>.
             </div>
@@ -383,19 +383,19 @@
         <!-- DECLARACIÓN II -->
         <div class="declaration">
             <div class="declaration-title">II.- DECLARA "EL ARRENDATARIO":</div>
-            
+
             <div class="declaration-item">
                 <span class="declaration-item-letter">a)</span> Que tiene las facultades suficientes y bastantes para obligarse en términos del presente instrumento.
             </div>
-            
+
             <div class="declaration-item">
                 <span class="declaration-item-letter">b)</span> Que tiene interés en recibir en arrendamiento  el  inmueble  que  se  describe  en  el  inciso  b),  de  la  declaración  número  I,  el  cual sabe y le consta, se encuentra en las condiciones necesarias de seguridad, higiene y salubridad para ser  habitado  y  que cuenta con el equipo en perfecto estado por lo que no condicionará el pago de rentas a ningún tipo de mejora.
             </div>
-            
+
             <div class="declaration-item">
                 <span class="declaration-item-letter declaration-item-letter">c)</span> Que  para  efectos  del  presente  contrato  señala  como  domicilio  para  recibir  y  oír  notificaciones <span >{{arrendatario_domicilio_completo}}</span>. Identificación: <span >{{arrendatario_identificacion}}</span>; teléfono: <span >{{arrendatario_telefono}}</span>; correo electrónico: <span >{{arrendatario_email}}</span>.
             </div>
-            
+
             <div class="declaration-item">
                 <span class="declaration-item-letter">d)</span> Ser  una  persona <span >{{arrendatario_tipo_persona}}</span>,  con  capacidad  económica  para  fungir  en  el  presente  contrato  como  "EL ARRENDATARIO", obligándose en los términos del mismo.
             </div>
@@ -404,7 +404,7 @@
         <!-- DECLARACIÓN III -->
         <div class="declaration">
             <div class="declaration-title">III.- DECLARA "EL OBLIGADO SOLIDARIO / FIADOR":</div>
-            
+
             <div class="declaration-item">
                 Ser persona <span >{{fiador_tipo_persona}}</span>, identificada con <span >{{fiador_identificacion}}</span>, con plena capacidad para la celebración del presente contrato y obligándose solidariamente en los términos del mismo. Domicilio: <span >{{fiador_domicilio_completo}}</span>; correo electrónico: <span >{{fiador_email}}</span>; teléfono: <span >{{fiador_telefono}}</span>.
             </div>
@@ -413,11 +413,11 @@
         <!-- DECLARACIÓN IV -->
         <div class="declaration">
             <div class="declaration-title">IV.- DECLARAN LAS PARTES</div>
-            
+
             <div class="declaration-item">
                 <span class="declaration-item-letter">a)</span> Que en el presente contrato no existe dolo, error, mala fe o cualquier otro vicio de la voluntad, por lo que expresamente renuncian a invocarlos en cualquier tiempo.
             </div>
-            
+
             <div class="declaration-item">
                 <span class="declaration-item-letter">b)</span> Que se reconocen la personalidad con la que comparecen a la celebración de este contrato y expresamente convienen en someterse a las obligaciones contenidas en las siguientes:
             </div>
@@ -433,38 +433,38 @@
         <!-- SEGUNDA -->
         <div class="clausula">
             <span class="clausula-title">SEGUNDA. - RENTA. -</span> <span class="clausula-text">Las partes convienen voluntariamente y de común acuerdo que "EL ARRENDATARIO" pagará a "EL ARRENDADOR" o a quien sus derechos representen, por concepto de contraprestación una renta mensual en los siguientes términos:</span>
-            
+
             <div class="clausula-item">
                 <span class="clausula-item-letter declaration-item-letter">a)</span> El  monto  de  la  renta  mensual  será  de  $ <span >{{monto_renta_mensual}}</span> (<span >{{monto_renta_mensual_letra}} PESOS 00/100 M.N.</span>).
             </div>
-            
+
             <div class="clausula-item">
                 <span class="clausula-item-letter">b)</span> El pago de la renta  mensual  será  por  meses  adelantados,  siéndole  forzoso  todo  el  mes  y  debiendo  cubrir  íntegra  la  mensualidad, aun cuando no usare el inmueble de tiempo completo.
             </div>
-            
+
             <div class="clausula-item">
                 <span class="clausula-item-letter">c)</span> A la fecha de firma del presente contrato, "EL ARRENDATARIO" paga a "EL ARRENDADOR", el primer mes de renta, sirviendo el presente contrato como el recibo más eficaz que en derecho corresponda.
             </div>
-            
+
             <div class="clausula-item">
                 <!-- <span class="clausula-item-letter">d)</span> Por mutuo acuerdo de las partes, <span class="bold-text">EL PAGO DE LA RENTA MENSUAL</span> se cubrirá por meses adelantados, dentro de los primeros <span class="bold-text">CINCO DÍAS NATURALES</span> contados a partir del <span class="bold-text">DÍA {{dia_pago_renta}} DE CADA MES</span>. El "ARRENDATARIO" podrá efectuar el pago <span class="bold-text">{{texto_pago_forma}}</span> en el domicilio de "EL ARRENDADOR" señalado en el presente contrato. El pago deberá realizarse íntegramente en tiempo, modo y lugar convenidos. -->
 
 
                 <span class="clausula-item-letter">d)</span> Por mutuo acuerdo de las partes, EL PAGO DE LA RENTA MENSUAL se cubrirá por meses adelantados, dentro de los primeros CINCO DÍAS NATURALES contados a partir del DÍA {{dia_pago_renta}} DE CADA MES. El "ARRENDATARIO" pagará la renta EN EFECTIVO EN EL DOMICILIO DE "EL ARRENDADOR" o mediante TRANSFERENCIA BANCARIA A LA CUENTA DESIGNADA POR "EL ARRENDADOR" EN EL RECUADRO QUE SE DETALLA A CONTINUACIÓN. El pago deberá realizarse íntegramente en tiempo, modo y lugar convenidos.
             </div>
-            
+
             <!-- DATOS BANCARIOS - Solo si hay transferencia bancaria disponible -->
             <!-- Para mostrar esta sección, usar variable: {{seccion_datos_bancarios}} -->
             <!-- Si hay transferencia, esta variable contendrá el HTML completo de la tabla -->
             <!-- Si solo hay efectivo, esta variable estará vacía -->
             {{seccion_datos_bancarios}}
-            
+
             <div class="clausula-item">
                 <span class="clausula-item-letter">e)</span> No podrá en ningún caso "EL ARRENDATARIO", retener las rentas, bajo ningún título judicial, ni extrajudicialmente, debiendo hacer el pago íntegro, a
 más tardar en el plazo que se describe en el inciso d) de esta cláusula, por lo que de no hacerlo en el tiempo, modo y lugar convenidos, pagará la
 pena convencional del 1% (uno por ciento) diario, sobre el importe de la renta, sin perjuicio de lo que estipula dicho inciso d).
             </div>
-            
+
             <div class="clausula-item">
                 <span class="clausula-item-letter">f)</span>Cuando "EL ARRENDATARIO" pague la renta con cheque, y éste no fuere cubierto por el banco emisor, por cualquier causa, se considerará que el
 pago de la pensión rentística de que se trate no fue recibido por el arrendador en tiempo y forma, quedando obligado "EL ARRENDATARIO" a cubrir
@@ -473,7 +473,7 @@ Operaciones de Crédito, así como las comisiones vigentes de la institución ba
 d) y e) de esta cláusula, reservándose "EL ARRENDADOR" o quien sus derechos represente a recibir o no el pago de la renta con cheque, debiendo en
 todo caso "EL ARRENDATARIO" pagar su importe en moneda de curso legal.
             </div>
-            
+
             <div class="clausula-item">
                 <span class="clausula-item-letter">g)</span> Si "EL ARRENDADOR" recibe la renta en fecha y forma distinta de la estipulada, o recibe abonos a cuenta de las mismas, no se entenderá novado el
 contrato, ni en cuanto a los términos ni en cuanto a la fecha y forma de pago.
@@ -568,7 +568,7 @@ contrato, ni en cuanto a los términos ni en cuanto a la fecha y forma de pago.
             <span class="clausula-title">DÉCIMA NOVENA.- OBLIGADO SOLIDARIO / FIADOR.- </span><span class="clausula-text">En garantía al cumplimiento de las obligaciones contraídas en el presente contrato por parte de “EL ARRENDATARIO”, “EL OBLIGADO SOLIDARIO” lo firma solidariamente, constituyéndose así en pagador de todas y cada una de dichas obligaciones, renunciando expresamente a los beneficios de orden y excusión en el presente contrato; por tanto, “EL ARRENDADOR” está en aptitud de demandar el cumplimiento de las obligaciones contraídas contra “EL ARRENDATARIO”, contra “EL OBLIGADO SOLIDARIO” o contra ambos, en una o diversas acciones. “EL OBLIGADO SOLIDARIO” conviene en que su responsabilidad legal no cesa sino hasta el momento en que “EL ARRENDADOR” se dé por recibido del inmueble y/o del pago total de lo adeudado a su entera satisfacción, renunciando a los beneficios contenidos en los artículos 2460, 2461, 2462 del Código Civil vigente para la Ciudad de México. “EL ARRENDADOR” podrá rehusarse a aceptar aquella persona que en su concepto no reúna los requisitos necesarios para garantizar como “OBLIGADO SOLIDARIO” el debido cumplimiento del presente contrato. “EL OBLIGADO SOLIDARIO” conviene en que su responsabilidad legal no cesa sino hasta el momento en que “EL ARRENDADOR” se dé por recibido del inmueble y/o del pago total de lo adeudado a su entera satisfacción, renunciando a los beneficios contenidos en los artículos 2846, 2847 y 2848 del Código Civil vigente para el Distrito Federal. “EL ARRENDATARIO” autoriza a “EL OBLIGADO SOLIDARIO / FIADOR” para que entregue el inmueble cuando él por ausencia o negligencia no lo haga, designándolo además representantes de sucesión únicamente en relación con el contrato, a fin de que en caso de que fallezca durante su vigencia, el garante esté en posibilidad de reintegrar el inmueble arrendado y quedar liberado. Si durante la vigencia del presente contrato “EL OBLIGADO SOLIDARIO / FIADOR” quedara incapacitado para cumplir con las obligaciones derivadas del presente contrato, “EL ARRENDATARIO” deberá avisar de inmediato a “EL ARRENDADOR” y señalar nuevo OBLIGADO SOLIDARIO que tenga capacidad para obligarse y bienes suficientes para garantizar el cumplimiento de este contrato, ya que en caso contrario “EL ARRENDADOR” podrá rescindir de pleno derecho este contrato.</span>
         </div>
 
-        
+
 
         <!-- VIGÉSIMA-->
         <div class="clausula">
@@ -609,7 +609,7 @@ contrato, ni en cuanto a los términos ni en cuanto a la fecha y forma de pago.
         <!-- SECCIÓN DE FIRMAS -->
         <div style="margin-top: 40px;">
             <div class="section-title">F I R M A S</div>
-            
+
             <table style="width: 100%; border-collapse: collapse; margin-top: 0;">
                 <tr>
                     <td style="width: 33%; border: 1px solid #000000; padding: 20px; vertical-align: top; text-align: center;">
@@ -637,7 +637,7 @@ contrato, ni en cuanto a los términos ni en cuanto a la fecha y forma de pago.
             </table>
         </div>
 
-  
+
 
     </div>
 
