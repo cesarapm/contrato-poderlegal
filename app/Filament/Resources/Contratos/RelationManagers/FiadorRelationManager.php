@@ -108,7 +108,7 @@ class FiadorRelationManager extends RelationManager
                                     ->label('Nacionalidad')
                                     ->default('México')
                                     ->maxLength(100)
-                                    ->visible(fn ($get) => $get('tipo') !== 'ninguno' && $get('tipo_persona') === 'fisica'),
+                                    ->visible(fn ($get) => $get('tipo') !== 'ninguno'),
 
                                 TextInput::make('numero_inm')
                                     ->label('Número INM')
