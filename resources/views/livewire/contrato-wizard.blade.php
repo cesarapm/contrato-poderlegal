@@ -4,7 +4,7 @@
         <div class="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 gap-2 mb-4">
             @for ($i = 1; $i <= $totalSteps; $i++)
                 <div class="relative">
-                    <button 
+                    <button
                         type="button"
                         wire:click="goToStep({{ $i }})"
                         class="w-full aspect-square rounded-xl sm:rounded-2xl font-bold text-sm sm:text-base lg:text-lg transition-all duration-300 shadow-xl hover:scale-105 hover:shadow-2xl {{ $currentStep < $i ? 'border border-white/20' : '' }}"
@@ -66,8 +66,8 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div>
                             <label class="block text-white font-semibold mb-2">Nombre *</label>
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 wire:model="tramitante_nombre"
                                 class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                 placeholder="Juan">
@@ -76,8 +76,8 @@
 
                         <div>
                             <label class="block text-white font-semibold mb-2">Apellido Paterno *</label>
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 wire:model="tramitante_apellido_paterno"
                                 class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                 placeholder="Pérez">
@@ -86,8 +86,8 @@
 
                         <div>
                             <label class="block text-white font-semibold mb-2">Apellido Materno</label>
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 wire:model="tramitante_apellido_materno"
                                 class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                 placeholder="García">
@@ -97,8 +97,8 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-white font-semibold mb-2">Teléfono Principal *</label>
-                            <input 
-                                type="tel" 
+                            <input
+                                type="tel"
                                 wire:model="tramitante_telefono_1"
                                 class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                 placeholder="55 1234 5678">
@@ -107,8 +107,8 @@
 
                         <div>
                             <label class="block text-white font-semibold mb-2">Teléfono Secundario</label>
-                            <input 
-                                type="tel" 
+                            <input
+                                type="tel"
                                 wire:model="tramitante_telefono_2"
                                 class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                 placeholder="55 8765 4321">
@@ -117,8 +117,8 @@
 
                     <div>
                         <label class="block text-white font-semibold mb-2">Correo Electrónico *</label>
-                        <input 
-                            type="email" 
+                        <input
+                            type="email"
                             wire:model="tramitante_email"
                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                             placeholder="correo@ejemplo.com">
@@ -127,7 +127,7 @@
 
                     <div>
                         <label class="block text-white font-semibold mb-2">Tipo de Solicitante *</label>
-                        <select 
+                        <select
                             wire:model="tipo_solicitante"
                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm">
                             <option value="asesor" class="bg-purple-900 text-white">Asesor</option>
@@ -137,8 +137,8 @@
                     </div>
 
                     <label class="flex items-center space-x-3 cursor-pointer group">
-                        <input 
-                            type="checkbox" 
+                        <input
+                            type="checkbox"
                             wire:model="es_independiente"
                             class="w-5 h-5 rounded border-white/30 bg-white/10 text-gold-accent focus:ring-gold-accent/50">
                         <span class="text-white group-hover:text-gold-accent transition-colors">Soy independiente</span>
@@ -221,9 +221,9 @@
                         <div>
                             <label class="block text-white font-semibold mb-2">Monto de Renta Mensual *</label>
                             <div class="relative">
-                              
-                                <input 
-                                    type="number" 
+
+                                <input
+                                    type="number"
                                     wire:model="monto_renta_mensual"
                                     class="w-full pl-7 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                     placeholder="15,000.00"
@@ -234,7 +234,7 @@
 
                         <div>
                             <label class="block text-white font-semibold mb-2">Uso del Inmueble</label>
-                            <select 
+                            <select
                                 wire:model="inmueble_uso"
                                 class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm">
                                 <option value="habitacional" class="bg-purple-900 text-white">Habitacional</option>
@@ -245,8 +245,8 @@
                     </div>
 
                     <label class="flex items-center space-x-3 cursor-pointer group">
-                        <input 
-                            type="checkbox" 
+                        <input
+                            type="checkbox"
                             wire:model="incluye_iva"
                             class="w-5 h-5 rounded border-white/30 bg-white/10 text-gold-accent focus:ring-gold-accent/50">
                         <span class="text-white group-hover:text-gold-accent transition-colors">La renta incluye IVA</span>
@@ -255,8 +255,8 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-white font-semibold mb-2">Fecha de Inicio *</label>
-                            <input 
-                                type="date" 
+                            <input
+                                type="date"
                                 wire:model="fecha_inicio"
                                 class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm">
                             @error('fecha_inicio') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
@@ -264,8 +264,8 @@
 
                         <div>
                             <label class="block text-white font-semibold mb-2">Fecha de Término *</label>
-                            <input 
-                                type="date" 
+                            <input
+                                type="date"
                                 wire:model="fecha_termino"
                                 class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm">
                             @error('fecha_termino') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
@@ -277,8 +277,8 @@
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                             @foreach(['agua' => '💧 Agua', 'luz' => '⚡ Luz', 'gas' => '🔥 Gas', 'internet' => '📡 Internet',  'seguridad' => '🛡️ Seguridad'] as $key => $label)
                                 <label class="flex items-center space-x-2 cursor-pointer group px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/20 transition-all">
-                                    <input 
-                                        type="checkbox" 
+                                    <input
+                                        type="checkbox"
                                         wire:model="servicios_incluidos"
                                         value="{{ $key }}"
                                         class="w-4 h-4 rounded border-white/30 bg-white/10 text-gold-accent focus:ring-gold-accent/50">
@@ -290,8 +290,8 @@
 
                     <div x-data="{ mantenimiento: @entangle('inmueble_incluye_mantenimiento') }">
                         <label class="flex items-center space-x-3 cursor-pointer group">
-                            <input 
-                                type="checkbox" 
+                            <input
+                                type="checkbox"
                                 wire:model="inmueble_incluye_mantenimiento"
                                 @change="mantenimiento = $event.target.checked"
                                 class="w-5 h-5 rounded border-white/30 bg-white/10 text-gold-accent focus:ring-gold-accent/50">
@@ -300,8 +300,8 @@
 
                         <div x-show="mantenimiento" class="mt-4 animate-fadeIn">
                             <label class="block text-white font-semibold mb-2">Costo Mensual de Mantenimiento *</label>
-                            <input 
-                                type="number" 
+                            <input
+                                type="number"
                                 wire:model="inmueble_costo_mantenimiento"
                                 class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                 placeholder="500.00"
@@ -314,8 +314,8 @@
                         <label class="block text-white font-semibold mb-3">Forma de Pago *</label>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                             <label class="flex items-center space-x-3 cursor-pointer group px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/20 transition-all">
-                                <input 
-                                    type="radio" 
+                                <input
+                                    type="radio"
                                     wire:model="forma_pago"
                                     value="efectivo"
                                     @change="formaPago = 'efectivo'"
@@ -323,8 +323,8 @@
                                 <span class="text-white text-sm">💵 Efectivo</span>
                             </label>
                             <label class="flex items-center space-x-3 cursor-pointer group px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/20 transition-all">
-                                <input 
-                                    type="radio" 
+                                <input
+                                    type="radio"
                                     wire:model="forma_pago"
                                     value="transferencia"
                                     @change="formaPago = 'transferencia'"
@@ -335,12 +335,12 @@
 
                         <div x-show="formaPago === 'transferencia'" class="mt-6 p-6 rounded-xl bg-white/5 border border-white/20 space-y-4 animate-fadeIn">
                             <h4 class="text-lg font-semibold text-gold-accent mb-4">Datos Bancarios</h4>
-                            
+
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-white font-semibold mb-2">Banco *</label>
-                                    <input 
-                                        type="text" 
+                                    <input
+                                        type="text"
                                         wire:model="banco"
                                         class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                         placeholder="Ej: BBVA México">
@@ -349,8 +349,8 @@
 
                                 <div>
                                     <label class="block text-white font-semibold mb-2">Beneficiario *</label>
-                                    <input 
-                                        type="text" 
+                                    <input
+                                        type="text"
                                         wire:model="beneficiario"
                                         class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                         placeholder="Ej: Poder Legal S.A. de C.V.">
@@ -360,8 +360,8 @@
 
                             <div>
                                 <label class="block text-white font-semibold mb-2">Cuenta / CLABE *</label>
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="text"
                                     wire:model="cuenta"
                                     class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                     placeholder="Ej: 123456789012345678">
@@ -370,8 +370,8 @@
 
                             <div>
                                 <label class="block text-white font-semibold mb-2">CLABE (18 dígitos) *</label>
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="text"
                                     wire:model="clabe"
                                     maxlength="18"
                                     class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
@@ -397,8 +397,8 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div>
                             <label class="block text-white font-semibold mb-2">Código Postal *</label>
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 wire:model="inmueble_codigo_postal"
                                 class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                 placeholder="03100"
@@ -408,8 +408,8 @@
 
                         <div>
                             <label class="block text-white font-semibold mb-2">Estado *</label>
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 wire:model="inmueble_estado"
                                 class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                 placeholder="Ciudad de México">
@@ -418,8 +418,8 @@
 
                         <div>
                             <label class="block text-white font-semibold mb-2">Municipio/Alcaldía *</label>
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 wire:model="inmueble_municipio"
                                 class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                 placeholder="Benito Juárez">
@@ -429,8 +429,8 @@
 
                     <div>
                         <label class="block text-white font-semibold mb-2">Colonia *</label>
-                        <input 
-                            type="text" 
+                        <input
+                            type="text"
                             wire:model="inmueble_colonia"
                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                             placeholder="Del Valle">
@@ -440,8 +440,8 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-white font-semibold mb-2">Calle *</label>
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 wire:model="inmueble_calle"
                                 class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                 placeholder="Av. Insurgentes Sur">
@@ -450,8 +450,8 @@
 
                         <div>
                             <label class="block text-white font-semibold mb-2">Número Exterior *</label>
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 wire:model="inmueble_numero_exterior"
                                 class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                 placeholder="1234">
@@ -462,8 +462,8 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-white font-semibold mb-2">Edificio/Torre (Opcional)</label>
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 wire:model="inmueble_edificio"
                                 class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                 placeholder="Torre A">
@@ -471,8 +471,8 @@
 
                         <div>
                             <label class="block text-white font-semibold mb-2">Número Interior (Opcional)</label>
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 wire:model="inmueble_numero_interior"
                                 class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                 placeholder="301">
@@ -482,8 +482,8 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-white font-semibold mb-2">🚗 Número de Estacionamientos</label>
-                            <input 
-                                type="number" 
+                            <input
+                                type="number"
                                 wire:model="numero_estacionamientos"
                                 min="0"
                                 class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
@@ -505,7 +505,7 @@
                             </h3>
                             <p class="text-white/70">Información de quien rentará la propiedad</p>
                         </div>
-                        <button 
+                        <button
                             type="button"
                             wire:click="addArrendatario"
                             class="px-4 py-2 rounded-xl bg-gold-accent text-purple-deep font-semibold hover:scale-105 transition-all">
@@ -537,7 +537,7 @@
                             <div class="flex justify-between items-center mb-4">
                                 <h4 class="text-xl font-bold text-gold-accent">Arrendatario {{ $index + 1 }}</h4>
                                 @if(count($arrendatarios) > 1)
-                                    <button 
+                                    <button
                                         type="button"
                                         wire:click="removeArrendatario({{ $index }})"
                                         class="px-3 py-1 rounded-lg bg-red-500/20 text-red-300 hover:bg-red-500/30 transition-all text-sm">
@@ -548,7 +548,7 @@
 
                             <div>
                                 <label class="block text-white font-semibold mb-2">Tipo de Persona</label>
-                                <select 
+                                <select
                                     wire:model.live="arrendatarios.{{ $index }}.tipo_persona"
                                     class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm">
                                     <option value="fisica" class="bg-purple-900 text-white">Persona Física</option>
@@ -560,8 +560,8 @@
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Nombre *</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             wire:model="arrendatarios.{{ $index }}.nombre"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="María">
@@ -570,8 +570,8 @@
 
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Apellido Paterno *</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             wire:model="arrendatarios.{{ $index }}.apellido_paterno"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="López">
@@ -580,8 +580,8 @@
 
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Apellido Materno</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             wire:model="arrendatarios.{{ $index }}.apellido_materno"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="Martínez">
@@ -591,8 +591,8 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Teléfono Principal *</label>
-                                        <input 
-                                            type="tel" 
+                                        <input
+                                            type="tel"
                                             wire:model="arrendatarios.{{ $index }}.telefono_1"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="55 1234 5678">
@@ -601,8 +601,8 @@
 
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Teléfono Secundario</label>
-                                        <input 
-                                            type="tel" 
+                                        <input
+                                            type="tel"
                                             wire:model="arrendatarios.{{ $index }}.telefono_2"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="55 8765 4321">
@@ -611,8 +611,8 @@
 
                                 <div>
                                     <label class="block text-white font-semibold mb-2">Correo Electrónico *</label>
-                                    <input 
-                                        type="email" 
+                                    <input
+                                        type="email"
                                         wire:model="arrendatarios.{{ $index }}.email"
                                         class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                         placeholder="arrendatario@ejemplo.com">
@@ -624,8 +624,8 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Número INE</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             wire:model="arrendatarios.{{ $index }}.numero_ine"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="123456789012345">
@@ -633,8 +633,8 @@
 
                                     <div>
                                         <label class="block text-white font-semibold mb-2">CURP</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             wire:model="arrendatarios.{{ $index }}.curp"
                                             maxlength="18"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm uppercase"
@@ -646,8 +646,8 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-white font-semibold mb-2">Nacionalidad</label>
-                                    <input 
-                                        type="text" 
+                                    <input
+                                        type="text"
                                         wire:model="arrendatarios.{{ $index }}.nacionalidad"
                                         maxlength="50"
                                         class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
@@ -765,7 +765,7 @@
                             </h3>
                             <p class="text-white/70">Información del propietario de la propiedad</p>
                         </div>
-                        <button 
+                        <button
                             type="button"
                             wire:click="addArrendador"
                             class="px-4 py-2 rounded-xl bg-gold-accent text-purple-deep font-semibold hover:scale-105 transition-all">
@@ -797,7 +797,7 @@
                             <div class="flex justify-between items-center mb-4">
                                 <h4 class="text-xl font-bold text-gold-accent">Arrendador {{ $index + 1 }}</h4>
                                 @if(count($arrendadores) > 1)
-                                    <button 
+                                    <button
                                         type="button"
                                         wire:click="removeArrendador({{ $index }})"
                                         class="px-3 py-1 rounded-lg bg-red-500/20 text-red-300 hover:bg-red-500/30 transition-all text-sm">
@@ -808,7 +808,7 @@
 
                             <div>
                                 <label class="block text-white font-semibold mb-2">Tipo de Persona</label>
-                                <select 
+                                <select
                                     wire:model.live="arrendadores.{{ $index }}.tipo_persona"
                                     class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm">
                                     <option value="fisica" class="bg-purple-900 text-white">Persona Física</option>
@@ -820,8 +820,8 @@
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Nombre *</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             wire:model="arrendadores.{{ $index }}.nombre"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="Carlos">
@@ -830,8 +830,8 @@
 
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Apellido Paterno *</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             wire:model="arrendadores.{{ $index }}.apellido_paterno"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="Ramírez">
@@ -840,8 +840,8 @@
 
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Apellido Materno</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             wire:model="arrendadores.{{ $index }}.apellido_materno"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="González">
@@ -851,8 +851,8 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Teléfono Principal *</label>
-                                        <input 
-                                            type="tel" 
+                                        <input
+                                            type="tel"
                                             wire:model="arrendadores.{{ $index }}.telefono_1"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="55 1234 5678">
@@ -861,8 +861,8 @@
 
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Teléfono Secundario</label>
-                                        <input 
-                                            type="tel" 
+                                        <input
+                                            type="tel"
                                             wire:model="arrendadores.{{ $index }}.telefono_2"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="55 8765 4321">
@@ -873,8 +873,8 @@
                             @if($arrendador['tipo_persona'] === 'fisica')
                                 <div>
                                     <label class="block text-white font-semibold mb-2">Correo Electrónico *</label>
-                                    <input 
-                                        type="email" 
+                                    <input
+                                        type="email"
                                         wire:model="arrendadores.{{ $index }}.email"
                                         class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                         placeholder="propietario@ejemplo.com">
@@ -884,8 +884,8 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Número INE</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             wire:model="arrendadores.{{ $index }}.numero_ine"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="123456789012345">
@@ -893,8 +893,8 @@
 
                                     <div>
                                         <label class="block text-white font-semibold mb-2">CURP</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             wire:model="arrendadores.{{ $index }}.curp"
                                             maxlength="18"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm uppercase"
@@ -903,35 +903,35 @@
                                 </div>
                             @endif
 
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-white font-semibold mb-2">Nacionalidad</label>
-                                    <input 
-                                        type="text" 
-                                        wire:model="arrendadores.{{ $index }}.nacionalidad"
-                                        maxlength="50"
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                        placeholder="Ej: Mexicana, Extranjera, etc.">
-                                </div>
-                            </div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 pb-1.5">
+    <div>
+        <label class="block text-white font-semibold mb-2">
+            Nacionalidad
+        </label>
 
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <label class="flex items-center space-x-3 cursor-pointer group px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/20 transition-all">
-                                    <input 
-                                        type="checkbox" 
-                                        wire:model="arrendadores.{{ $index }}.tiene_representante_legal"
-                                        class="w-5 h-5 rounded border-white/30 bg-white/10 text-gold-accent focus:ring-gold-accent/50">
-                                    <span class="text-white group-hover:text-gold-accent transition-colors">Tiene representante legal</span>
-                                </label>
+        <input
+            type="text"
+            wire:model="arrendadores.{{ $index }}.nacionalidad"
+            maxlength="50"
+            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+            placeholder="Ej: Mexicana, Extranjera, etc."
+        >
+    </div>
 
-                                <!-- <label class="flex items-center space-x-3 cursor-pointer group px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/20 transition-all">
-                                    <input 
-                                        type="checkbox" 
-                                        wire:model="arrendadores.{{ $index }}.en_proceso_sucesorio"
-                                        class="w-5 h-5 rounded border-white/30 bg-white/10 text-gold-accent focus:ring-gold-accent/50">
-                                    <span class="text-white group-hover:text-gold-accent transition-colors">En proceso sucesorio</span>
-                                </label> -->
-                            </div>
+    <div class="flex items-center md:mt-7">
+        <label class="flex items-center gap-3 cursor-pointer text-white font-semibold">
+            <input
+                type="checkbox"
+                wire:model="arrendadores.{{ $index }}.tiene_representante_legal"
+                class="w-5 h-5 shrink-0 rounded border-white/30 bg-white/10 text-gold-accent focus:ring-gold-accent/50"
+            >
+
+            <span class="transition-colors hover:text-gold-accent">
+                Tiene representante legal
+            </span>
+        </label>
+    </div>
+</div>
 
                             @if($arrendador['tipo_persona'] === 'moral')
                                 @include('formulario.persona-moral-fields', [
@@ -1057,8 +1057,8 @@
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Nombre *</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             wire:model="fiador_nombre"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="Roberto">
@@ -1067,8 +1067,8 @@
 
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Apellido Paterno *</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             wire:model="fiador_apellido_paterno"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="Sánchez">
@@ -1077,8 +1077,8 @@
 
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Apellido Materno</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             wire:model="fiador_apellido_materno"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="Cruz">
@@ -1088,8 +1088,8 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Teléfono Principal *</label>
-                                        <input 
-                                            type="tel" 
+                                        <input
+                                            type="tel"
                                             wire:model="fiador_telefono_1"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="55 1234 5678">
@@ -1098,8 +1098,8 @@
 
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Teléfono Secundario</label>
-                                        <input 
-                                            type="tel" 
+                                        <input
+                                            type="tel"
                                             wire:model="fiador_telefono_2"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="55 8765 4321">
@@ -1108,8 +1108,8 @@
 
                                 <div>
                                     <label class="block text-white font-semibold mb-2">Correo Electrónico *</label>
-                                    <input 
-                                        type="email" 
+                                    <input
+                                        type="email"
                                         wire:model="fiador_email"
                                         class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                         placeholder="fiador@ejemplo.com">
@@ -1119,7 +1119,7 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Estado civil *</label>
-                                        <select 
+                                        <select
                                             wire:model="fiador_estado_civil"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm">
                                             <option value="">SELECCIONA</option>
@@ -1131,29 +1131,19 @@
                                         </select>
                                         @error('fiador_estado_civil') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                                     </div>
-
-                                    <div>
-                                        <label class="block text-white font-semibold mb-2">Nacionalidad *</label>
-                                        <input 
-                                            type="text" 
-                                            wire:model="fiador_nacionalidad"
-                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
-                                            placeholder="México">
-                                        @error('fiador_nacionalidad') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-                                    </div>
                                 </div>
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label class="block text-white font-semibold mb-2">
                                             Número INM
-                                            <button type="button" class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-white/10 hover:bg-white/20 transition-colors ml-1" 
+                                            <button type="button" class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-white/10 hover:bg-white/20 transition-colors ml-1"
                                                     title="Solo para extranjeros con residencia permanente en México">
                                                 <span class="text-xs">?</span>
                                             </button>
                                         </label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             wire:model="fiador_numero_inm"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="11883224">
@@ -1161,8 +1151,8 @@
 
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Número de INE</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             wire:model="fiador_numero_ine"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="1234567890123">
@@ -1170,8 +1160,8 @@
 
                                     <div>
                                         <label class="block text-white font-semibold mb-2">CURP</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             wire:model="fiador_curp"
                                             maxlength="18"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm uppercase"
@@ -1184,8 +1174,8 @@
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Código postal*</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             wire:model="fiador_codigo_postal"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="01234">
@@ -1194,8 +1184,8 @@
 
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Estado*</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             wire:model="fiador_estado"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="Ciudad de México">
@@ -1204,8 +1194,8 @@
 
                                     <div>
                                         <label class="block text-white font-semibold mb-2">Alcaldía / Municipio*</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             wire:model="fiador_ciudad"
                                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                             placeholder="Cuauhtémoc">
@@ -1215,8 +1205,8 @@
 
                                 <div>
                                     <label class="block text-white font-semibold mb-2">País *</label>
-                                    <input 
-                                        type="text" 
+                                    <input
+                                        type="text"
                                         wire:model="fiador_pais"
                                         class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                         placeholder="México">
@@ -1225,8 +1215,8 @@
 
                                 <div>
                                     <label class="block text-white font-semibold mb-2">Calle *</label>
-                                    <input 
-                                        type="text" 
+                                    <input
+                                        type="text"
                                         wire:model="fiador_domicilio"
                                         class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
                                         placeholder="Avenida Insurgentes Sur 123, Colonia Roma">
@@ -1255,6 +1245,18 @@
                                     ],
                                 ])
                             @endif
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                <div>
+                                    <label class="block text-white font-semibold mb-2">Nacionalidad *</label>
+                                    <input
+                                        type="text"
+                                        wire:model="fiador_nacionalidad"
+                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                        placeholder="México">
+                                    @error('fiador_nacionalidad') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
 
                             {{-- Comprobantes de ingresos (todos los tipos) --}}
                             @php
@@ -1390,7 +1392,7 @@
 
                     <div>
                         <label class="block text-white font-semibold mb-2">Observaciones Adicionales</label>
-                        <textarea 
+                        <textarea
                             wire:model="observaciones"
                             rows="5"
                             class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm resize-none"
@@ -1465,8 +1467,8 @@
                         </div>
 
                         <label class="flex items-start space-x-3 cursor-pointer group p-4 rounded-xl bg-white/5 hover:bg-white/10 border-2 border-white/20 hover:border-gold-accent/50 transition-all">
-                            <input 
-                                type="checkbox" 
+                            <input
+                                type="checkbox"
                                 wire:model="acepto_terminos"
                                 class="w-5 h-5 mt-1 rounded border-white/30 bg-white/10 text-gold-accent focus:ring-gold-accent/50">
                             <span class="text-white flex-1">
@@ -1477,8 +1479,8 @@
                         @error('acepto_terminos') <span class="text-red-400 text-sm ml-8">{{ $message }}</span> @enderror
 
                         <label class="flex items-start space-x-3 cursor-pointer group p-4 rounded-xl bg-white/5 hover:bg-white/10 border-2 border-white/20 hover:border-gold-accent/50 transition-all">
-                            <input 
-                                type="checkbox" 
+                            <input
+                                type="checkbox"
                                 wire:model="acepto_privacidad"
                                 class="w-5 h-5 mt-1 rounded border-white/30 bg-white/10 text-gold-accent focus:ring-gold-accent/50">
                             <span class="text-white flex-1">
@@ -1501,7 +1503,7 @@
             <!-- Navigation Buttons -->
             <div class="flex justify-between mt-8 sm:mt-10 md:mt-12 pt-6 sm:pt-8 border-t border-white/10">
                 @if ($currentStep > 1)
-                    <button 
+                    <button
                         type="button"
                         wire:click="previousStep"
                         class="group px-4 py-3 sm:px-6 sm:py-3.5 md:px-8 md:py-4 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl backdrop-blur-sm text-sm sm:text-base">
@@ -1518,7 +1520,7 @@
                 @endif
 
                 @if ($currentStep < $totalSteps)
-                    <button 
+                    <button
                         type="button"
                         wire:click="nextStep"
                         class="group px-4 py-3 sm:px-6 sm:py-3.5 md:px-8 md:py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 hover:shadow-2xl text-sm sm:text-base {{ $currentStep === 7 && $fiador_tipo === 'ninguno' ? 'opacity-50 cursor-not-allowed' : '' }}"
@@ -1535,7 +1537,7 @@
                         <p class="text-red-400 text-sm mt-2">Por favor, selecciona un tipo de fiador para continuar</p>
                     @endif
                 @else
-                    <button 
+                    <button
                         type="submit"
                         class="group px-4 py-3 sm:px-6 sm:py-3.5 md:px-8 md:py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 hover:shadow-2xl text-white text-sm sm:text-base {{ $fiador_tipo === 'ninguno' ? 'opacity-50 cursor-not-allowed' : '' }}"
                         style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);"
