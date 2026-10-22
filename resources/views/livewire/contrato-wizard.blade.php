@@ -643,6 +643,18 @@
                                 </div>
                             @endif
 
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-white font-semibold mb-2">Nacionalidad</label>
+                                    <input 
+                                        type="text" 
+                                        wire:model="arrendatarios.{{ $index }}.nacionalidad"
+                                        maxlength="50"
+                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                        placeholder="Ej: Mexicana, Extranjera, etc.">
+                                </div>
+                            </div>
+
                             @if($arrendatario['tipo_persona'] === 'moral')
                                 @include('formulario.persona-moral-fields', [
                                     'prefix' => "arrendatarios.{$index}",
@@ -890,6 +902,18 @@
                                     </div>
                                 </div>
                             @endif
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-white font-semibold mb-2">Nacionalidad</label>
+                                    <input 
+                                        type="text" 
+                                        wire:model="arrendadores.{{ $index }}.nacionalidad"
+                                        maxlength="50"
+                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm"
+                                        placeholder="Ej: Mexicana, Extranjera, etc.">
+                                </div>
+                            </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <label class="flex items-center space-x-3 cursor-pointer group px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/20 transition-all">
