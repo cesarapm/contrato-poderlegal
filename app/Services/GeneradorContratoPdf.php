@@ -227,9 +227,12 @@ class GeneradorContratoPdf
         // Preparar sección de datos bancarios (condicional según forma_pago)
         $seccionDatosBancarios = '';
         $textoPagoForma = 'EN EFECTIVO';
+        $textIncisoPago = '';
 
         if ($contrato->forma_pago === 'transferencia') {
             $textoPagoForma = 'EN EFECTIVO o mediante TRANSFERENCIA BANCARIA';
+
+            $textIncisoPago = 'El pago de la renta mensual se cubrirá en su totalidad dentro de los primeros CINCO DÍAS contados a partir del día {{dia_pago_renta}} de cada mes, en la cuenta bancaria número {{numero_cuenta}}, del banco {{banco_nombre}}, a nombre de {{arrendador_nombre_completo}}, con CLABE Interbancaria {{clabe_interbancaria}}, y empezará a cubrirse a partir de la fecha de inicio de la vigencia del presente instrumento, siendo causa de rescisión de contrato el hecho de que se cubra extemporáneamente una mensualidad o más, o de que ésta no sea cubierta.';
 
             $seccionDatosBancarios = '
             <table class="banco-table">
@@ -252,6 +255,8 @@ class GeneradorContratoPdf
             ';
         } else {
             // Cuando es solo efectivo, mostrar tabla con datos de pago en efectivo
+            $textIncisoPago = 'El pago de la renta mensual se cubrirá en su totalidad dentro de los primeros CINCO DÍAS contados a partir del día {{dia_pago_renta}} de cada mes en el domicilio de "EL ARRENDADOR", señalado en la declaración I inciso e), y empezará a cubrirse a partir de la fecha de inicio de la vigencia del presente instrumento, siendo causa de rescisión de contrato el hecho de que se cubra extemporáneamente una mensualidad o más, o de que ésta no sea cubierta.';
+
             $seccionDatosBancarios = '
             <table class="banco-table">
                 <tr>
@@ -387,9 +392,10 @@ class GeneradorContratoPdf
             'firma_fiador' => $firmaFiador,
             'seccion_fiador_ultimo' => $seccionFiadorUltimo,
 
-            // Sección condicional de datos bancarios
+            // Sección condicional de datos bancarios y texto de pago
             'seccion_datos_bancarios' => $seccionDatosBancarios,
             'texto_pago_forma' => $textoPagoForma,
+            'texto_inciso_pago' => $textIncisoPago,
 
             // Folio
             'folio' => $contrato->folio ?? '',
