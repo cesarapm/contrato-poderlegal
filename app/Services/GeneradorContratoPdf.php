@@ -336,6 +336,11 @@ class GeneradorContratoPdf
             'deposito_garantia_meses' => '1',
             'monto_total' => number_format((float) $contrato->monto_total, 2),
 
+            // Datos bancarios
+            'numero_cuenta' => $contrato->cuenta ?? '',
+            'banco_nombre' => $contrato->banco ?? '',
+            'clabe_interbancaria' => $contrato->clabe ?? '',
+
             // Fechas
             'fecha_inicio_texto' => $fechaInicio ? mb_strtoupper($this->fechaTexto($fechaInicio), 'UTF-8') : '',
             'fecha_termino_texto' => $fechaTermino ? mb_strtoupper($this->fechaTexto($fechaTermino), 'UTF-8') : '',
