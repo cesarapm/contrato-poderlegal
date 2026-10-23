@@ -250,6 +250,23 @@ class GeneradorContratoPdf
                 </tr>
             </table>
             ';
+        } else {
+            // Cuando es solo efectivo, mostrar tabla con datos de pago en efectivo
+            $seccionDatosBancarios = '
+            <table class="banco-table">
+                <tr>
+                    <td colspan="2" class="banco-table-header">FORMA DE PAGO</td>
+                </tr>
+                <tr class="banco-table-row">
+                    <td class="banco-table-label">MÉTODO DE PAGO</td>
+                    <td>EN EFECTIVO</td>
+                </tr>
+                <tr class="banco-table-row">
+                    <td class="banco-table-label">LUGAR DE PAGO</td>
+                    <td>En el domicilio de "EL ARRENDADOR" señalado en la Declaración I, inciso e)</td>
+                </tr>
+            </table>
+            ';
         }
 
         return [
