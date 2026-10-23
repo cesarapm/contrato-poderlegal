@@ -232,7 +232,7 @@ class GeneradorContratoPdf
         if ($contrato->forma_pago === 'transferencia') {
             $textoPagoForma = 'EN EFECTIVO o mediante TRANSFERENCIA BANCARIA';
 
-            $textIncisoPago = 'El pago de la renta mensual se cubrirá en su totalidad dentro de los primeros CINCO DÍAS contados a partir del día {{dia_pago_renta}} de cada mes, en la cuenta bancaria número {{numero_cuenta}}, del banco {{banco_nombre}}, a nombre de {{arrendador_nombre_completo}}, con CLABE Interbancaria {{clabe_interbancaria}}, y empezará a cubrirse a partir de la fecha de inicio de la vigencia del presente instrumento, siendo causa de rescisión de contrato el hecho de que se cubra extemporáneamente una mensualidad o más, o de que ésta no sea cubierta.';
+            $textIncisoPago = 'El pago de la renta mensual se cubrirá en su totalidad dentro de los primeros CINCO DÍAS contados a partir del día {{dia_pago_renta}} de cada mes, en la cuenta bancaria número {{numero_cuenta}}, del banco {{banco_nombre}}, a nombre de {{arrendador_nombre_completo}}, con CLABE Interbancaria {{clabe_interbancaria}}, o en el domicilio de "EL ARRENDADOR", señalado en la declaración I inciso e), y empezará a cubrirse a partir de la fecha de inicio de la vigencia del presente instrumento, siendo causa de rescisión de contrato el hecho de que se cubra extemporáneamente una mensualidad o más, o de que ésta no sea cubierta.';
 
             $seccionDatosBancarios = '
             <table class="banco-table">
@@ -254,8 +254,8 @@ class GeneradorContratoPdf
             </table>
             ';
         } else {
-            // Cuando es solo efectivo, mostrar tabla con datos de pago en efectivo
-            $textIncisoPago = 'El pago de la renta mensual se cubrirá en su totalidad dentro de los primeros CINCO DÍAS contados a partir del día {{dia_pago_renta}} de cada mes en el domicilio de "EL ARRENDADOR", señalado en la declaración I inciso e), y empezará a cubrirse a partir de la fecha de inicio de la vigencia del presente instrumento, siendo causa de rescisión de contrato el hecho de que se cubra extemporáneamente una mensualidad o más, o de que ésta no sea cubierta.';
+            // Cuando es solo efectivo
+            $textIncisoPago = 'El pago de la renta mensual se cubrirá en su totalidad dentro de los primeros CINCO DÍAS contados a partir del día {{dia_pago_renta}} de cada mes, en efectivo en el domicilio de "EL ARRENDADOR", señalado en la declaración I inciso e), y empezará a cubrirse a partir de la fecha de inicio de la vigencia del presente instrumento, siendo causa de rescisión de contrato el hecho de que se cubra extemporáneamente una mensualidad o más, o de que ésta no sea cubierta.';
 
             $seccionDatosBancarios = '
             <table class="banco-table">
