@@ -233,7 +233,7 @@ class GeneradorContratoPdf
         if ($contrato->forma_pago === 'transferencia') {
             $textoPagoForma = 'EN EFECTIVO o mediante TRANSFERENCIA BANCARIA';
 
-            $textIncisoPago = 'El pago de la renta mensual se cubrirá en su totalidad dentro de los primeros CINCO DÍAS contados a partir del día ' . $diaPago . ' de cada mes, en la cuenta bancaria número ' . ($contrato->cuenta ?? '') . ', del banco ' . ($contrato->banco ?? '') . ', a nombre de ' . ($contrato->beneficiario ?? '') . ', con CLABE Interbancaria ' . ($contrato->clabe ?? '') . ', o en el domicilio de "EL ARRENDADOR", señalado en la declaración I inciso c), y empezará a cubrirse a partir de la fecha de inicio de la vigencia del presente instrumento, siendo causa de rescisión de contrato el hecho de que se cubra extemporáneamente una mensualidad o más, o de que ésta no sea cubierta, en cuyo caso "EL ARRENDATARIO" acepta que se le embarguen bienes muebles u objetos de los que introduzca en la localidad arrendada y que declara desde hoy que son de su exclusiva propiedad, los que entregará desde luego a la persona que "EL ARRENDADOR" nombre como depositario.';
+            $textIncisoPago = 'El pago de la renta mensual se cubrirá en su totalidad dentro de los primeros CINCO DÍAS contados a partir del día 1 de cada mes, en la cuenta bancaria número ' . ($contrato->cuenta ?? '') . ', del banco ' . ($contrato->banco ?? '') . ', a nombre de ' . ($contrato->beneficiario ?? '') . ', con CLABE Interbancaria ' . ($contrato->clabe ?? '') . ', o en el domicilio de "EL ARRENDADOR", señalado en la declaración I inciso c), y empezará a cubrirse a partir de la fecha de inicio de la vigencia del presente instrumento, siendo causa de rescisión de contrato el hecho de que se cubra extemporáneamente una mensualidad o más, o de que ésta no sea cubierta, en cuyo caso "EL ARRENDATARIO" acepta que se le embarguen bienes muebles u objetos de los que introduzca en la localidad arrendada y que declara desde hoy que son de su exclusiva propiedad, los que entregará desde luego a la persona que "EL ARRENDADOR" nombre como depositario.';
 
             $seccionDatosBancarios = '
             <table class="banco-table">
@@ -256,7 +256,7 @@ class GeneradorContratoPdf
             ';
         } else {
             // Cuando es solo efectivo
-            $textIncisoPago = 'El pago de la renta mensual se cubrirá en su totalidad dentro de los primeros CINCO DÍAS contados a partir del día ' . $diaPago . ' de cada mes, en efectivo en el domicilio de "EL ARRENDADOR", señalado en la declaración I inciso c), y empezará a cubrirse a partir de la fecha de inicio de la vigencia del presente instrumento, siendo causa de rescisión de contrato el hecho de que se cubra extemporáneamente una mensualidad o más, o de que ésta no sea cubierta, en cuyo caso "EL ARRENDATARIO" acepta que se le embarguen bienes muebles u objetos de los que introduzca en la localidad arrendada y que declara desde hoy que son de su exclusiva propiedad, los que entregará desde luego a la persona que "EL ARRENDADOR" nombre como depositario.';
+            $textIncisoPago = 'El pago de la renta mensual se cubrirá en su totalidad dentro de los primeros CINCO DÍAS contados a partir del día 1 de cada mes, en efectivo en el domicilio de "EL ARRENDADOR", señalado en la declaración I inciso c), y empezará a cubrirse a partir de la fecha de inicio de la vigencia del presente instrumento, siendo causa de rescisión de contrato el hecho de que se cubra extemporáneamente una mensualidad o más, o de que ésta no sea cubierta, en cuyo caso "EL ARRENDATARIO" acepta que se le embarguen bienes muebles u objetos de los que introduzca en la localidad arrendada y que declara desde hoy que son de su exclusiva propiedad, los que entregará desde luego a la persona que "EL ARRENDADOR" nombre como depositario.';
 
             $seccionDatosBancarios = '
             <table class="banco-table">
@@ -372,6 +372,7 @@ class GeneradorContratoPdf
             'fiador_tipo' => mb_strtoupper($fiador?->tipo ?? '', 'UTF-8'),
             'fiador_tipo_persona' => mb_strtoupper($fiador?->tipo_persona === 'moral' ? 'moral' : 'física', 'UTF-8'),
             'fiador_numero_ine' => $fiador?->numero_ine ?? '',
+            'fiador_curp' => $fiador?->curp ?? '',
             'fiador_nacionalidad' => mb_strtoupper($fiador?->nacionalidad ?? 'México', 'UTF-8'),
             'fiador_domicilio_completo' => $fiadorDomicilioCompleto,
             'fiador_email' => $fiador && $fiador->tipo_persona === 'moral'
