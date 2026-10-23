@@ -42,9 +42,9 @@
                     <img src="/logo.webp" alt="Poder Legal Logo" class="w-9 h-9 md:w-12 md:h-12 rounded-xl shadow-gold" style="object-fit: contain; width: 36px; height: 36px; flex-shrink: 0;">
                     <h1 class="text-lg md:text-2xl font-display font-bold text-white leading-tight whitespace-nowrap">Poder Legal</h1>
                 </div>
-                <a href="/admin" class="px-5 py-2 md:px-8 md:py-3 bg-white/20 hover:bg-white/30 text-white rounded-xl border border-white/30 backdrop-blur-sm transition-all duration-300 text-sm md:text-base">
+                {{-- <a href="/admin" class="px-5 py-2 md:px-8 md:py-3 bg-white/20 hover:bg-white/30 text-white rounded-xl border border-white/30 backdrop-blur-sm transition-all duration-300 text-sm md:text-base">
                     <span class="font-semibold">Acceso Admin</span>
-                </a>
+                </a> --}}
             </div>
         </div>
     </header>
@@ -56,11 +56,11 @@
                 <div class="inline-block px-6 py-2 bg-gold-accent/20 border border-gold-accent rounded-full mb-6">
                     <span class="text-gold-accent font-semibold">🎯 Proceso 100% Digital</span>
                 </div>
-                
+
                <h2 class="text-3xl md:text-6xl font-display font-bold text-white mb-6 leading-tight">
     Genera tu Póliza de Arrendamiento
 </h2>
-                
+
                 <p class="text-xl text-white/80 mb-10 leading-relaxed">
                     Crea la solicitud profesional en minutos con nuestro asistente paso a paso.
                     <br class="hidden md:block">
@@ -84,7 +84,7 @@
 
                 <!-- Stats -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-2xl mx-auto">
-    
+
     <div class="card-gradient p-4 md:p-6 text-center">
         <div class="text-2xl md:text-3xl font-bold text-gold-accent mb-2">9</div>
         <div class="text-xs md:text-sm text-white/70">Pasos Simples</div>
