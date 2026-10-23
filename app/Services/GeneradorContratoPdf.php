@@ -256,6 +256,8 @@ class GeneradorContratoPdf
             // Arrendador
             'arrendador_nombre_completo' => mb_strtoupper($arrendador?->nombre_completo ?? '', 'UTF-8'),
             'arrendador_tipo_persona' => mb_strtoupper($arrendador?->tipo_persona === 'moral' ? 'moral' : 'física', 'UTF-8'),
+            'arrendador_nacionalidad' => mb_strtoupper($arrendador?->nacionalidad ?? 'México', 'UTF-8'),
+            'arrendador_curp' => $arrendador?->curp ?? '',
             'arrendador_domicilio' => mb_strtoupper($this->formatearDireccion($arrendador?->direccion), 'UTF-8'),
             'arrendador_email' => $arrendador && $arrendador->tipo_persona === 'moral'
                 ? mb_strtoupper($arrendador->representante_legal_email ?? $arrendador->email ?? '', 'UTF-8')
@@ -277,6 +279,8 @@ class GeneradorContratoPdf
             // Arrendatario
             'arrendatario_nombre_completo' => mb_strtoupper($arrendatario?->nombre_completo ?? '', 'UTF-8'),
             'arrendatario_tipo_persona' => mb_strtoupper($arrendatario?->tipo_persona === 'moral' ? 'moral' : 'física', 'UTF-8'),
+            'arrendatario_nacionalidad' => mb_strtoupper($arrendatario?->nacionalidad ?? 'México', 'UTF-8'),
+            'arrendatario_curp' => $arrendatario?->curp ?? '',
             'arrendatario_email' => $arrendatario && $arrendatario->tipo_persona === 'moral'
                 ? mb_strtoupper($arrendatario->representante_legal_email ?? $arrendatario->email ?? '', 'UTF-8')
                 : mb_strtoupper($arrendatario?->email ?? '', 'UTF-8'),
