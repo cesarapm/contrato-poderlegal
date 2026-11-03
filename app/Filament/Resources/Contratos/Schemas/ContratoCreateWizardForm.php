@@ -65,7 +65,12 @@ class ContratoCreateWizardForm
                     ->schema([
                         TextInput::make('monto_renta_mensual')->label('Renta mensual')->numeric()->prefix('$')->required(),
                         Toggle::make('incluye_iva')->label('La renta incluye IVA')->default(false),
-                        DatePicker::make('fecha_inicio')->label('Fecha de inicio')->native(false)->required(),
+                        DatePicker::make('fecha_inicio')->label('Fecha de inicio')->native(false)->required()->reactive()->afterStateUpdated(function ($state, callable $set) {
+                            if ($state) {
+                                $date = \Carbon\Carbon::createFromFormat('Y-m-d', $state);
+                                $set('fecha_termino', $date->addYear()->format('Y-m-d'));
+                            }
+                        }),
                         DatePicker::make('fecha_termino')->label('Fecha de término')->native(false)->required()->after('fecha_inicio'),
                         Toggle::make('incluye_mantenimiento')->label('Incluye mantenimiento')->live(),
                         TextInput::make('costo_mantenimiento')->label('Costo mensual de mantenimiento')->numeric()->prefix('$')

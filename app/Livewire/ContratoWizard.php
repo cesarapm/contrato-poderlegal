@@ -214,6 +214,14 @@ class ContratoWizard extends Component
         $this->currentStep = 1;
     }
 
+    public function updatedFechaInicio($value)
+    {
+        if ($value) {
+            $date = \Carbon\Carbon::createFromFormat('Y-m-d', $value);
+            $this->fecha_termino = $date->addYear()->format('Y-m-d');
+        }
+    }
+
     public function nextStep()
     {
         $this->validateCurrentStep();

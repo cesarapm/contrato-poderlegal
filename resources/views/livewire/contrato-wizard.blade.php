@@ -257,7 +257,7 @@
                             <label class="block text-white font-semibold mb-2">Fecha de Inicio *</label>
                             <input
                                 type="date"
-                                wire:model="fecha_inicio"
+                                wire:model.live="fecha_inicio"
                                 class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:border-gold-accent focus:ring-2 focus:ring-gold-accent/50 transition-all backdrop-blur-sm">
                             @error('fecha_inicio') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                         </div>
