@@ -25,7 +25,6 @@ class ContratoForm
                     ->schema([
                         TextInput::make('numero_poliza')
                             ->label('Número de Póliza')
-                            ->required()
                             ->placeholder('Ej: POL-2026-001')
                             ->helperText('Este número aparecerá en el campo PÓLIZA del PDF')
                             ->columnSpan(1),

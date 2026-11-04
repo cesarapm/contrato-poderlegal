@@ -68,7 +68,7 @@ class ContratoCreateWizardForm
                         DatePicker::make('fecha_inicio')->label('Fecha de inicio')->native(false)->required()->reactive()->afterStateUpdated(function ($state, callable $set) {
                             if ($state) {
                                 $date = \Carbon\Carbon::createFromFormat('Y-m-d', $state);
-                                $set('fecha_termino', $date->addYear()->format('Y-m-d'));
+                                $set('fecha_termino', $date->addYear()->subDay()->format('Y-m-d'));
                             }
                         }),
                         DatePicker::make('fecha_termino')->label('Fecha de término')->native(false)->required()->after('fecha_inicio'),

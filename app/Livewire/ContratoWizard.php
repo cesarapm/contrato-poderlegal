@@ -218,7 +218,7 @@ class ContratoWizard extends Component
     {
         if ($value) {
             $date = \Carbon\Carbon::createFromFormat('Y-m-d', $value);
-            $this->fecha_termino = $date->addYear()->format('Y-m-d');
+            $this->fecha_termino = $date->addYear()->subDay()->format('Y-m-d');
         }
     }
 
