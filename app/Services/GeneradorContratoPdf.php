@@ -260,19 +260,12 @@ class GeneradorContratoPdf
             $seccionDatosBancariosQuadro = '
             <div class="datos-bancarios-cuadro">
                 <div class="datos-bancarios-titulo">DATOS BANCARIOS DEL ARRENDADOR</div>
-                <div class="datos-bancarios-contenido">
-                    <div class="datos-bancarios-fila">
-                        <strong>TITULAR:</strong> ' . mb_strtoupper($contrato->beneficiario ?? '', 'UTF-8') . '
-                    </div>
-                    <div class="datos-bancarios-fila">
-                        <strong>BANCO:</strong> ' . mb_strtoupper($contrato->banco ?? '', 'UTF-8') . '
-                    </div>
-                    <div class="datos-bancarios-fila">
-                        <strong>CUENTA:</strong> ' . ($contrato->cuenta ?? '') . '
-                    </div>
-                    <div class="datos-bancarios-fila">
-                        <strong>CLABE INTERBANCARIA:</strong> ' . ($contrato->clabe ?? '') . '
-                    </div>
+                <div class="datos-bancarios-titular">' . mb_strtoupper($contrato->beneficiario ?? '', 'UTF-8') . '</div>
+                <div class="datos-bancarios-fila">
+                    <strong>BANCO:</strong> ' . mb_strtoupper($contrato->banco ?? '', 'UTF-8') . ' | <strong>CUENTA:</strong> ' . ($contrato->cuenta ?? '') . '
+                </div>
+                <div class="datos-bancarios-fila">
+                    <strong>CLABE INTERBANCARIA:</strong> ' . ($contrato->clabe ?? '') . '
                 </div>
             </div>
             ';
