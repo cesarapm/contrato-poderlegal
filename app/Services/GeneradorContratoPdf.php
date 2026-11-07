@@ -226,6 +226,7 @@ class GeneradorContratoPdf
 
         // Preparar sección de datos bancarios (condicional según forma_pago)
         $seccionDatosBancarios = '';
+        $seccionDatosBancariosQuadro = '';
         $textoPagoForma = 'EN EFECTIVO';
         $textIncisoPago = '';
         $diaPago = $fechaInicio ? $fechaInicio->day : '1';
@@ -233,7 +234,7 @@ class GeneradorContratoPdf
         if ($contrato->forma_pago === 'transferencia') {
             $textoPagoForma = 'EN EFECTIVO o mediante TRANSFERENCIA BANCARIA';
 
-            $textIncisoPago = 'El pago de la renta mensual se cubrirá en su totalidad dentro de los primeros CINCO DÍAS contados a partir del día 1 de cada mes, en la cuenta bancaria número ' . ($contrato->cuenta ?? '') . ', del banco ' . ($contrato->banco ?? '') . ', a nombre de ' . ($contrato->beneficiario ?? '') . ', con CLABE Interbancaria ' . ($contrato->clabe ?? '') . ', o en el domicilio de "EL ARRENDADOR", señalado en la declaración I inciso c), y empezará a cubrirse a partir de la fecha de inicio de la vigencia del presente instrumento, siendo causa de rescisión de contrato el hecho de que se cubra extemporáneamente una mensualidad o más, o de que ésta no sea cubierta, en cuyo caso "EL ARRENDATARIO" acepta que se le embarguen bienes muebles u objetos de los que introduzca en la localidad arrendada y que declara desde hoy que son de su exclusiva propiedad, los que entregará desde luego a la persona que "EL ARRENDADOR" nombre como depositario.';
+            $textIncisoPago = 'El pago de la renta mensual se cubrirá en su totalidad dentro de los primeros CINCO DÍAS contados a partir del día 1 de cada mes, mediante depósito o transferencia a la cuenta bancaria del "EL ARRENDADOR" indicada en el recuadro de datos bancarios del presente contrato, o en el domicilio de "EL ARRENDADOR" señalado en la declaración I inciso c), y empezará a cubrirse a partir de la fecha de inicio de la vigencia del presente instrumento, siendo causa de rescisión de contrato el hecho de que se cubra extemporáneamente una mensualidad o más, o de que ésta no sea cubierta, en cuyo caso "EL ARRENDATARIO" acepta que se le embarguen bienes muebles u objetos de los que introduzca en la localidad arrendada y que declara desde hoy que son de su exclusiva propiedad, los que entregará desde luego a la persona que "EL ARRENDADOR" nombre como depositario.';
 
             $seccionDatosBancarios = '
             <table class="banco-table">
@@ -254,9 +255,30 @@ class GeneradorContratoPdf
                 </tr>
             </table>
             ';
+
+            // Crear cuadro estilizado para datos bancarios
+            $seccionDatosBancariosQuadro = '
+            <div class="datos-bancarios-cuadro">
+                <div class="datos-bancarios-titulo">DATOS BANCARIOS DEL ARRENDADOR</div>
+                <div class="datos-bancarios-contenido">
+                    <div class="datos-bancarios-fila">
+                        <strong>TITULAR:</strong> ' . mb_strtoupper($contrato->beneficiario ?? '', 'UTF-8') . '
+                    </div>
+                    <div class="datos-bancarios-fila">
+                        <strong>BANCO:</strong> ' . mb_strtoupper($contrato->banco ?? '', 'UTF-8') . '
+                    </div>
+                    <div class="datos-bancarios-fila">
+                        <strong>CUENTA:</strong> ' . ($contrato->cuenta ?? '') . '
+                    </div>
+                    <div class="datos-bancarios-fila">
+                        <strong>CLABE INTERBANCARIA:</strong> ' . ($contrato->clabe ?? '') . '
+                    </div>
+                </div>
+            </div>
+            ';
         } else {
             // Cuando es solo efectivo
-            $textIncisoPago = 'El pago de la renta mensual se cubrirá en su totalidad dentro de los primeros CINCO DÍAS contados a partir del día 1 de cada mes, en efectivo en el domicilio de "EL ARRENDADOR", señalado en la declaración I inciso c), y empezará a cubrirse a partir de la fecha de inicio de la vigencia del presente instrumento, siendo causa de rescisión de contrato el hecho de que se cubra extemporáneamente una mensualidad o más, o de que ésta no sea cubierta, en cuyo caso "EL ARRENDATARIO" acepta que se le embarguen bienes muebles u objetos de los que introduzca en la localidad arrendada y que declara desde hoy que son de su exclusiva propiedad, los que entregará desde luego a la persona que "EL ARRENDADOR" nombre como depositario.';
+            $textIncisoPago = 'El pago de la renta mensual se cubrirá en su totalidad dentro de los primeros CINCO DÍAS contados a partir del día 1 de cada mes, mediante pago en efectivo, entregado directamente a "EL ARRENDADOR" en el domicilio señalado en la declaración I inciso c) del presente contrato, o en el lugar que ambas partes acuerden previamente. "EL ARRENDADOR" deberá entregar a "EL ARRENDATARIO" el recibo correspondiente como comprobante del pago realizado. El pago comenzará a cubrirse a partir de la fecha de inicio de vigencia del presente instrumento. Será causa de rescisión del contrato el hecho de que "EL ARRENDATARIO" deje de cubrir una mensualidad o más, o realice el pago de manera extemporánea, conforme a las disposiciones legales aplicables.';
 
             $seccionDatosBancarios = '
             <table class="banco-table">
@@ -269,7 +291,7 @@ class GeneradorContratoPdf
                 </tr>
                 <tr class="banco-table-row">
                     <td class="banco-table-label">LUGAR DE PAGO</td>
-                    <td>En el domicilio de "EL ARRENDADOR" señalado en la Declaración I, inciso e)</td>
+                    <td>En el domicilio de "EL ARRENDADOR" señalado en la Declaración I, inciso c)</td>
                 </tr>
             </table>
             ';
@@ -397,6 +419,7 @@ class GeneradorContratoPdf
 
             // Sección condicional de datos bancarios y texto de pago
             'seccion_datos_bancarios' => $seccionDatosBancarios,
+            'seccion_datos_bancarios_cuadro' => $seccionDatosBancariosQuadro,
             'texto_pago_forma' => $textoPagoForma,
             'texto_inciso_pago' => $textIncisoPago,
 

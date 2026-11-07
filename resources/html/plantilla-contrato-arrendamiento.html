@@ -147,14 +147,13 @@
     width: auto;
     font-size: 17px;
     font-weight: bold;
-    color: #44205f;
+    color: #060606;
     margin-bottom: 10px;
-    background-color: rgba(91, 44, 131, 0.2);
+    /* background-color: rgba(91, 44, 131, 0.2); */
     padding: 2px 6px;
 }
         .declaration-item {
-            margin-bottom: 10px;
-            margin-left: 10px;
+
             text-align: justify;
             font-size: 16px;
             line-height: 1.2;
@@ -165,7 +164,13 @@
             width: 16px;
             margin-left: 5px;
             font-size: 15px;
+
         }
+        .declaration-item-margien-left{
+             margin-bottom: 10px;
+            margin-left: 20px;
+        }
+
 
         .declaration-item-letter-bold {
             font-weight: bold;
@@ -292,6 +297,37 @@
             width: 40%;
         }
 
+        .datos-bancarios-cuadro {
+            border: 2px solid #5b2c83;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            background-color: #f9f9f9;
+        }
+
+        .datos-bancarios-titulo {
+            text-align: center;
+            font-weight: bold;
+            color: #5b2c83;
+            font-size: 14px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .datos-bancarios-contenido {
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .datos-bancarios-fila {
+            margin-bottom: 8px;
+        }
+
+        .datos-bancarios-fila strong {
+            color: #5b2c83;
+            font-weight: bold;
+        }
+
         .page-break {
             page-break-after: always;
         }
@@ -358,7 +394,7 @@
         </div>
 
         <div class="title-intro">
-            CONTRATO DE ARRENDAMIENTO QUE CELEBRAN POR UNA PARTE <span class="blank">{{arrendador_nombre_o_razon}}</span>, A QUIEN EN LO SUCESIVO Y PARA LOS EFECTOS DEL PRESENTE INSTRUMENTO SE LE DENOMINARA “EL ARRENDADOR”, POR LA OTRA <span class="blank">{{arrendatario_nombre_o_razon}}</span>, A QUIEN EN LO SUCESIVO SE LE DENOMINARÁ "EL ARRENDATARIO"; Y <span class="blank">{{fiador_nombre_o_razon}}</span>, A QUIEN EN LO SUCESIVO SE LE DENOMINARÁ "EL OBLIGADO SOLIDARIO" TODOS LOS CUALES SE SUJETAN A LAS SIGUIENTES DECLARACIONES Y CLÁUSULAS:
+            CONTRATO DE ARRENDAMIENTO QUE CELEBRAN POR UNA PARTE {{arrendador_nombre_o_razon}}, A QUIEN EN LO SUCESIVO Y PARA LOS EFECTOS DEL PRESENTE INSTRUMENTO SE LE DENOMINARA <span class="blank">“EL ARRENDADOR”</span>, POR LA OTRA {{arrendatario_nombre_o_razon}}, A QUIEN EN LO SUCESIVO SE LE DENOMINARÁ <span class="blank">"EL ARRENDATARIO"</span>; Y {{fiador_nombre_o_razon}}, A QUIEN EN LO SUCESIVO SE LE DENOMINARÁ <span class="blank">"EL OBLIGADO SOLIDARIO"</span> TODOS LOS CUALES SE SUJETAN A LAS SIGUIENTES DECLARACIONES Y CLÁUSULAS:
         </div>
 
         <div class="section-title">D E C L A R A C I O N E S</div>
@@ -366,96 +402,100 @@
         <!-- DECLARACIÓN I -->
         <div class="declaration">
             <div class="declaration-title">I.- DECLARA "EL ARRENDADOR":</div>
+            <div class="declaration-item-margien-left">
 
             <div class="declaration-item">
-                <span class="declaration-item-letter">a)</span> Que es una persona <span class="bold">{{arrendador_tipo_persona}}</span> de nacionalidad <span class="bold">{{arrendador_nacionalidad}}</span>.
+                <span class="declaration-item-letter-bold">a)</span> Que es una persona <span class="bold">{{arrendador_tipo_persona}}</span> de nacionalidad <span class="bold">{{arrendador_nacionalidad}}</span>.
             </div>
 
             <div class="declaration-item">
-                <span class="declaration-item-letter">b)</span> Que se identifica con INE <span class="bold">{{arrendador_identificacion}}</span> y su CURP es <span class="bold">{{arrendador_curp}}</span>.
+                <span class="declaration-item-letter-bold">b)</span> Que se identifica con INE <span class="bold">{{arrendador_identificacion}}</span> y su CURP es <span class="bold">{{arrendador_curp}}</span>.
             </div>
 
             <div class="declaration-item">
-                <span class="declaration-item-letter">c)</span> Que cuenta con la capacidad jurídica suficiente y bastante para celebrar y suscribir el presente contrato.
+                <span class="declaration-item-letter-bold">c)</span> Que cuenta con la capacidad jurídica suficiente y bastante para celebrar y suscribir el presente contrato.
             </div>
 
             <div class="declaration-item">
-                <span class="declaration-item-letter">d)</span> Que tiene la facultad y es propietario(a) del inmueble ubicado en <span class="bold">{{inmueble_direccion_completa}}</span>.
+                <span class="declaration-item-letter-bold">d)</span> Que tiene la facultad y es propietario(a) del inmueble ubicado en <span class="bold">{{inmueble_direccion_completa}}</span>.
+            </div>
+
+
+            <div class="declaration-item">
+                <span class="declaration-item-letter-bold">e)</span> Que para efectos del presente contrato señala como su domicilio para recibir y oír toda clase de notificaciones el ubicado en <span class="bold">{{arrendador_domicilio}}</span>; correo electrónico: <span class="bold">{{arrendador_email}}</span>; teléfono: <span class="bold">{{arrendador_telefono}}</span>.
             </div>
 
             <div class="declaration-item">
-                <span class="declaration-item-letter">e)</span> Que para efectos del presente contrato señala como su domicilio para recibir y oír toda clase de notificaciones el ubicado en <span class="bold">{{arrendador_domicilio}}</span>; correo electrónico: <span class="bold">{{arrendador_email}}</span>; teléfono: <span class="bold">{{arrendador_telefono}}</span>.
+                <span class="declaration-item-letter-bold">f)</span> Que por medio del presente contrato es su deseo otorgar uso y goce temporal del inmueble, en el estado y condiciones físicas que actualmente se encuentra, a la Fecha de entrega y que son del conocimiento del Arrendatario, de conformidad con los lineamientos y términos establecidos en este instrumento.
             </div>
 
             <div class="declaration-item">
-                <span class="declaration-item-letter">f)</span> Que por medio del presente contrato es su deseo otorgar uso y goce temporal del inmueble, en el estado y condiciones físicas que actualmente se encuentra, a la Fecha de entrega y que son del conocimiento del Arrendatario, de conformidad con los lineamientos y términos establecidos en este instrumento.
+                <span class="declaration-item-letter-bold">g)</span> Que no tiene conocimiento sobre si el Arrendatario se encuentra o ha estado involucrado, directa o indirectamente, en la comisión de delitos, particularmente aquellos que establece la Ley Nacional de Extinción de Dominio y sus correlativos para las demás entidades de la República Mexicana.
             </div>
-
-            <div class="declaration-item">
-                <span class="declaration-item-letter">g)</span> Que no tiene conocimiento sobre si el Arrendatario se encuentra o ha estado involucrado, directa o indirectamente, en la comisión de delitos, particularmente aquellos que establece la Ley Nacional de Extinción de Dominio y sus correlativos para las demás entidades de la República Mexicana.
-            </div>
+             </div>
         </div>
 
         <!-- DECLARACIÓN II -->
         <div class="declaration">
             <div class="declaration-title">II.- DECLARA "EL ARRENDATARIO":</div>
+              <div class="declaration-item-margien-left">
 
             <div class="declaration-item">
-                <span class="declaration-item-letter">a)</span> Que es una persona <span class="bold">{{arrendatario_tipo_persona}}</span> de nacionalidad <span class="bold">{{arrendatario_nacionalidad}}</span>.
+                <span class="declaration-item-letter-bold">a)</span> Que es una persona <span class="bold">{{arrendatario_tipo_persona}}</span> de nacionalidad <span class="bold">{{arrendatario_nacionalidad}}</span>.
             </div>
 
             <div class="declaration-item">
-                <span class="declaration-item-letter">b)</span> Que se identifica con INE<span class="bold">{{arrendatario_identificacion}}</span> y su CURP es <span class="bold">{{arrendatario_curp}}</span>.
+                <span class="declaration-item-letter-bold">b)</span> Que se identifica con INE<span class="bold">{{arrendatario_identificacion}}</span> y su CURP es <span class="bold">{{arrendatario_curp}}</span>.
             </div>
 
             <div class="declaration-item">
-                <span class="declaration-item-letter">c)</span> Que tiene las facultades suficientes y bastantes para obligarse en términos del presente instrumento.
+                <span class="declaration-item-letter-bold">c)</span> Que tiene las facultades suficientes y bastantes para obligarse en términos del presente instrumento.
             </div>
 
-            <!-- <div class="declaration-item">
-                <span class="declaration-item-letter">d)</span> Que tiene interés en recibir en arrendamiento el inmueble que se describe en la Declaración número I, el cual sabe y le consta se encuentra en las condiciones necesarias de seguridad, higiene y salubridad para ser habitado y que cuenta con el equipo en perfecto estado, por lo que no condicionará el pago de rentas a ningún tipo de mejora.
-            </div> -->
+        
 
             <div class="declaration-item">
-                <span class="declaration-item-letter">d)</span> Que tiene su domicilio para efectos del presente contrato señala como su domicilio <span class="bold">{{arrendatario_domicilio_completo}}</span> con email:<span class="bold">{{arrendatario_email}}</span>y teléfono: <span class="bold">{{arrendatario_telefono}}</span>.
+                <span class="declaration-item-letter-bold">d)</span> Que tiene su domicilio para efectos del presente contrato señala como su domicilio <span class="bold">{{arrendatario_domicilio_completo}}</span> con email:<span class="bold">{{arrendatario_email}}</span>y teléfono: <span class="bold">{{arrendatario_telefono}}</span>.
             </div>
                 <div class="declaration-item">
-                <span class="declaration-item-letter">e)</span> Que tiene interés en recibir en arrendamiento el inmueble que se describe en el inciso b), de la declaración número I, el cual sabe y le consta, se encuentra en las condiciones necesarias de seguridad, higiene y salubridad para ser habitado y que cuenta con el equipo en perfecto por lo que no condicionará el pago de rentas a ningún tipo de mejora. <span style="background-color: #FFFF00; padding: 2px 4px;">Se anexa un inventario fotográfico del inmueble</span>.
+                <span class="declaration-item-letter-bold">e)</span> Que tiene interés en recibir en arrendamiento el inmueble que se describe en el inciso b), de la declaración número I, el cual sabe y le consta, se encuentra en las condiciones necesarias de seguridad, higiene y salubridad para ser habitado y que cuenta con el equipo en perfecto por lo que no condicionará el pago de rentas a ningún tipo de mejora. <span style="background-color: #FFFF00; padding: 2px 4px;">Se anexa un inventario fotográfico del inmueble</span>.
             </div>
-
+</div>
 
         </div>
 
         <!-- DECLARACIÓN III -->
         <div class="declaration">
             <div class="declaration-title">III.- DECLARA "EL OBLIGADO SOLIDARIO / FIADOR":</div>
-
+<div class="declaration-item-margien-left">
             <div class="declaration-item">
-                <span class="declaration-item-letter">a)</span> Ser persona <span class="bold">{{fiador_tipo_persona}}</span> de nacionalidad <span class="bold">{{fiador_nacionalidad}}</span>.
+                <span class="declaration-item-letter-bold">a)</span> Ser persona <span class="bold">{{fiador_tipo_persona}}</span> de nacionalidad <span class="bold">{{fiador_nacionalidad}}</span>.
             </div>
               <div class="declaration-item">
-                <span class="declaration-item-letter">b)</span> Que se identificado con INE <span class="bold">{{fiador_identificacion}}</span> CURP <span class="bold">{{fiador_curp}}</span>.
+                <span class="declaration-item-letter-bold">b)</span> Que se identificado con INE <span class="bold">{{fiador_identificacion}}</span> CURP <span class="bold">{{fiador_curp}}</span>.
             </div>
 
             <div class="declaration-item">
-                <span class="declaration-item-letter">c)</span> Que tiene plena capacidad para la celebración del presente contrato y compromete a cumplir exactamente con todas las cláusulas y obligaciones que se hacen referencia a <span class="bold">‘EL ARRENDATARIO’</span> establecido en el presente contrato.
+                <span class="declaration-item-letter-bold">c)</span> Que tiene plena capacidad para la celebración del presente contrato y compromete a cumplir exactamente con todas las cláusulas y obligaciones que se hacen referencia a <span class="bold">‘EL ARRENDATARIO’</span> establecido en el presente contrato.
             </div>
 
             <div class="declaration-item">
-                <span class="declaration-item-letter">d)</span> Declara tener su domicilio en <span class="bold">{{fiador_domicilio_completo}}</span>; correo email: <span class="bold">{{fiador_email}}</span>; teléfono: <span class="bold">{{fiador_telefono}}</span>.
+                <span class="declaration-item-letter-bold">d)</span> Declara tener su domicilio en <span class="bold">{{fiador_domicilio_completo}}</span>; correo email: <span class="bold">{{fiador_email}}</span>; teléfono: <span class="bold">{{fiador_telefono}}</span>.
+            </div>
             </div>
         </div>
 
         <!-- DECLARACIÓN IV -->
         <div class="declaration">
             <div class="declaration-title">IV.- DECLARAN LAS PARTES</div>
+            <div class="declaration-item-margien-left">
+                <div class="declaration-item">
+                    <span class="declaration-item-letter-bold">a)</span> Que en el presente contrato no existe dolo, error, mala fe o cualquier otro vicio de la voluntad, por lo que expresamente renuncian a invocarlos en cualquier tiempo.
+                </div>
 
-            <div class="declaration-item">
-                <span class="declaration-item-letter">a)</span> Que en el presente contrato no existe dolo, error, mala fe o cualquier otro vicio de la voluntad, por lo que expresamente renuncian a invocarlos en cualquier tiempo.
-            </div>
-
-            <div class="declaration-item">
-                <span class="declaration-item-letter">b)</span> Que se reconocen la personalidad con la que comparecen a la celebración de este contrato y expresamente convienen en someterse a las obligaciones contenidas en las siguientes:
+                <div class="declaration-item">
+                    <span class="declaration-item-letter-bold">b)</span> Que se reconocen la personalidad con la que comparecen a la celebración de este contrato y expresamente convienen en someterse a las obligaciones contenidas en las siguientes:
+                </div>
             </div>
         </div>
 
@@ -484,7 +524,17 @@
 
             <div class="clausula-item">
 
-                <span class="clausula-item-letter">d)</span> {{texto_inciso_pago}}
+                <!-- <span class="clausula-item-letter">d)</span> {{texto_inciso_pago}} -->
+
+                <span class="clausula-item-letter">d)</span> El pago de la renta mensual se cubrirá en su totalidad dentro de los primeros CINCO DÍAS contados a partir del
+                día 1 de cada mes, mediante depósito o transferencia a la cuenta bancaria del “EL ARRENDADOR” indicada en el
+                recuadro de datos bancarios del presente contrato, o en el domicilio de “EL ARRENDADOR” señalado en la
+                declaración I inciso c), y empezará a cubrirse a partir de la fecha de inicio de la vigencia del presente instrumento,
+                siendo causa de rescisión de contrato el hecho de que se cubra extemporáneamente una mensualidad o más, o de
+                que ésta no sea cubierta, en cuyo caso “EL ARRENDATARIO” acepta que se le embarguen bienes muebles u
+                objetos de los que introduzca en la localidad arrendada y que declara desde hoy que son de su exclusiva propiedad,
+                los que entregará desde luego a la persona que “EL ARRENDADOR” nombre como depositario
+
             </div>
 
             <!-- DATOS BANCARIOS - Solo si hay transferencia bancaria disponible -->
@@ -495,23 +545,28 @@
 
             <div class="clausula-item">
                 <span class="clausula-item-letter">e)</span> No podrá en ningún caso "EL ARRENDATARIO", retener las rentas, bajo ningún título judicial, ni extrajudicialmente, debiendo hacer el pago íntegro, a
-más tardar en el plazo que se describe en el inciso d) de esta cláusula, por lo que de no hacerlo en el tiempo, modo y lugar convenidos, pagará la
-pena convencional del 1% (uno por ciento) diario, sobre el importe de la renta, sin perjuicio de lo que estipula dicho inciso d).
+                más tardar en el plazo que se describe en el inciso d) de esta cláusula, por lo que de no hacerlo en el tiempo, modo y lugar convenidos, pagará la
+                pena convencional del 1% (uno por ciento) diario, sobre el importe de la renta, sin perjuicio de lo que estipula dicho inciso d).
             </div>
 
             <div class="clausula-item">
                 <span class="clausula-item-letter">f)</span>Cuando "EL ARRENDATARIO" pague la renta con cheque, y éste no fuere cubierto por el banco emisor, por cualquier causa, se considerará que el
-pago de la pensión rentística de que se trate no fue recibido por el arrendador en tiempo y forma, quedando obligado "EL ARRENDATARIO" a cubrir
-los gastos que dicho ilícito genere, incluyendo el 20% del valor del cheque, conforme a lo estipulado en el artículo 193 de la Ley General de Títulos y
-Operaciones de Crédito, así como las comisiones vigentes de la institución bancaria de que se trate, sin perjuicio de lo estipulado en los incisos
-d) y e) de esta cláusula, reservándose "EL ARRENDADOR" o quien sus derechos represente a recibir o no el pago de la renta con cheque, debiendo en
-todo caso "EL ARRENDATARIO" pagar su importe en moneda de curso legal.
+                pago de la pensión rentística de que se trate no fue recibido por el arrendador en tiempo y forma, quedando obligado "EL ARRENDATARIO" a cubrir
+                los gastos que dicho ilícito genere, incluyendo el 20% del valor del cheque, conforme a lo estipulado en el artículo 193 de la Ley General de Títulos y
+                Operaciones de Crédito, así como las comisiones vigentes de la institución bancaria de que se trate, sin perjuicio de lo estipulado en los incisos
+                d) y e) de esta cláusula, reservándose "EL ARRENDADOR" o quien sus derechos represente a recibir o no el pago de la renta con cheque, debiendo en
+                todo caso "EL ARRENDATARIO" pagar su importe en moneda de curso legal.
             </div>
 
             <div class="clausula-item">
                 <span class="clausula-item-letter">g)</span> Si "EL ARRENDADOR" recibe la renta en fecha y forma distinta de la estipulada, o recibe abonos a cuenta de las mismas, no se entenderá novado el
-contrato, ni en cuanto a los términos ni en cuanto a la fecha y forma de pago.
+                contrato, ni en cuanto a los términos ni en cuanto a la fecha y forma de pago.
             </div>
+
+
+
+            <!-- aqui cuadro -->
+            {{seccion_datos_bancarios_cuadro}}
         </div>
 
         <!-- TERCERA -->
@@ -712,21 +767,21 @@ contrato, ni en cuanto a los términos ni en cuanto a la fecha y forma de pago.
                         <div style="margin-bottom: 30px; border-bottom: 1px solid #000000; min-height: 40px;"></div>
                         <div style="font-size: 11px; color: #5b2c83; font-weight: bold; margin-bottom: 10px;">FIRMA</div>
                         <div style="margin-top: 15px; font-weight: bold; font-size: 11px; text-align: center;">NOMBRE: <span style="font-weight: normal;">{{arrendador_nombre_o_razon}}</span></div>
-                        <div style="font-weight: bold; font-size: 11px; text-align: center; margin-top: 5px;">IDENTIFICACIÓN: <span style="font-weight: normal;">{{arrendador_identificacion}}</span></div>
+                        <div style="font-weight: bold; font-size: 11px; text-align: center; margin-top: 5px;">INE: <span style="font-weight: normal;">{{arrendador_identificacion}}</span></div>
                     </td>
                     <td style="width: 33%; border: 1px solid #000000; border-left: none; padding: 20px; vertical-align: top; text-align: center;">
                         <div style="color: #5b2c83; font-weight: bold; font-size: 13px; margin-bottom: 20px;">"EL ARRENDATARIO"</div>
                         <div style="margin-bottom: 30px; border-bottom: 1px solid #000000; min-height: 40px;"></div>
                         <div style="font-size: 11px; color: #5b2c83; font-weight: bold; margin-bottom: 10px;">FIRMA</div>
                         <div style="margin-top: 15px; font-weight: bold; font-size: 11px; text-align: center;">NOMBRE: <span style="font-weight: normal;">{{arrendatario_nombre_o_razon}}</span></div>
-                        <div style="font-weight: bold; font-size: 11px; text-align: center; margin-top: 5px;">IDENTIFICACIÓN: <span style="font-weight: normal;">{{arrendatario_identificacion}}</span></div>
+                        <div style="font-weight: bold; font-size: 11px; text-align: center; margin-top: 5px;">INE: <span style="font-weight: normal;">{{arrendatario_identificacion}}</span></div>
                     </td>
                     <td style="width: 33%; border: 1px solid #000000; border-left: none; padding: 20px; vertical-align: top; text-align: center;">
                         <div style="color: #5b2c83; font-weight: bold; font-size: 13px; margin-bottom: 20px;">"EL OBLIGADO SOLIDARIO / FIADOR"</div>
                         <div style="margin-bottom: 30px; border-bottom: 1px solid #000000; min-height: 40px;"></div>
                         <div style="font-size: 11px; color: #5b2c83; font-weight: bold; margin-bottom: 10px;">FIRMA</div>
                         <div style="margin-top: 15px; font-weight: bold; font-size: 11px; text-align: center;">NOMBRE: <span style="font-weight: normal;">{{fiador_nombre_o_razon}}</span></div>
-                        <div style="font-weight: bold; font-size: 11px; text-align: center; margin-top: 5px;">IDENTIFICACIÓN: <span style="font-weight: normal;">{{fiador_identificacion}}</span></div>
+                        <div style="font-weight: bold; font-size: 11px; text-align: center; margin-top: 5px;">INE: <span style="font-weight: normal;">{{fiador_identificacion}}</span></div>
                     </td>
                 </tr>
             </table>
