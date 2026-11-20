@@ -417,8 +417,10 @@ class PlantillaPolizaSeeder extends Seeder
   }
   .firma-espacio { height: 55px; }
   .firma-linea {
+    width: 50%;
     border-top: 1.5px solid #4A148C;
     margin-bottom: 6px;
+    margin: auto;
   }
   .firma-nombre {
     font-weight: 700;
@@ -463,7 +465,7 @@ class PlantillaPolizaSeeder extends Seeder
 
   <!-- Cuerpo -->
   <div class="body-portada">
-    
+
     <!-- Primera Fila: DATOS GENERALES y DATOS DE COBERTURA lado a lado -->
     <div class="fila-superior">
       <!-- DATOS GENERALES -->
@@ -540,7 +542,7 @@ class PlantillaPolizaSeeder extends Seeder
     </div>
 
     <!-- Secciones de Ancho Completo -->
-    
+
     <!-- DATOS DE LA INMOBILIARIA -->
     <div class="seccion-completa">
       <div class="seccion-box">
@@ -866,13 +868,13 @@ class PlantillaPolizaSeeder extends Seeder
   <!-- Firmas -->
   <div class="firmas">
     <div class="firmas-row">
-      <div class="firma-col">
+      <!-- <div class="firma-col">
         <div class="firma-espacio"></div>
         <div class="firma-linea"></div>
         <div class="firma-nombre">{{arrendador_nombre_completo}}</div>
         <div class="firma-cargo">CLIENTE · Por propio derecho</div>
       </div>
-      <div class="firma-separador"></div>
+      <div class="firma-separador"></div> -->
       <div class="firma-col">
         <div class="firma-espacio"></div>
         <div class="firma-linea"></div>
@@ -883,7 +885,7 @@ class PlantillaPolizaSeeder extends Seeder
   </div>
 
   <div class="contrato-footer-num">
-    Póliza No. {{numero_poliza}} &nbsp;·&nbsp; GW NETWORK S.A. DE C.V. (PODER LEGAL) 
+    Póliza No. {{numero_poliza}} &nbsp;·&nbsp; GW NETWORK S.A. DE C.V. (PODER LEGAL)
   </div>
 
 </div>

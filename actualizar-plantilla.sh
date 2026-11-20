@@ -8,3 +8,6 @@ echo ""
 echo "✅ Plantilla actualizada!"
 echo "🌐 Abre: http://localhost:8000/preview"
 echo "📝 Recarga la página (F5) para ver los cambios"
+
+
+php artisan db:seed --class=PlantillaPolizaSeeder
